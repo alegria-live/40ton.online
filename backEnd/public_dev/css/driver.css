@@ -1,0 +1,79 @@
+@font-face {
+   font-family: Montserrat;
+   src: url(../fonts/Montserrat-Regular.woff);
+}
+
+* {
+	box-sizing: border-box;
+}
+body {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 20px;	
+}
+
+.hidden {
+	display: none;
+}
+
+.driverInput div {
+	text-align: center;
+	padding: 15px 0;
+	font-size: 1.6em;
+	max-width: 100vw;
+}
+
+.driverInput div input {	
+	font-size: 1.7em;
+	padding: 20px 20px;
+	text-align: center;
+	width: 95%;
+	border-radius: 20px;
+	background-color: #F9F9F9;
+}
+.driverInput div button {	
+	font-size: 1.7em;
+	padding: 20px 20px;
+	text-align: center;
+	width: 45%;
+	border-radius: 20px;
+}
+.driverInput div.label {
+	font-size: 3em;
+	padding: 15px 10px;
+	color: #ffffff;
+	margin-bottom: 15px;
+	background-color: #940000;
+}
+
+.driverInput select {
+	font-size: 1.9em;
+	width: 90%;
+}
+
+.logInDriver div button {
+	width: 90%;
+	margin: 20px 0;
+	box-shadow: 1px 1px #9A9A9A;
+}
+#lastRouteDisp div {
+	font-size: 3.2em;
+	padding: 20px;
+	text-align: center;
+}
+#lastRouteDisp ul li {
+	font-size: 1.2em;
+	margin-left: 20px;
+	padding: 5px;
+	
+}
+.error {
+	border: 2px solid #F20000;
+}
+[name = "driverId2"] {
+	padding: 25px;
+}
+[name = "driverId2"] li {
+	padding-top: 35px;
+	list-style: none;
+	font-size: 0.9em;
+}

@@ -1,0 +1,109 @@
+{
+    "headerSlogan": "¿Cómo ahorrar combustible en tu camión?",
+    "navHeader": [
+        {
+            "text":"Iniciar sesión",
+            "fn": "onLoginHandler"
+        },
+        {
+            "text": "Crear cuenta",
+            "fn": "onSignInHanler"
+        },
+        {
+            "text": "Demo",
+            "fn": "onDemoHanler"
+        },
+        {
+           "text": "Pl",
+           "fn": "onSetLangPl" 
+        },
+        {
+            "text": "Es",
+            "fn": "onSetLangEs"
+        }
+    ],
+    "navHeaderSigned": [
+        {
+            "text":"Iniciar mi sistema",
+            "fn": "toSytemPage"
+        },
+        {
+            "text": "Cerrar sesión",
+            "fn": "onLogoutHandler"
+        },
+        {
+           "text": "Pl",
+           "fn": "onSetLangPl" 
+        },
+        {
+            "text": "Es",
+            "fn": "onSetLangEs"
+        }
+    ],
+    "navHeaderOwner": [
+        {
+            "text":"Pagina principal",
+            "fn": "toHomePage"
+        },
+        {
+            "text": "Cerrar sesión",
+            "fn": "onLogoutHandler"
+        },
+        {
+           "text": "Pl",
+           "fn": "onSetLangPl" 
+        },
+        {
+            "text": "Es",
+            "fn": "onSetLangEs"
+        }
+    ],
+    "serverResErrors": {
+        "461": "Dirección email o contraseña incorrecta",
+        "462": "Dirección de correo electrónico no válida. La contraseña maestra se puede restablecer solo para los usuarios que han registrado la empresa. El acceso a otros datos es posible a través del panel de administración de la compañía después de iniciar sesión en el usuario principal.",
+        "463": "Hay un cliente en el sistema con la dirección de correo electrónico o número CIF",
+        "464": "Este usuario no se ha activado. Se ha enviado un enlace de activación a la dirección de correo electrónico proporcionada durante el registro. Revise su carpeta de correo electrónico y SPAM o contáctenos usando el formulario o email",
+        "465": "Los datos introducidos son incorrectos.",
+        "466": "El usuario ya ha activado.",
+        "467": "Dirección de correo electrónico no válida.",
+        "468": "Este permiso ya está registrado",
+        "469": "Esta matricula ya está registrada",
+        "500": "Internal Server Error",
+        "503": "DataBase connection error"
+    },
+    "logIn": {
+        "submit": "Iniciar sesión",
+        "cancel": "Cerrar",
+        "forgotPsw": "¿Olvidó su Contraseña?",
+        "email": "Dirección de email",
+        "password": "Contraseña",
+        "newPassRequest": "Introduzca la dirección de correo electrónico para obtener una contraseña temporal.",
+        "newPassSubmit": "Enviar",
+        "newPassInfoP1": "Se ha enviado una nueva contraseña a ",
+        "newPassInfoP2": "Siga las instrucciones en el correo electrónico para restablecer la contraseña."
+    },
+    "registerForm" : {
+        "formName": "Formulario de registro",
+        "name" : "Nombre",
+        "lastName": "Apellido",
+        "company": "Nombre de la empresa",
+        "nip": "Numero CIF",
+        "street": "Dirección",
+        "city": "Ciudad",
+        "post": "Codigo postal",
+        "country": "Pais",
+        "email": "Dirección de email",
+        "email2": "Repite email",
+        "password": "Contraseña",
+        "password2": "Repite contraseña",
+        "password3": "Contraseña nueva o anterior", 
+        "clause": "Doy mi consentimiento para que 40ton.online procese los datos de la empresa para configurar y mantener mi cuenta de usuario en los términos descritos en los TÉRMINOS Y CONDICIONES y en cumplimiento con las disposiciones del Reglamento de Protección de Datos Personales (GDPR). Puedo retirar el consentimiento en cualquier momento. Tengo derecho a acceder, corregir y eliminar mis datos con mi cuenta en cualquier momento.",
+        "submit": "Registra tu empresa",
+        "cancel": "Volver",
+        "emailNotIdentity": "La dirección de email y el email repetido no coinciden.",
+        "passwordNotIdentity": "La contraseña y la contraseña repetida no coinciden.",
+        "registerSuccess1": "Se ha enviado un email de confirmación del nuevo usuario a la dirección de correo: ",
+        "registerSuccess2": " Para completar el proceso de registro, revise su correo electrónico entrante. En ausencia de información, por favor revise la carpeta SPAM.",
+        "activateSuccess": "La activación salió bien. Ya puedes iniciar sesión en el sistema."
+    }
+}

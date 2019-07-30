@@ -1,0 +1,23 @@
+.Slogan {
+  width: 90%;
+  text-align: center;
+  text-shadow: 1px 1px 8px #111111;
+  padding: 0 4rem;
+}
+
+.Slogan h1 {
+  font-size: 6.5vw;
+  line-height: 7.7vw;
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .Slogan {
+    padding: 0;
+  }
+  .Slogan h1 {
+    font-size: 15vw;
+    line-height: 18vw;
+  }
+}
+/*# sourceMappingURL=Slogan.css.map */

@@ -1,0 +1,109 @@
+{
+    "headerSlogan": "Jak zredukować koszty paliwa w transporcie?",
+    "navHeader": [
+        {
+            "text":"Logowanie",
+            "fn": "onLoginHandler"
+        },
+        {
+            "text": "Rejestracja",
+            "fn": "onSignInHanler"
+        },
+        {
+            "text": "Demo",
+            "fn": "onDemoHanler"
+        },
+        {
+           "text": "Pl",
+           "fn": "onSetLangPl" 
+        },
+        {
+            "text": "Es",
+            "fn": "onSetLangEs"
+        }
+    ],
+    "navHeaderSigned": [
+        {
+            "text":"Uruchom mój system",
+            "fn": "toSytemPage"
+        },
+        {
+            "text": "Wyloguj mnie",
+            "fn": "onLogoutHandler"
+        },        
+        {
+           "text": "Pl",
+           "fn": "onSetLangPl" 
+        },
+        {
+            "text": "Es",
+            "fn": "onSetLangEs"
+        }
+    ],
+    "navHeaderOwner" : [
+        {
+            "text":"Strona główna",
+            "fn": "toHomePage"
+        },
+        {
+            "text": "Wyloguj mnie",
+            "fn": "onLogoutHandler"
+        },        
+        {
+           "text": "Pl",
+           "fn": "onSetLangPl" 
+        },
+        {
+            "text": "Es",
+            "fn": "onSetLangEs"
+        }
+    ],
+    "serverResErrors": {
+        "461": "Niprawidłowy adres email lub hasło",
+        "462": "Nieprawidłowy adres email. Hasło główne może by resetowane tylko dla użytkowników, którzy dokonywali rejestracji firmy. Dostęp do pozostałych danych możliwy jest poprzez panel administracyjny firmy po zalogowaniu głównego użytkownika.",
+        "463": "W systemie istnieje klient o podanym adresie e-mail lub numerze Nip",
+        "464": "Ten użytkownik nie dokonał aktywacj. Na adres email podany przy rejestracji został wysłany link aktywacyjny. Sprawdź wiadomości email i folder SPAM lub sontaktuj się poprzez formularz, email lub czat",
+        "465": "Wprowadzone dane są nieprawidłowe.",
+        "466": "Użytkownik dokonał już aktywacj.",
+        "467": "Nieprawidłowy adres email.",
+        "468": "Ten numer prawa jazdy jest już zarejestrowany",
+        "469": "Ta rejestracja jest już zapisana w bazie",
+        "500": "Błąd połączenia z serwerem.",
+        "503": "Błąd połączenia z bazą danych."
+    },
+    "logIn": {
+        "submit": "Logowanie",
+        "cancel": "Powrót",
+        "forgotPsw": "Nie pamiętam hasła.",
+        "email": "Adres email",
+        "password": "Hasło",
+        "newPassRequest": "Wpisz adres email podany przy rejestracji aby uzyskać tymczasowe hasło.",
+        "newPassSubmit": "Wyślij",
+        "newPassInfoP1": "Nowe hasło tymczasowe zostało wysłane na adres: ",
+        "newPassInfoP2": "Proszę postępować zgodnie ze wskazówkami zawartymi we wiadomości email."
+    },
+    "registerForm" : {
+        "formName": "Formularz rejestracji firmy",
+        "name" : "Imię",
+        "lastName": "Nazwisko",
+        "company": "Nazwa firmy",
+        "nip": "Numer Nip",
+        "street": "Ulica",
+        "city": "Miasto",
+        "post": "Kod pocztowy",
+        "country": "Kraj",        
+        "email": "Adres email",
+        "email2": "Powtórz email",
+        "password": "Hasło",
+        "password2": "Powtórz hasło",
+        "password3": "Nowe lub aktualne hasło",
+        "clause": "Wyrażam zgodę na przetwarzanie danych firmy przez 40ton.online w celu założenia i utrzymywania mojego konta użytkownika na warunkach opisanych w REGULAMINIE i przy zachowaniu przepisów rozporządzenia o ochronie danych osobowych (RODO). Zgodę mogę wycofać w dowolnym momencie. Mam prawo do wglądu, poprawiania oraz do usunięcia danych firmy wraz z kontem w dowolnej chwili.",
+        "submit": "Rejestracja firmy",
+        "cancel": "Powrót",
+        "emailNotIdentity": "Podane adresy email nie są ze sobą zgodne.",
+        "passwordNotIdentity": "Podane hasła nie są ze sobą zgodne.",
+        "registerSuccess1": "Została wysłana wiadomość potwierdzająca rejestrację użytkownika na adres: ",
+        "registerSuccess2": " Aby zakończyć proces rejestracji proszę sprawdzić pocztę przychodzącą. W przypadku braku informacji proszę sprawdzić folder SPAM.",
+        "activateSuccess": "Aktywacja przebiegła pomyślnie. Możesz zalogować się do swojego systemu."
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACF,KAAK,EAAE,IAAI;CAMd;;AAPD,AAGI,KAHC,CAGD,UAAU,CAAC;EACP,OAAO,EAAE,gBAAgB;EACzB,UAAU,EAAE,MAAM;CACrB",
+    "sources": [
+        "Trucks.scss"
+    ],
+    "names": [],
+    "file": "Trucks.css"
+}

@@ -1,0 +1,16 @@
+.ChoiceLang {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 1s;
+    
+    img {
+        margin: 0 1rem;
+        cursor: pointer;
+    }
+}
+.ChoiceLang:hover {
+    opacity: 0.9;
+}

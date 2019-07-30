@@ -1,0 +1,10 @@
+.Main {
+    padding: 2rem;
+    border: 1px solid green;   
+    .Row {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 1px 0 8px rgba(0, 0, 0, 0.1);
+        padding-right: 1.5rem;
+        // border-radius: 15px;
+    }
+}

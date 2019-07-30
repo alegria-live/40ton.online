@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACI,MAAM,EAAC,SAAS,EAAE,KAAK;EAD3B,AAAA,iBAAiB,CAAC;IAEV,OAAO,EAAE,IAAI;GAEpB",
+    "sources": [
+        "NavForBigDevices.scss"
+    ],
+    "names": [],
+    "file": "NavForBigDevices.css"
+}

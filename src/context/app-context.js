@@ -1,3 +1,14 @@
 import React from 'react';
-const authContext = React.createContext({lang: null, choiceLang: () => {}});
-export default authContext;
+const appContext = React.createContext({
+    lang: null,
+    choiceLang: () => {},
+    showLogIn: false,
+    setShowLogIn: () => {},
+    showNewPass: false,
+    setShowNewPass: () => {},
+    showRegister: false,
+    setShowRegister: () => {},
+    showOwner: false,
+    setShowOwner: () => {}
+});
+export default appContext;

@@ -1,0 +1,6 @@
+@media (min-width: 760px) {
+  .NavForSmallDevices {
+    display: none;
+  }
+}
+/*# sourceMappingURL=NavForSmallDevices.css.map */
