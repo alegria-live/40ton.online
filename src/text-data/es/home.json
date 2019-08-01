@@ -1,4 +1,7 @@
-{
+{   "headText": {
+        "title": "Sistema de control de consumo de combustible",
+        "description": "El control del mantenimiento de la norma de combustión es la base del futuro económico de cualquier empresa de transporte."
+    },
     "headerSlogan": "¿Cómo ahorrar combustible en tu camión?",
     "navHeader": [
         {
@@ -7,11 +10,11 @@
         },
         {
             "text": "Crear cuenta",
-            "fn": "onSignInHanler"
+            "fn": "onSignInHandler"
         },
         {
             "text": "Demo",
-            "fn": "onDemoHanler"
+            "fn": "onDemoHandler"
         },
         {
            "text": "Pl",
@@ -105,5 +108,9 @@
         "registerSuccess1": "Se ha enviado un email de confirmación del nuevo usuario a la dirección de correo: ",
         "registerSuccess2": " Para completar el proceso de registro, revise su correo electrónico entrante. En ausencia de información, por favor revise la carpeta SPAM.",
         "activateSuccess": "La activación salió bien. Ya puedes iniciar sesión en el sistema."
+    },
+    "demoData": {
+        "email": "fuel.control.demo@alegria.live",
+        "pass": "giX0sf-nHUe5Hw8GXQ9N3gtjHMg"
     }
 }

@@ -12,6 +12,7 @@ import AddWorker from '../../../Containers/Owner/Workers/AddWorker';
 import EditWorker from '../../../Containers/Owner/Workers/EditWorker';
 import EditCompany from '../../../Containers/Owner/Company/EditCompany';
 import Payments from '../../../Containers/Owner/Company/Payments';
+import PhoneInstruction from '../../../Components/Owner/Instructions/PhoneInstruction';
 import AppContext from '../../../context/app-context';
 import {Modal} from 'antd';
 import classes from './OwnerLayout.css';
@@ -26,7 +27,7 @@ const OwnerLayout = props => {
        if(!props.token) {
         setShowOwner(false);
         props.onLogout();
-       } 
+       } // eslint-disable-next-line
     }, [props.token]);
 
     const [showAddDriver, setShowAddDriver] = useState(false);
@@ -50,6 +51,11 @@ const OwnerLayout = props => {
     const [showPayments, setShowPayments] = useState(false);
     const setPayments = val => setShowPayments(val);
 
+    const [showPhoneInstruction, setShowPhoneInstruction] = useState(false);
+    const setPhoneInstruction = val => setShowPhoneInstruction(val);
+
+    
+
     const [showDemoModal, setShowDemoModal] = useState(false);
 
     return (
@@ -69,7 +75,9 @@ const OwnerLayout = props => {
             showEditCompany,
             setShowEditCompany: setEditCompany,
             showPayments,
-            setShowPayments:setPayments
+            setShowPayments:setPayments,
+            showPhoneInstruction,
+            setShowPhoneInstruction: setPhoneInstruction
             }}>
             <div>
                 <NavForBigDevices />
@@ -95,6 +103,7 @@ const OwnerLayout = props => {
             <EditWorker demoModal={setShowDemoModal} />
             <EditCompany demoModal={setShowDemoModal}/>
             <Payments />
+            <PhoneInstruction />
         </MenuContext.Provider>
     );
 };

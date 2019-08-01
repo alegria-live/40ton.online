@@ -2,13 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import MenuContext from '../../../context/menu-context';
 import { Truck } from './truckModel';
-import { inputChangedHandler, validFormHandler, cancelForm } from '../../../shared/utility';
+import { inputChangedHandler, validFormHandler, cancelForm, changeInputsLabelText } from '../../../shared/utility';
 import Input from '../../../Components/UI/Input/Input';
-import { Drawer, Select, Button } from 'antd';
+import { Drawer, Select, Button, Modal } from 'antd';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 import Axios from 'axios';
 import _ from 'lodash';
 const { Option } = Select;
+const { confirm } = Modal;
 
 const EditTruck = props => {
 
@@ -112,6 +113,11 @@ const EditTruck = props => {
         validFormHandler(controls, setFormIsValid);
     }, [controls]);
 
+    useEffect(() => {
+        changeInputsLabelText(controls, formElementsKeyArray, props.trucksText, setControls)
+        // eslint-disable-next-line
+    }, [props.trucksText]);
+
     const setTruck = val => {
         const actualTruck = allTrucks.find(elem => elem._id === val);
         const copyControls = _.cloneDeep(controls);
@@ -144,7 +150,14 @@ const EditTruck = props => {
         const truck = new Truck({
             id: controls._id.value.toUpperCase().trim()
         });
-        truck.deleteTruck(setSuccesMsg, setErrorMsg, setIsLoading, getTrucks);
+        confirm({
+            title: controls._id.value,
+            content: props.trucksText.deleteConfirm,
+            onOk() {
+                truck.deleteTruck(setSuccesMsg, setErrorMsg, setIsLoading, getTrucks);
+            },
+            onCancel() { return }
+        });
     };
     const cancelHandler = (event) => {
         if (event) event.preventDefault();
@@ -185,7 +198,7 @@ const EditTruck = props => {
     const formElement = (
         <>
             <h6>{props.trucksText.editPanelName}</h6>
-            <p>{props.trucksText.choiceDriver}</p>
+            <p>{props.trucksText.choiceTruck}</p>
             <Select
                 style={{ width: 280 }}
                 onChange={(value) => setTruck(value)}

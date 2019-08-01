@@ -2,13 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import MenuContext from '../../../context/menu-context';
 import { Driver } from './driverModel';
-import { inputChangedHandler, validFormHandler, cancelForm } from '../../../shared/utility';
+import { inputChangedHandler, validFormHandler, cancelForm, changeInputsFormText } from '../../../shared/utility';
 import Input from '../../../Components/UI/Input/Input';
-import { Drawer, Select, Button } from 'antd';
+import { Drawer, Select, Button, Modal } from 'antd';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 import Axios from 'axios';
 import _ from 'lodash';
 const { Option } = Select;
+const { confirm } = Modal;
 
 const EditDriver = props => {
 
@@ -16,7 +17,8 @@ const EditDriver = props => {
         name: {
             elementType: 'input',
             elementConfig: {
-                type: 'text'
+                type: 'text',
+                placeholder: props.driversText.name
             },
             value: '',
             validation: {
@@ -30,7 +32,8 @@ const EditDriver = props => {
         lastName: {
             elementType: 'input',
             elementConfig: {
-                type: 'text'
+                type: 'text',
+                placeholder: props.driversText.lastName
             },
             value: '',
             validation: {
@@ -92,6 +95,11 @@ const EditDriver = props => {
         validFormHandler(controls, setFormIsValid);
     }, [controls]);
 
+    useEffect(() => {
+        changeInputsFormText(controls, formElementsKeyArray, props.driversText, setControls)
+        // eslint-disable-next-line
+    }, [props.driversText]);
+
     const setDriver = val => {
         const actualDriver = allDrivers.find(elem => elem._id === val);
         const copyControls = _.cloneDeep(controls);
@@ -123,8 +131,16 @@ const EditDriver = props => {
         const driver = new Driver({
             id: controls._id.value.toLowerCase().trim()
         });
-        driver.deleteDriver(setSuccesMsg, setErrorMsg, setIsLoading, getDrivers);
+        confirm({
+            title: controls.name.value + ' ' + controls.lastName.value,
+            content: props.driversText.deleteConfirm,
+            onOk() {
+                driver.deleteDriver(setSuccesMsg, setErrorMsg, setIsLoading, getDrivers);
+            },
+            onCancel() { return }
+        });
     };
+
     const cancelHandler = (event) => {
         if (event) event.preventDefault();
         cancelForm(controls, formElementsKeyArray, setControls);

@@ -63,9 +63,9 @@ const FuelChart = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.dateFrom, props.dateEnd])
 
-    const getData = () => {
+    const getData = (from, end) => {
         const urlData = encodeURI(
-            `from=${props.dateFrom}&end=${props.dateEnd}&param=mediaReal`);
+            `from=${from}&end=${end}&param=mediaReal`);
         setLoading(true);
         axios.get(`/system/driversFuelEfficiency?${urlData}`)
         .then((res) => {

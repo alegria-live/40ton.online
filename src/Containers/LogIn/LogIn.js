@@ -106,8 +106,7 @@ const LogIn = props => {
         <>           
             {props.loading ? <Spinner /> : null}
             <form onSubmit={submitHandler}>
-                {props.error ? <p>{props.errorText[props.error.toString()] || props.error}</p>: null}
-                <p>noyes6@o2.pl</p>
+                {props.error ? <p>{props.errorText[props.error.toString()] || props.error}</p>: null}                
                 {form}
                 <button 
                 className='btn btn-primary btn-sm' 

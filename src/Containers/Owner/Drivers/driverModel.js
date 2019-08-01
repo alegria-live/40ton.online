@@ -7,10 +7,10 @@ export class Driver {
             newData
         }
     };    
-    addDriver(success, error, isLoading) {
+    addDriver(success, showInstruction, error, isLoading) {
         isLoading(true);
         axios.post('/system/addDriver', this.driverData)
-            .then(res => { success(res.data); isLoading(false); })
+            .then(res => { success(res.data); showInstruction(true); isLoading(false); })
             .catch(e => { error(e.response.data); isLoading(false) });
     };
     updateDriver(success, error, isLoading, getDrivers) {

@@ -21,6 +21,7 @@ else {
 	app.set("x-powered-by", false);
 	require("./middlewares/middlewares.js")(app);
 	app.set("env", process.env.NODE_ENV);
+	app.use(express.static("build"));
 
 	db.initDb((err, db) => {
 		if (err) {			

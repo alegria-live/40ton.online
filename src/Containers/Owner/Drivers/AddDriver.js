@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import MenuContext from '../../../context/menu-context';
 import { Driver } from './driverModel';
 import { inputChangedHandler, validFormHandler, changeInputsFormText, cancelForm } from '../../../shared/utility';
+import DriverInstruction from '../../../Components/Owner/Instructions/DriverInstruction';
 import Input from '../../../Components/UI/Input/Input';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 import { Drawer } from 'antd';
@@ -61,6 +62,7 @@ const AddDriver = props => {
     const [successMsg, setSuccesMsg] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [formIsValid, setFormIsValid] = useState(false);
+    const [showInstruction, setShowInstruction] = useState(false);
 
     const formElementsArray = [];
     const formElementsKeyArray = [];
@@ -95,7 +97,7 @@ const AddDriver = props => {
                 }
             }
         );        
-        driver.addDriver(setSuccesMsg, setErrorMsg, setIsLoading);
+        driver.addDriver(setSuccesMsg, setShowInstruction, setErrorMsg, setIsLoading);
     };
     const cancelHandler = (event) => {
         if (event) event.preventDefault();
@@ -103,6 +105,7 @@ const AddDriver = props => {
         setShowAddDriver(false);
         setSuccesMsg(null);
         setErrorMsg(null);
+        setShowInstruction(false);
     };
 
     let form = formElementsArray.map(formElement => (
@@ -134,6 +137,14 @@ const AddDriver = props => {
         </>
     )
     return (
+        successMsg ?
+        <DriverInstruction 
+            visible={showInstruction}
+            onClose={cancelHandler}
+            name= {successMsg.name}
+            lastName= {successMsg.lastName}
+            id={successMsg.id}>
+        </DriverInstruction> :
         <Drawer
             visible={showAddDriver}
             placement="left"
@@ -143,23 +154,16 @@ const AddDriver = props => {
             onClose={cancelHandler}
         >
             {
-                successMsg ?
-                    <div style={{ margin: 20, textAlign: 'center' }}>
-                        <h5 style={{color: 'rgba(43, 144, 143, 0.85)'}}>
-                        {props.driversText.addDriverSuccess}</h5>
-                        <h6>{successMsg.name}</h6>
-                        <h6>{successMsg.lastName}</h6>
+                errorMsg ?
+                    <div style={{margin: '1.5rem'}}>
+                        <h6 style={{color: 'red'}}>{
+                            props.errorText[errorMsg] ? 
+                            props.errorText[errorMsg] : 
+                            props.driversText.addDriverError
+                        }</h6>
                     </div> :
-                    errorMsg ?
-                        <div style={{margin: '1.5rem'}}>
-                            <h6 style={{color: 'red'}}>{
-                                props.errorText[errorMsg] ? 
-                                props.errorText[errorMsg] : 
-                                props.driversText.addDriverError
-                            }</h6>
-                        </div> :
-                        isLoading ? <Spinner /> :
-                            formElement
+                    isLoading ? <Spinner /> :
+                        formElement
             }
 
             <button

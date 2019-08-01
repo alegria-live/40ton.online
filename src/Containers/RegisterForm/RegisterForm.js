@@ -208,6 +208,10 @@ const LogIn = props => {
     }, [controls]);
 
     useEffect(() => {
+        window.scrollTo(0, 400);
+    }, []);
+
+    useEffect(() => {
         changeInputsFormText(controls, formElementsKeyArray, props.registerText, setControls)
     // eslint-disable-next-line
     }, [props.registerText]);

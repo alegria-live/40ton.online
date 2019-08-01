@@ -4,8 +4,9 @@ import * as actions from '../actions/index';
 
 export function* getTruckRoutesSaga(action) {
     yield put (actions.truckRoutesInit());
-    try {
-        const response = yield axios.get('/system/truckRoutes?truckId='+action.truckId);
+    try {        
+        const url = 'truckId=' + action.truckId + '&from=' + action.from + '&end=' + action.end
+        const response = yield axios.get('/system/truckRoutes?' + url);
         yield put(actions.truckRoutesSuccess(response.data));
     }
     catch (error) {

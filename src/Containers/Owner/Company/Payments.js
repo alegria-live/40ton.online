@@ -104,7 +104,7 @@ const Payments = props => {
                     }
                 })
             );
-        }
+        } // eslint-disable-next-line
     },[toCheck]);
 
     const switchHandler = (checked, e) => {      

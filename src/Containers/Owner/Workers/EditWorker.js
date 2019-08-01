@@ -2,13 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import MenuContext from '../../../context/menu-context';
 import { Worker } from './workerModel';
-import { inputChangedHandler, validFormHandler, cancelForm } from '../../../shared/utility';
+import { inputChangedHandler, validFormHandler, cancelForm, changeInputsFormText } from '../../../shared/utility';
 import Input from '../../../Components/UI/Input/Input';
-import { Drawer, Select, Button } from 'antd';
+import { Drawer, Select, Button, Modal } from 'antd';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 import Axios from 'axios';
 import _ from 'lodash';
 const { Option } = Select;
+const { confirm } = Modal;
 
 const EditWorker = props => {
 
@@ -110,6 +111,11 @@ const EditWorker = props => {
         validFormHandler(controls, setFormIsValid);
     }, [controls]);
 
+    useEffect(() => {
+        changeInputsFormText(controls, formElementsKeyArray, props.workerText, setControls)
+        // eslint-disable-next-line
+    }, [props.workerText]);
+
     const setWorker = val => {
         setWorkerCurrentEmail(val);
         const actualWorker = allWorkers.find(elem => elem.email === val);
@@ -145,7 +151,14 @@ const EditWorker = props => {
         const worker = new Worker({
             id: controls.email.value.trim()
         });
-        worker.deleteWorker(setSuccesMsg, setErrorMsg, setIsLoading, getWorkers);
+        confirm({
+            title: controls.name.value + ' ' + controls.lastName.value,
+            content: props.workerText.deleteConfirm,
+            onOk() {
+                worker.deleteWorker(setSuccesMsg, setErrorMsg, setIsLoading, getWorkers);
+            },
+            onCancel() { return }
+        });        
     };
     const cancelHandler = (event) => {
         if (event) event.preventDefault();
@@ -188,7 +201,7 @@ const EditWorker = props => {
         <>
             <h6>{props.workerText.editPanelName}</h6>
             <p>{props.workerText.restrictionText}</p>
-            <p style={{ fontWeight: 'bold' }}>{props.workerText.choiceWorker}</p>
+            <p>{props.workerText.choiceWorker}</p>
             <Select
                 style={{ width: 280 }}
                 onChange={(value) => setWorker(value)}
@@ -196,7 +209,7 @@ const EditWorker = props => {
                 {options}
             </Select>
             <form onSubmit={submitHandler} style={{ display: "inline", textAlign: 'center' }}>
-                {form}
+                {form}       
                 <Button
                     onClick={submitHandler}
                     disabled={!formIsValid || isLoading || !props.perm}

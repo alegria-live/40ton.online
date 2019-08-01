@@ -9,15 +9,16 @@ const MenuContent = props => {
 	const [collapsed, setCollapsed] = useState(false);
 	const {
 		setShowAddDriver,
-		setShowEditDriver,
+		setShowEditDriver,		
 		setShowAddTruck,
 		setShowEditTruck,
 		setShowAddWorker,
 		setShowEditWorker,
 		setShowEditCompany,
-		setShowPayments
+		setShowPayments,
+		setShowPhoneInstruction
 	} = useContext(MenuContext);
-
+	
 	return (
 		<div className='container'>
 			<Button type="primary" onClick={() => setCollapsed(!collapsed)} style={{ marginBottom: 20 }}>
@@ -57,6 +58,7 @@ const MenuContent = props => {
 				>
 					<Menu.Item onClick={() => setShowAddTruck(true)} key="4">{props.textMenu.addTruck}</Menu.Item>
 					<Menu.Item onClick={() => setShowEditTruck(true)} key="5">{props.textMenu.editTruck}</Menu.Item>
+					<Menu.Item onClick={() => {}} key="6">{props.textMenu.theft}</Menu.Item>
 				</SubMenu>
 				<SubMenu
 					key="workers"
@@ -67,8 +69,8 @@ const MenuContent = props => {
 						</span>
 					}
 				>
-					<Menu.Item onClick={() => setShowAddWorker(true)} key="6">{props.textMenu.addWorker}</Menu.Item>
-					<Menu.Item onClick={() => setShowEditWorker(true)} key="7">{props.textMenu.editWorker}</Menu.Item>
+					<Menu.Item onClick={() => setShowAddWorker(true)} key="7">{props.textMenu.addWorker}</Menu.Item>
+					<Menu.Item onClick={() => setShowEditWorker(true)} key="8">{props.textMenu.editWorker}</Menu.Item>
 				</SubMenu>
 				<SubMenu
 					key="company"
@@ -79,8 +81,27 @@ const MenuContent = props => {
 						</span>
 					}
 				>
-					<Menu.Item onClick={() => setShowEditCompany(true)} key="8">{props.textMenu.editCompany}</Menu.Item>
-					<Menu.Item onClick={() => setShowPayments(true)} key="9">{props.textMenu.payments}</Menu.Item>
+					<Menu.Item onClick={() => setShowEditCompany(true)} key="9">{props.textMenu.editCompany}</Menu.Item>
+					<Menu.Item onClick={() => setShowPayments(true)} key="10">{props.textMenu.payments}</Menu.Item>
+					<Menu.Item onClick={() => {} } key="11">{props.textMenu.orders}</Menu.Item>
+					<Menu.Item onClick={() => {}} key="12">{props.textMenu.invoices}</Menu.Item>
+				</SubMenu>
+				<SubMenu
+					key="instructions"
+					title={
+						<span>
+							<Icon type="info-circle" />
+							<span>{props.textMenu.instructions}</span>
+						</span>
+					}
+				>					
+					<Menu.Item onClick={() => {} } key="13">
+						<a 
+							href={props.textMenu.systemInstructionLink}
+							target='_blanc'>{props.textMenu.systemInstruction}
+						</a>
+					</Menu.Item>
+					<Menu.Item onClick={() => setShowPhoneInstruction(true)} key="14">{props.textMenu.driverInstruction}</Menu.Item>
 				</SubMenu>
 			</Menu>
 		</div>
@@ -88,7 +109,7 @@ const MenuContent = props => {
 }
 const mapStateToProps = state => {
 	return {
-		textMenu: state.initLang.textOwner.userMenu,
+		textMenu: state.initLang.textOwner.userMenu		
 	}
 }
 export default connect(mapStateToProps)(MenuContent)

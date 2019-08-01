@@ -46,6 +46,9 @@
     },
     "routes" : {
         "selectTruck": "Wybierz rejestrację pojazdu",
+        "dateChoice": "Zakres dat tabeli",
+        "thisMonth": "Ten miesiąc",
+        "lastMonth": "Poprzedni miesiąc",
         "date": "Data",
         "driver": "Kierowca",
         "action": "Czynność",
@@ -68,6 +71,7 @@
         "drivers": "Kierowcy",
         "addDriver": "Dodawanie kierowcy",
         "editDriver": "Edycja kierowcy",
+        "theft": "Kradzież paliwa",
         "showDrivers": "Wszyscy kierowcy",
         "trucks": "Pojazdy",
         "addTruck": "Dodawanie poojazdu",
@@ -81,11 +85,15 @@
         "payments": "Abonamenty i płatności",
         "orders": "Zamówienia",
         "invoices": "Faktury",
+        "instructions": "Instruckcje",
+        "systemInstruction": "Instrukcja systemu",
+        "systemInstructionLink": "https://react.40ton.online/pdf/instrukcja_systemu_kontroli_zuzycia_paliwa.pdf",
+        "driverInstruction": "Instrukcja panelu kierowcy",
         "demo": "Wersja demonstracyjna. Zapisywanie informacji nie jest dostępne."
     },
     "driversForm": {
         "addPanelName": "Panel dodawania kierowcy",
-        "changePanelName": "Panel edycji danych kierowcy",
+        "editPanelName": "Panel edycji danych kierowcy",
         "choiceDriver": "Wybierz kierowcę aby edytować",
         "noDrivers": "Brak kierowców do edycji",
         "name": "Imię",
@@ -102,7 +110,7 @@
     },
     "trucksForm": {
         "addPanelName": "Panel dodawania pojazdu",
-        "changePanelName": "Panel edycji danych pojazdu",
+        "editPanelName": "Panel edycji danych pojazdu",
         "choiceTruck": "Wybierz pojazd aby edytować",
         "noTrucks": "Brak pojazdów do edycji",
         "name": "Marka pojazdu",
@@ -112,7 +120,7 @@
         "submit": "Dodaj",
         "submitChange": "Zapisz zmiany",
         "delete": "Usuń pojazd",
-        "deleteConfirm": "Wszystkie dane pojazdu zostaną usunięte",
+        "deleteConfirm": "Wszystkie dane pojazdu zostaną usunięte. Skasować?",
         "cancel": "Powrót",
         "addTruckSuccess": "Do bazy danych dodano pojazd",
         "addTruckError": "Wystąpił błąd. Proszę zalogować się od nowa i ponowić operację",
@@ -136,7 +144,7 @@
         "submit": "Dodaj",
         "submitChange": "Zapisz zmiany",
         "delete": "Usuń użytkownika",
-        "deleteConfirm": "Wszystkie dane użytkownika zostaną usunięte",
+        "deleteConfirm": "Wszystkie dane użytkownika zostaną usunięte. Skasować?",
         "cancel": "Powrót",
         "addWorkerSuccess": "Dodano dostęp do systemu dla użytkownika",
         "addWorkerError": "Wystąpił błąd. Proszę zalogować się od nowa i ponowić operację",
@@ -146,7 +154,7 @@
         "panelName": "Edycja danych firmy",
         "submitChange": "Zapisz",
         "delete": "Usuń firmę",
-        "deleteConfirm": "UWAGA !!! - Wszystkie dane firmy zostaną bezpowrotnie usunięte. Czy kontynuować ?",
+        "deleteConfirm": "UWAGA !!! - Wszystkie dane firmy zostaną bezpowrotnie usunięte. Czy kontynuować?",
         "cancel": "Powrót",
         "editCompanySuccess": "Zmiany zostały poprawnie zapisane"
     },
@@ -167,5 +175,21 @@
         "acceptPayment": "Akceptacja i zakończenie zamówienia następuje poprzez kliknięcie przycisku DotPay. Klient zostanie przekierowany na bezpieczną stronę serwisu dotPay.pl, gdzie dokona zapłaty wybierając dogodną opcję. O pozytywnym zakończeniu procesu płatności DotPay informuje klienta wysyłając wiadomość na adres e-mail podany podczas transakcji.",
         "payButton": "Zamawiam i płacę przez DotPay",
         "cancel": "Powrót"
+    },
+    "phoneInstruction": {
+        "title": "Ustawianie dostępu do systemu na telefonach kierowców",
+        "p1": "- Z panelu telefonu uruchom przeglądarkę Chrome",
+        "p2": "- W pasku adresowym wprowadź następujący adres: ",
+        "p3": "- Jeśli adres wprowadzono poprawnie wyświetli się panel wyboru obsady",
+        "p4": "- Na prawo od paska adresu kliknij Opcje",
+        "p5": "- Wybierz opcję 'Dodaj do ekranu głównego' oraz 'Wersja na komputer'",
+        "p6": "- Na pulpicie zostanie utworzony bezpośredni skrót do aplikacji 'Panel kierowcy'",
+        "p7": "- Wskaż kierowcy gdzie znajduje się skrót do aplikacji."
+    },
+    "driverInstruction" : {
+        "title": "Instrukcja logowania i obsługi panelu kierowcy",
+        "driver":"Kierowca ",
+        "id": "Identyfikator kierowcy: ",
+        "instruction": "<p>W penelu telefonu klknij ikonę 'Panel kierowcy'</p><p>Wybierz odpowiedni typ obsady</p><p>Wprowadź swój identyfikator i zatwierdź</p><p>Wprowadź numer rejestracyjny pojazdu i zatwierdź</p><p>Jeśli jest to pierwszy wpis dla danego pojazdu dostępna będzie wyłącznie opcja tankowania do pełna</p><p>Dostęne opcje:</p><p> - Załadunek</p><p> - Rozładunek</p><p> - Tankowanie</p><p> - Zakończenie okresu</p><p> - Edytuj ostatni wpis</p><p> - Wyloguj</p><p>Wrowadzaj kolejne etapy trasy systematycznie i na bieżąco</p><p>Należy wypełnić wszystkie pola danej opcji aby trasa została zapisana</p><p>Zawsze sprawdzaj prawidłowość ostatniego wpisu</p><p>Opcja 'Edytuj ostatni wpis' pozwala poprawić ewentualny błąd ostatniego zapisu</p><p>'Zakończenie okresu' - kiedy istnieje możliwość, że pojazd będzie prowadzony przez innego kierowcę</p><p>np. przed urlopem lub zakończeniem cyklu.</p><p>Przy zmianie pojazdu automatycznie wystąpi opcja nowego kierowcy dla danego pojazdu</p><p>Po dokonaniu i sprawdzeniu wpisu wybierz opcję 'Wyloguj'</p>"
     }
 }

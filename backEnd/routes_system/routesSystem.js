@@ -70,8 +70,11 @@ router.get("/oneTruckData", async (req, res) => {
 
 router.get("/truckRoutes", async (req, res) => {
   const truckId = querystring.parse(url.parse(req.url).query).truckId;
+  const from = querystring.parse(url.parse(req.url).query).from;
+  const end = querystring.parse(url.parse(req.url).query).end;
+  
   try {
-    const data = await truck.truckRoutes({collectionName: req.cookies._gcn, truckId});
+    const data = await truck.truckRoutes({collectionName: req.cookies._gcn, truckId, from, end});
     res.json(data);
   }
   catch (e) { res.status(500).json(e.message);

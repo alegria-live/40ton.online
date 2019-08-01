@@ -40,7 +40,7 @@ const Inside = props => (
 			</div>			
 		</div>
 		<Divider>{props.titleText.routesTitle}</Divider>
-		<div className="row mx-auto pt-1 mb-5">
+		<div className="row mx-auto mb-5">
 			<div className="col-xs-12 col-sm-12 mx-auto">
 				<RoutesTable />
 			</div>			

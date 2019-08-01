@@ -24,14 +24,13 @@ const NavHeader = props => {
         navHeaderArr = props.navHeaderOwner
     }
 
-    const onLoginHandler = (val) => {
+    const onLoginHandler = val => {
         if(showRegister || showOwner ) return
         setShowLogIn(val)
     };
-    const onSignInHanler = (val) => {
-        if(showRegister) return
-        setShowRegister(val);
-        window.scrollTo(0, 400);
+    const onSignInHandler = val => {
+        // if(showRegister) return        
+        setShowRegister(!showRegister);
     };
     const toSytemPage = () => {
         setShowOwner(true);
@@ -43,13 +42,22 @@ const NavHeader = props => {
         setShowOwner(false);
         props.onLogout();
     }
+
+    const onDemoHandler = () => {
+        const data = {
+            email: props.demoData.email,
+            password: props.demoData.pass,
+            _csrf: props._csrf
+        };
+        props.onDemo(data);
+    }
     
-    const onClickHandler = (data) => {
+    const onClickHandler = data => {
        switch(data) {
            case('onLoginHandler'):
            onLoginHandler(true); break
-           case('onSignInHanler'):
-           onSignInHanler(true); break;
+           case('onSignInHandler'):
+           onSignInHandler(true); break;
            case('onSetLangPl'):
            choiceLang('pl');break
            case('onSetLangEs'):
@@ -60,6 +68,8 @@ const NavHeader = props => {
            toHomePage();break
            case('onLogoutHandler'):
            onLogoutHandler();break
+           case('onDemoHandler'):
+           onDemoHandler();break
            default: console.log("default");
        };
     };
@@ -76,13 +86,16 @@ const mapStateToProps = state => {
         navHeaderSigned: state.initLang.textHome.navHeaderSigned,
         navHeaderOwner: state.initLang.textHome.navHeaderOwner,
         appLanguage: state.initLang.language,
+        demoData: state.initLang.textHome.demoData,
         token: state.authReducer.token,
+        _csrf: state.initLang._csrf,
         company: state.authReducer.company
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
+        onDemo: (data) => dispatch(actions.authProcess(data)),
         onLogout: () => dispatch(actions.logoutUser())
     }
-}
+};
 export default withRouter( connect(mapStateToProps, mapDispatchToProps)(NavHeader) );

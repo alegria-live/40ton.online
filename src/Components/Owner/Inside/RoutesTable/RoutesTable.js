@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import RoutesTableData from '../../../../Containers/Owner/RoutesTableData/RoutesTableData';
-import { Table } from 'antd';
+import { Table, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
+import ReactToPrint from 'react-to-print';
 
 const RouteTable = props => {
 	const [data, setData] = useState([]);
+	const componentRef = useRef();
+
 	useEffect(() => {
 		if (props.routes !== undefined && props.routes.length) {
 			const routesSorted = props.routes.sort((prev, next) => {
 				return next._id - prev._id
-			});
+			});			
 			setData(
 				routesSorted.map(route => {
 					return {
@@ -17,16 +20,20 @@ const RouteTable = props => {
 						dtStop: (new Date(route.dtStop)).toLocaleDateString(),
 						type: checkAction(route.type),
 						full: route.full ? props.text.yes : route.type === 3 ? props.text.no : '-',
-						tonIn: route.type === 1 ? route.tonOut : '-',
-						tonOut: route.type === 2 ? route.tonIn - route.tonOut : '-',
+						tonIn: route.type === 1 ? route.tonOut + ' t.': '-',
+						tonOut: route.type === 2 ? (route.tonIn - route.tonOut) + ' t.' : '-',
 						key: route['_id'],
-						litres: route.type === 3 ? route.litres : '-',
+						litres: route.type === 3 ? route.litres + ' l.': '-',
 						comments: ''
 					}
 				})
 			)
-		}// eslint-disable-next-line
-	}, [props.routes]);
+		}
+		else {
+			setData([]);
+		}
+		// eslint-disable-next-line
+	}, [props.routes, props.text]);
 	
 	const checkAction = (val) => {
 		switch (val) {
@@ -97,16 +104,28 @@ const RouteTable = props => {
 	];
 
 	return (
-		<Table
+		<div style={{margin: 30}} ref={componentRef}>
+			<Table			
 			columns={columns}
 			dataSource={data}
 			bordered
 			loading={props.isLoading}
-			size="small"
-			pagination={{ pageSize: 20 }}
-			title={() => (<RoutesTableData />)}
+			size="middle"
+			pagination={false}
+			title={() => (
+				<div style={{display:'flex', justifyContent:'space-between'}}>
+					<div>
+						<RoutesTableData />
+					</div>
+					<ReactToPrint
+                    	trigger={() => <Button><Icon type="printer" /></Button>}
+                    	content={() => componentRef.current}
+               		/>
+				</div>	
+			)}
 			footer={() => props.text.registration + ' ' + (props.truckId ? props.truckId: "")}
 		/>
+		</div>
 	);
 };
 const mapStateToProps = state => {

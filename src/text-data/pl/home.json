@@ -1,4 +1,7 @@
-{
+{   "headText": {
+    "title": "System kontroli zużycia paliwa w transporcie",
+    "description": "Redukcja przepałów poprzez optymalizację stylu jazdy. Zmniejszenie kosztów firm transportowych."
+    },
     "headerSlogan": "Jak zredukować koszty paliwa w transporcie?",
     "navHeader": [
         {
@@ -7,11 +10,11 @@
         },
         {
             "text": "Rejestracja",
-            "fn": "onSignInHanler"
+            "fn": "onSignInHandler"
         },
         {
             "text": "Demo",
-            "fn": "onDemoHanler"
+            "fn": "onDemoHandler"
         },
         {
            "text": "Pl",
@@ -105,5 +108,9 @@
         "registerSuccess1": "Została wysłana wiadomość potwierdzająca rejestrację użytkownika na adres: ",
         "registerSuccess2": " Aby zakończyć proces rejestracji proszę sprawdzić pocztę przychodzącą. W przypadku braku informacji proszę sprawdzić folder SPAM.",
         "activateSuccess": "Aktywacja przebiegła pomyślnie. Możesz zalogować się do swojego systemu."
+    },
+    "demoData": {
+        "email": "fuel.control.demo@alegria.live",
+        "pass": "giX0sf-nHUe5Hw8GXQ9N3gtjHMg"
     }
 }

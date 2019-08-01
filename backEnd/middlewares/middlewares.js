@@ -10,16 +10,12 @@ const express = require("express"),
     csrfProtection = csrf({ cookie: true }),
     parseForm = bodyParser.urlencoded({ extended: false }),
     app = express();
-   
-let publicCat = "public_dev";
-if(app.get('env') === "production") {publicCat = "public";}
 
 process.on('uncaughtException', (err) => {
     fs.appendFileSync('logss.txt', new Date() + ' ' + err.stack + '\n');
 });
 
-module.exports = (app) => {   
-    app.use(express.static(publicCat));
+module.exports = (app) => {       
     app.use(cookieParser());
     app.use(bodyParser.json());
 

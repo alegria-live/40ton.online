@@ -7789,3 +7789,108 @@ Thu Jul 25 2019 15:52:47 GMT+0200 (GMT+02:00) TypeError: Cannot read property 's
     at Server.emit (events.js:182:13)
     at emitCloseNT (net.js:1629:8)
     at process._tickCallback (internal/process/next_tick.js:63:19)
+Tue Jul 30 2019 21:05:59 GMT+0200 (GMT+02:00) Error [ERR_STREAM_WRITE_AFTER_END]: write after end
+    at writeAfterEnd (_stream_writable.js:243:12)
+    at Socket.Writable.write (_stream_writable.js:291:5)
+    at Connection.write (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\connection.js:733:57)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1532:44
+    at waitForAuth (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1386:40)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1394:5
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1247:23
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+Tue Jul 30 2019 23:41:22 GMT+0200 (GMT+02:00) Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (net.js:1290:14)
+    at listenInCluster (net.js:1338:12)
+    at Server.listen (net.js:1425:7)
+    at Function.listen (D:\Project_Tir\40_react\40\backEnd\node_modules\express\lib\application.js:618:24)
+    at db.initDb (D:\Project_Tir\40_react\40\backEnd\app.js:29:7)
+    at MongoClient.connect.then.client (D:\Project_Tir\40_react\40\backEnd\utils\dbConnection.js:19:4)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Tue Jul 30 2019 23:41:25 GMT+0200 (GMT+02:00) TypeError: Cannot read property 'slice' of undefined
+    at Test.request.post.set.send.expect.end (D:\Project_Tir\40_react\40\backEnd\tests\systemTest.Integration.js:108:44)
+    at Test.assert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:181:6)
+    at Server.localAssert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:131:12)
+    at Object.onceWrapper (events.js:273:13)
+    at Server.emit (events.js:182:13)
+    at emitCloseNT (net.js:1629:8)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+Tue Jul 30 2019 23:42:18 GMT+0200 (GMT+02:00) TypeError: Cannot read property 'Truck' of null
+    at dbConnection.getDb.collection.findOneAndUpdate (D:\Project_Tir\40_react\40\backEnd\system\addRoutes.js:16:43)
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at session.endSession (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:400:11)
+    at ClientSession.endSession (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\sessions.js:69:41)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:396:17)
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:405:9)
+    at handleCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:128:55)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\collection.js:2302:12
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:405:9)
+    at handleCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:128:55)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\db.js:340:5
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:541:18
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+Tue Jul 30 2019 23:42:18 GMT+0200 (GMT+02:00) TypeError: Cannot read property 'Truck' of null
+    at dbConnection.getDb.collection.findOneAndUpdate (D:\Project_Tir\40_react\40\backEnd\system\addRoutes.js:16:43)
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at session.endSession (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:400:11)
+    at ClientSession.endSession (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\sessions.js:69:41)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:396:17)
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:405:9)
+    at handleCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:128:55)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\collection.js:2302:12
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:405:9)
+    at handleCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:128:55)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\db.js:340:5
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:541:18
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+Tue Jul 30 2019 23:42:19 GMT+0200 (GMT+02:00) TypeError: Cannot read property 'Truck' of null
+    at dbConnection.getDb.collection.findOneAndUpdate (D:\Project_Tir\40_react\40\backEnd\system\addRoutes.js:16:43)
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at session.endSession (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:400:11)
+    at ClientSession.endSession (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\sessions.js:69:41)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:396:17)
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:405:9)
+    at handleCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:128:55)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\collection.js:2302:12
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:405:9)
+    at handleCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:128:55)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\db.js:340:5
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:541:18
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+Tue Jul 30 2019 23:42:19 GMT+0200 (GMT+02:00) TypeError: Cannot read property 'Truck' of null
+    at dbConnection.getDb.collection.findOneAndUpdate (D:\Project_Tir\40_react\40\backEnd\system\addRoutes.js:16:43)
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at session.endSession (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:400:11)
+    at ClientSession.endSession (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\sessions.js:69:41)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:396:17)
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:405:9)
+    at handleCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:128:55)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\collection.js:2302:12
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:405:9)
+    at handleCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:128:55)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\db.js:340:5
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:541:18
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+Tue Jul 30 2019 23:42:19 GMT+0200 (GMT+02:00) TypeError: Cannot read property 'Truck' of null
+    at dbConnection.getDb.collection.findOneAndUpdate (D:\Project_Tir\40_react\40\backEnd\system\addRoutes.js:16:43)
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at session.endSession (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:400:11)
+    at ClientSession.endSession (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\sessions.js:69:41)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:396:17)
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:405:9)
+    at handleCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:128:55)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\collection.js:2302:12
+    at result (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:413:17)
+    at executeCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:405:9)
+    at handleCallback (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\utils.js:128:55)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb\lib\db.js:340:5
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:541:18
+    at process._tickCallback (internal/process/next_tick.js:61:11)

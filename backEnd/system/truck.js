@@ -66,17 +66,23 @@ const oneTruckData = async ({ collectionName, truckId }) => {
 };
 
 //returns truck routes array
-const truckRoutes = async ({ collectionName, truckId }) => {
+const truckRoutes = async ({ collectionName, truckId, from, end }) => {
+    from = Number(from);
+    end = Number(end);
     try {
         const res = await dbConnection.getDb().collection(collectionName)
             .aggregate([
                 { $match: { _id: truckId } },
-                {
-                    $project: {
-                        routes: '$Truck.routes'
+                { $project: {
+                        routes: {
+                            $filter: {
+                                input: '$Truck.routes',
+                                cond: { $and: [{ $gte: ['$$this.dtStop', from] }, { $lte: ['$$this.dtStop', end] }] }
+                            }
+                        }
                     }
                 }
-            ]).next();
+            ]).next();           
         return res;
     }
     catch (e) { throw new Error(503); }

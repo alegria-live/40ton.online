@@ -2,13 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import MenuContext from '../../../context/menu-context';
 import AppContext from '../../../context/app-context';
-import { inputChangedHandler, validFormHandler, cancelForm, checkIdentity } from '../../../shared/utility';
+import { inputChangedHandler, validFormHandler, cancelForm, checkIdentity, changeInputsFormText } from '../../../shared/utility';
 import Input from '../../../Components/UI/Input/Input';
-import { Drawer, Button } from 'antd';
+import { Drawer, Button, Modal } from 'antd';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 import Axios from 'axios';
 import * as actions from '../../../store/actions';
 import _ from 'lodash';
+const { confirm } = Modal;
 
 const EditCompany = props => {
 
@@ -234,6 +235,11 @@ const EditCompany = props => {
         // eslint-disable-next-line
     }, [controls]);
 
+    useEffect(() => {
+        changeInputsFormText(controls, formElementsKeyArray, props.registerText, setControls)
+        // eslint-disable-next-line
+    }, [props.registerText]);
+
     const setWorker = val => {        
         const copyControls = _.cloneDeep(controls);
         formElementsKeyArray.forEach(elem => {
@@ -294,20 +300,26 @@ const EditCompany = props => {
     };
     const deleteHandler = event => {
         event.preventDefault();
-        if(props.demo) { props.demoModal(true); return; }
-        setIsLoading(true);
-        Axios.delete('api/users')
-        .then(res => {
-            if(res.status === 200) {
-                setShowOwner(false);
-                props.onLogout();
-            }
-        })
-        .catch(e => {
-            console.log(e)
-            // setErrorMsg(e.response);
-            setIsLoading(false);
-        })
+        if(props.demo) { props.demoModal(true); return }
+        confirm({
+            title: controls.company.value,
+            content: props.cText.deleteConfirm,
+            onOk() {
+                setIsLoading(true);
+                Axios.delete('api/users')
+                .then(res => {
+                    if(res.status === 200) {
+                        setShowOwner(false);
+                        props.onLogout();
+                    }
+                })
+                .catch(e => {
+                    setErrorMsg(e.response.data.error);
+                    setIsLoading(false);
+                })
+            },
+            onCancel() { return }
+        });        
     };
     const cancelHandler = (event) => {
         if (event) event.preventDefault();

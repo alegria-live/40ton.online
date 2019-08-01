@@ -5,10 +5,12 @@ export const truckRoutesInit = () => {
         type: actionTypes.TRUCK_ROUTES_INIT
     };
 };
-export const truckRoutesProcess = (truckId) => {
+export const truckRoutesProcess = (truckId, from, end) => {
     return {
         type: actionTypes.TRUCK_ROUTES_PROCESS,
-        truckId
+        truckId,
+        from,
+        end
     };
 };
 export const truckRoutesSuccess = truck => {

@@ -25,7 +25,7 @@ module.exports = function(app) {
         try {
             const data = await users.checkUser(req.body.email, req.body.password);
             const hashedId = jwt.sign(data._id.toString(), process.env.JWT_CODE);
-            const demo = process.env.E2E_TEST_EMAIL === req.body.email ? true : false;
+            const demo = process.env.E2E_TEST_EMAIL === req.body.email ? true : false;            
             req.session.user = data.company;
             req.session.perm = data.permission;            
             req.session._id = data._id.toString();            
