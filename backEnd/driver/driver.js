@@ -2,8 +2,9 @@ const dbConnection = require('../utils/dbConnection'),
 	{Long} = require("mongodb"),
 	Q = require("q");
 
-/* returns the table with the name of the driver
+/* returns array with the name of the driver
 * and the average of real combustion or norm in a given period
+* depending on param
 */
 const driversFuelEfficiency = ({ collectionName, from, end, param }) => {
 	from = Number(from);
@@ -38,6 +39,9 @@ const driversFuelEfficiency = ({ collectionName, from, end, param }) => {
 	return def.promise;
 };
 
+/* returns one driver with array of average real fuel consumption
+* and norm for every route 
+*/
 const oneDriverData = async ({ collectionName, driverId }) => {
 	try {
 		const res = await dbConnection.getDb()
@@ -59,7 +63,9 @@ const oneDriverData = async ({ collectionName, driverId }) => {
 	catch (e) {throw new Error(503);}
 };
 
-
+/* returns drivers who have at least one route
+* to select input filed of the one driver chart
+*/
 const activeDrivers = async ({ collectionName }) => {
 	try {
 		const res = await dbConnection.getDb()
@@ -78,6 +84,8 @@ const activeDrivers = async ({ collectionName }) => {
 	catch (e) {throw new Error(503);}
 };
 
+/* adds new driver to the company data base
+*/
 const addDriver = async (driver) => {
 	const duplError = 'duplicate key error';
 	driver.Driver.date = Long.fromString(driver.Driver.date.toString());
@@ -99,6 +107,8 @@ const addDriver = async (driver) => {
 	}
 };
 
+/* returns all company drivers for select input field in drivers edition form 
+*/
 const allDrivers = async (collectionName) => {
 	try {
 		const res = await dbConnection.getDb()
@@ -116,6 +126,9 @@ const allDrivers = async (collectionName) => {
 	}
 	catch (e) { throw new Error(503); }
 };
+
+/* returns one driver for edition
+*/
 const find = async (collection, id) => {
 
 	if (typeof collection !== "string" && collection.length !== 24) {

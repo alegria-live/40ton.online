@@ -109,15 +109,7 @@ describe('SERVER SIDE APLICATION MOCHA TESTS', () => {
 				done();
 			});
 	}).timeout(25000);
-
-	it('GET /system/owner?hashedId - expect status 200', (done) => {
-		request(app)
-			.get(`/system/owner?${hashedId}`)
-			.set('Cookie', [`_gcn=${userId}`, `session=${session}`])
-			.send({ email: testEmail, password: "secretpass", _csrf: int_cookie })
-			.expect(200, done);
-	}).timeout(25000);
-
+	
 	it('POST /login - incorrect password - expect status 503', (done) => {
 		request(app)
 			.post('/login')

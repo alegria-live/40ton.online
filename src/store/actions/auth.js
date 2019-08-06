@@ -43,7 +43,8 @@ export const checkAuthTimeout = data => {
         type: actionTypes.CHECK_AUTH_TIMEOUT,
         data
     }
-}
+};
+
 export const newPassProcess = data => {
     return {
         type: actionTypes.NEW_PASS_PROCESS,

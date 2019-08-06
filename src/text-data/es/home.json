@@ -112,5 +112,9 @@
     "demoData": {
         "email": "fuel.control.demo@alegria.live",
         "pass": "giX0sf-nHUe5Hw8GXQ9N3gtjHMg"
+    },   
+    "autoLogout": {
+        "title": "Ha pasado 30 minutos sin actividad del usuario.",
+        "content": "Para evitar que se complete la sesión, haga clic OK en "
     }
 }

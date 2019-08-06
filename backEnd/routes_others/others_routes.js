@@ -9,6 +9,7 @@ const emailer = require("../utils/nodemailer"),
 	
 module.exports = function(app) {
     
+    //set app language depending on the client choice
 	app.get("/:lang", csrfProtection, (req, res) => {        
         app.set('language',  req.params.lang);
         let env = app.get("env");
@@ -19,6 +20,7 @@ module.exports = function(app) {
         });    
     });
 
+    // user activation
     app.put("/activation", (req, res) => {
                 
         if(app.get("dbError")) {
@@ -35,6 +37,7 @@ module.exports = function(app) {
         }   
     });
 
+    // sends client message from page contact form
 	app.post("/sendForm", (req, res) => {
 
         if(app.get("dbError")) {

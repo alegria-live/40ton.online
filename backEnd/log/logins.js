@@ -4,14 +4,13 @@ const sessions = require("client-sessions"),
     authenticate = require("../middlewares/authenticate"); 
 
 module.exports = function(app) {
-
-    const duration = 8 * 60 * 60 * 1000;
+    
+    const duration = 14 * 60 * 60 * 1000; 
     
     app.use(sessions({
         cookieName: "session",
         secret: process.env.SESSION_CODE,
-        duration: duration,
-        activeDuration: 60 * 60 * 1000
+        duration: duration
     }));
 
     app.post("/login", async (req, res) => {
@@ -30,8 +29,13 @@ module.exports = function(app) {
             req.session.perm = data.permission;            
             req.session._id = data._id.toString();            
             res.status(202);
-            res.cookie('_gcn',data._id.toString(), { maxAge: duration, httpOnly: false });
-            res.json({token: hashedId, company: data.company, perm: data.permission, expiredTime: duration, demo});
+            res.cookie('_gcn',data._id.toString(), { maxAge: duration, httpOnly: false });            
+            res.json({
+                token: hashedId,
+                company: data.company,
+                perm: data.permission,
+                expiredTime: duration,
+                demo});
         } catch (e) {
             req.session.reset();
             res.status(503);

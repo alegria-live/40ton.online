@@ -7,11 +7,12 @@ import ChoiceLang from '../Components/Home/ChoiceLang/ChoiceLang';
 import Spinner from '../Components/UI/Spinner/Spinner';
 import { Helmet } from "react-helmet";
 import './App.css';
+import favicon from '../assets/img/favicon.png';
 const Activation = React.lazy(() => import('../Components/Activation/Activation'));
 const HomeLayout = React.lazy(() => import('../hoc/HomeLayout/HomeLayout'));
 
-function App({ autoInitLang, ...props }) {
-
+export const App = ({autoInitLang, ...props}) => {
+	console.log(props)
 	useEffect(() => { autoInitLang() }, [autoInitLang]);
 
 	const [showLogIn, changeShowLogin] = useState(false);
@@ -37,6 +38,7 @@ function App({ autoInitLang, ...props }) {
 			<Helmet>				
 				<title>{props.headText ? props.headText.title : null}</title>
 				<meta name="description" content={props.headText ? props.headText.description : null} />
+				<link rel="icon" type="image/png" href={favicon} sizes="16x16" />
 			</Helmet>
 
 			<AppContext.Provider value={{

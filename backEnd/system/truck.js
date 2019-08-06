@@ -2,6 +2,9 @@ const Q = require("q"),
     dbConnection = require('../utils/dbConnection'),
     Long = require('mongodb').Long;
 
+/* returns trucks who have at least one route
+* to select input filed of the one truck chart
+*/
 const activeTrucks = async ({ collectionName }) => {
     try {
         const res = await dbConnection.getDb().collection(collectionName)
@@ -15,6 +18,10 @@ const activeTrucks = async ({ collectionName }) => {
     catch (e) { throw new Error(503); }
 };
 
+/* returns array with the Id of the truck
+* and the average of real combustion or norm in a given period
+* depending on param
+*/
 const trucksFuelEfficiency = ({ collectionName, from, end, param }) => {
     from = Number(from);
     end = Number(end);
@@ -45,6 +52,9 @@ const trucksFuelEfficiency = ({ collectionName, from, end, param }) => {
     return def.promise;
 };
 
+/* returns one truck with array of average real fuel consumption
+* and norm for every route 
+*/
 const oneTruckData = async ({ collectionName, truckId }) => {
     try {
         const res = await dbConnection.getDb().collection(collectionName)
@@ -65,7 +75,7 @@ const oneTruckData = async ({ collectionName, truckId }) => {
     catch (e) { throw new Error(503); }
 };
 
-//returns truck routes array
+//returns truck routes array for all trucks routes table
 const truckRoutes = async ({ collectionName, truckId, from, end }) => {
     from = Number(from);
     end = Number(end);
@@ -88,6 +98,8 @@ const truckRoutes = async ({ collectionName, truckId, from, end }) => {
     catch (e) { throw new Error(503); }
 };
 
+/* adds new truck to the company data base
+*/
 const addTruck = async (truck) => {
     const duplError = 'duplicate key error';
     truck.Truck.paid = Long.fromString(truck.Truck.paid.toString());
@@ -106,7 +118,8 @@ const addTruck = async (truck) => {
 	}
 };
 
-//return array of the trucks with _id, norm i consum for edit trucks
+/* returns all company trucks for select input field in truck edition form 
+*/
 const allTrucks = async (truck) => {
     try {
         const res = await dbConnection.getDb().collection(truck.collectionName)
@@ -125,7 +138,12 @@ const allTrucks = async (truck) => {
     catch (e) { throw new Error(503); }
 };
 
-function theft(truck) {
+/**
+ * returns the approximate amount of fuel lost in the event of theft
+ * @param {*} truck 
+ */
+const theft = truck => {
+
     let def = Q.defer();
     dbConnection.getDb().collection(truck.collectionName)
         .findOne({ _id: truck._id }, (err, res) => {
@@ -175,7 +193,7 @@ function theft(truck) {
                     });
         });
     return def.promise;
-}
+};
 
 module.exports = {
     activeTrucks,

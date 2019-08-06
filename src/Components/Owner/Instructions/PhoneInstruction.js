@@ -9,6 +9,8 @@ const PhoneInstruction = props => {
 
     const [_gcn] = useState(Cookies.get('_gcn'))
     const {showPhoneInstruction, setShowPhoneInstruction } = useContext(MenuContext);
+    let url = 'https://40ton.online/driver/';
+    if (props.lang === 'es') url = "https://es.40ton.online/driver/";
     
     return (
         <Modal
@@ -23,7 +25,7 @@ const PhoneInstruction = props => {
         ]}
     >
         <p>{props.instrText.p1}</p>
-        <p>{props.instrText.p2 + ' ' + window.location.href + _gcn}</p>
+        <p>{props.instrText.p2 +  url + _gcn}</p>
         <p>{props.instrText.p3}</p>
         <p>{props.instrText.p4}</p>
         <p>{props.instrText.p5}</p>
@@ -36,7 +38,8 @@ const PhoneInstruction = props => {
 };
 const mapStateToProps = state => {
     return {
-        instrText: state.initLang.textOwner.phoneInstruction
+        instrText: state.initLang.textOwner.phoneInstruction,
+        lang: state.initLang.language
     }
 };
 export default connect(mapStateToProps)(PhoneInstruction);

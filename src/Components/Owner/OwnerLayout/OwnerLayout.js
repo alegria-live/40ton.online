@@ -103,7 +103,7 @@ const OwnerLayout = props => {
             <EditWorker demoModal={setShowDemoModal} />
             <EditCompany demoModal={setShowDemoModal}/>
             <Payments />
-            <PhoneInstruction />
+            <PhoneInstruction />           
         </MenuContext.Provider>
     );
 };

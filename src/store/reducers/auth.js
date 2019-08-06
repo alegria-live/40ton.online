@@ -30,7 +30,7 @@ const authSuccess = (state, action) => {
 };
 
 const authLogout = (state, action) => {   
-    return updateObject(state, {token: null, company: null, demo: true})
+    return updateObject(state, {token: null, company: null, demo: true, beforeLogout: false})
 };
 
 const clearError = (state, action) => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { connect } from 'react-redux';
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import autoLogout from '../../hoc/autoLogout';
 import axios from 'axios';
 import { preloadImage } from '../../shared/utility';
 import headerImg from '../../assets/img/motorway_trucks.jpg';
@@ -12,10 +12,13 @@ import NewPass from '../../Containers/LogIn/NewPass';
 import AppContext from '../../context/app-context';
 import ChartsContext from '../../context/charts-context';
 import Modal from '../../Components/UI/Modal/Modal';
+
 const Register = React.lazy(() => import('../../Components/Home/Register/Register'));
 const Owner = React.lazy(() => import('../../Components/Owner/OwnerLayout/OwnerLayout'));
 
-const HomeLayout = (props) => {
+
+
+export const HomeLayout = (props) => {
 	const { showLogIn, showNewPass, showRegister, showOwner } = useContext(AppContext);
 	const [allActiveDrivers, setAllActiveDrivers] = useState({});
 	const [allActiveTrucks, setAllActiveTrucks] = useState({});
@@ -44,7 +47,7 @@ const HomeLayout = (props) => {
 		<>
 			<Modal show={showLogIn} ><LogIn /></Modal>
 			<Modal show={showNewPass} ><NewPass /></Modal>
-			<Header />
+			<Header />			
 			<React.Suspense>
 				{showRegister ? <Register formName={props.registerText.formName} /> : <Main />}
 			</React.Suspense>
@@ -60,7 +63,7 @@ const HomeLayout = (props) => {
 					getActiveTrucks,
 					allActiveTrucks
 				}}>
-					<Owner />
+					<Owner />					
 				</ChartsContext.Provider>
 			</React.Suspense>
 		);
@@ -81,7 +84,7 @@ const HomeLayout = (props) => {
 
 	return (
 		<>
-			{!imgLoaded || (props._csrf.length !== 36 && props.textHome) ? <Spinner /> : component}
+			{!imgLoaded || (props._csrf.length !== 36 && props.textHome) || props.isLoading ? <Spinner /> : component}			
 		</>
 	);
 };
@@ -91,7 +94,8 @@ const setStateToProps = state => {
 		_csrf: state.initLang._csrf,
 		textHome: state.initLang.textHome,
 		error: state.initLang.error,
-		registerText: state.initLang.textHome.registerForm
+		registerText: state.initLang.textHome.registerForm,
+		isLoading: state.authReducer.loading
 	};
 };
-export default connect(setStateToProps)(withErrorHandler(HomeLayout, axios));
+export default connect(setStateToProps)(autoLogout(HomeLayout));
