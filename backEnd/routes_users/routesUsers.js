@@ -11,10 +11,10 @@ const express = require("express"),
 */
 router.post("/user", async (req, res) => {
     if (req.app.get("dbError")) { 
-        return res.status(503).json({ error: 503 });
+        return res.status(503).json(503);
     }
     if (!reqDataCheck(req.body.dataSet)) {
-        return res.status(404).json({ error: 465 });
+        return res.status(404).json(465);
     }
     try {
         const data = await users.addUser(req.body);
@@ -23,30 +23,30 @@ router.post("/user", async (req, res) => {
             .then(dt => {
                 res.append('_gcn', hashedId).json(dt);
             })
-            .catch(error => res.status(503).json(error));
+            .catch(e => res.status(503).json(e));
     }
-    catch (data) { res.status(500).json(data); }
+    catch (e) { res.status(500).json(e); }
 });
 
 router.get("/users/findUser", (req, res) => {
     req.body.id = req.cookies._gcn;
     users.findUser(req.body)
         .then(data => res.json(data))
-        .catch(data => res.status(500).json(data));
+        .catch(e => res.status(500).json(e));
 });
 
 router.put("/users/", (req, res) => {
     req.body._id = req.cookies._gcn;
     users.editUser(req.body)
         .then(data => res.json(data))
-        .catch(data => res.status(500).json(data));
+        .catch(e => res.status(500).json(e));
 });
 
 router.delete("/users/", (req, res) => {
     req.body._id = req.cookies._gcn;
     users.delUser(req.body)
-        .then(data => res.json(data.msg))
-        .catch(data => res.status(500).json(data));
+        .then(data => res.json(data))
+        .catch(e => res.status(500).json(e));
 });
 
 router.put("/user/psw", (req, res) => {
@@ -56,7 +56,7 @@ router.put("/user/psw", (req, res) => {
                 .then(dt => res.json(dt))
                 .catch(dt => res.status(500).json(dt));
         })
-        .catch(data => { res.status(500).json(data); });
+        .catch(e => res.status(500).json(e));
 });
 
 router.post('/workers/addWorker', async (req, res) => {
@@ -65,27 +65,27 @@ router.post('/workers/addWorker', async (req, res) => {
         const worker = await users.addWorker(req.body);
         res.json(worker);
     }
-    catch (data) { res.status(500).json(data); }
+    catch (e) { res.status(500).json(e); }
 });
 
 router.get("/workers/getWorkers", (req, res) => {
     req.body.collectionName = req.cookies._gcn;
     users.getWorkers(req.body)
     .then(data => res.json(data))
-        .catch(e => res.status(500).json(e.message));
+        .catch(e => res.status(500).json(e));
 });
 
 router.put("/workers/editWorker", (req, res) => {
     req.body.collectionName = req.cookies._gcn;
     users.editWorker(req.body)
         .then(data => res.json(data))
-        .catch(e => res.status(500).json(e.message));
+        .catch(e => { res.status(500).json(e);});
 });
 
 router.delete("/workers/delWorker", (req, res) => {
     req.body.collectionName = req.cookies._gcn;
     users.delWorker(req.body)
         .then(data => res.json(data))
-        .catch(e => res.status(500).json(e.message));
+        .catch(e => res.status(500).json(e));
 });
 module.exports = router;

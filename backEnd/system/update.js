@@ -9,17 +9,17 @@ const toUpdate = async (data) => {
 				{ returnOriginal: false });
 		return res.value._id;
 	}
-	catch (e) { throw new Error(503); }
+	catch (e) { return Promise.reject(503); }
 };
 
-const toDelete = async data => {	
+const toDelete = async data => {
 	try {
 		const res = await dbConnection.getDb()
 			.collection(data.collectionName)
 			.findOneAndDelete({ _id: data.id });		
 		return res.value._id;
 	}
-	catch (e) { throw new Error(503); }
+	catch (e) { return Promise.reject(503); }
 };
 
 module.exports = {

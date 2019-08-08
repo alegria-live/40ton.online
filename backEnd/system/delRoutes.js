@@ -18,9 +18,9 @@ const delRoute = data => {
 				.findOneAndUpdate(
 					{ _id: data.driverId },
 					{ $pull: { "Driver.routes": { fuel_Id: ObjectId(data.fuel_Id) } } })
-				.catch(e => def.reject({ msg: 400 }));
+				.catch(e => def.reject(400));
 			})
-			.catch(e => def.reject({ msg: 400 }));
+			.catch(e => def.reject(400));
 	}
 
 	// delete trip of the route for the truck's _id
@@ -29,7 +29,7 @@ const delRoute = data => {
 		{ _id: data.truckId },
 		{ $pull: { "Truck.routes": { _id: data.id } } })
 	.then(res => def.resolve(res.value))
-	.catch(e => def.reject({ msg: 400 }));
+	.catch(e => def.reject(400));
 	return def.promise;
 };
 

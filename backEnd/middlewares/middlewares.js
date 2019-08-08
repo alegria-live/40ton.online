@@ -4,7 +4,6 @@ const express = require("express"),
     csrf = require('csurf'),
     bodyParser = require("body-parser"),
     routes_users = require("../routes_users"),
-    routes_driver = require("../routes_driver"),
     routes_system = require("../routes_system"),
     jwt = require('jsonwebtoken'),
     csrfProtection = csrf({ cookie: true }),
@@ -43,8 +42,7 @@ module.exports = (app) => {
     });
 
     require("../log/logins.js")(app);
-    app.use("/api", routes_users);
-    app.use("/driver", routes_driver);
+    app.use("/api", routes_users);    
     app.use("/system", routes_system);
 
     require("../routes_others/others_routes.js")(app);

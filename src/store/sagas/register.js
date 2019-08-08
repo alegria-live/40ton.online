@@ -9,7 +9,7 @@ export function* registerProcessSaga(action) {
         yield put(actions.registerSuccess(response.data));
     }
     catch (error) {
-        yield put(actions.registerFail(error.response.data.error || error.message));
+        yield put(actions.registerFail(error.response.data || error.message));
     };
 };
 export function* activateProcessSaga(action) {
@@ -20,6 +20,6 @@ export function* activateProcessSaga(action) {
         yield put(actions.activateSuccess(response.data));
     }
     catch (error) {
-        yield put(actions.registerFail(error.response.data.error || error.message));
+        yield put(actions.registerFail(error.response.data || error.message));
     };
 };

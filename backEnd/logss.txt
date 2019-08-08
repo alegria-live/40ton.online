@@ -1,0 +1,8 @@
+Thu Aug 08 2019 10:29:05 GMT+0200 (GMT+02:00) Error: listen EADDRINUSE: address already in use :::8000
+    at Server.setupListenHandle [as _listen2] (net.js:1290:14)
+    at listenInCluster (net.js:1338:12)
+    at Server.listen (net.js:1425:7)
+    at Function.listen (D:\Project_Tir\40_react\40\backEnd\node_modules\express\lib\application.js:618:24)
+    at db.initDb (D:\Project_Tir\40_react\40\backEnd\app.js:29:7)
+    at MongoClient.connect.then.client (D:\Project_Tir\40_react\40\backEnd\utils\dbConnection.js:19:4)
+    at process._tickCallback (internal/process/next_tick.js:68:7)

@@ -15,7 +15,7 @@ const activeTrucks = async ({ collectionName }) => {
             ]).toArray();
         return res;
     }
-    catch (e) { throw new Error(503); }
+    catch (e) { return Promise.reject(503); }
 };
 
 /* returns array with the Id of the truck
@@ -48,7 +48,7 @@ const trucksFuelEfficiency = ({ collectionName, from, end, param }) => {
             { $sort: { 'realAvg': 1 } }
         ]).toArray()
         .then(res => def.resolve(res))
-        .catch(e => def.reject({ error: 503 }));
+        .catch(() => def.reject(503));
     return def.promise;
 };
 
@@ -72,7 +72,7 @@ const oneTruckData = async ({ collectionName, truckId }) => {
             ]).next();
         return res;
     }
-    catch (e) { throw new Error(503); }
+    catch (e) { return Promise.reject(503); }
 };
 
 //returns truck routes array for all trucks routes table
@@ -95,7 +95,7 @@ const truckRoutes = async ({ collectionName, truckId, from, end }) => {
             ]).next();           
         return res;
     }
-    catch (e) { throw new Error(503); }
+    catch (e) { return Promise.reject(503); }
 };
 
 /* adds new truck to the company data base
@@ -113,8 +113,8 @@ const addTruck = async (truck) => {
         return  res.ops[0]._id;
     }
     catch (e) {        
-		if(e.message.indexOf(duplError) !== -1 ) { throw new Error(469);}
-		else throw new Error(503); 
+		if(e.message.indexOf(duplError) !== -1 ) { return Promise.reject(469);}
+		else return Promise.reject(503); 
 	}
 };
 
@@ -135,7 +135,7 @@ const allTrucks = async (truck) => {
             .toArray();
         return res;
     }
-    catch (e) { throw new Error(503); }
+    catch (e) { return Promise.reject(503); }
 };
 
 /**
@@ -146,52 +146,55 @@ const theft = truck => {
 
     let def = Q.defer();
     dbConnection.getDb().collection(truck.collectionName)
-        .findOne({ _id: truck._id }, (err, res) => {
+    .findOne({ _id: truck._id }, (err, res) => {
 
-            if (err) { def.reject({ error: 400 }); return; }
+        if (err) { def.reject(400); return; }
 
-            if (!res) { def.reject({ error: 400 }); return; }
+        if (!res) { def.reject(400); return; }
 
-            let theftRoute = res.Truck.fuel.find(e => {
-                truck.date = new Date(truck.date).getTime();
-                return new Date(e.dtStop).getTime() >= truck.date;
-            });
-
-            let mediaReal = theftRoute.mediaRoute,
-                diff = theftRoute.fuel - (theftRoute.totalRoute * theftRoute.mediaRoute / 100),
-                newFuel = theftRoute.fuel - diff,
-                routeId = theftRoute._id - 1,
-                targetMedia = `Truck.fuel.${routeId}.mediaReal`,
-                targetRatio = `Truck.fuel.${routeId}.ratio`,
-                targetFuel = `Truck.fuel.${routeId}.fuel`,
-                targetFuelD = `Driver.routes.${routeId}.fuel`,
-                targetRatioD = `Driver.routes.${routeId}.ratio`,
-                targetMediaD = `Driver.routes.${routeId}.mediaReal`;
-
-            dbConnection.getDb().collection(truck.collectionName)
-                .findOneAndUpdate({ _id: theftRoute.driver },
-                    {
-                        $set: {
-                            [targetMediaD]: mediaReal, [targetRatioD]: 1,
-                            [targetFuelD]: newFuel
-                        },
-                    }, (err, res) => {
-
-                        if (err) { def.reject({ error: 400 }); return; }
-
-                        dbConnection.getDb().collection(truck.collectionName)
-                            .findOneAndUpdate({ _id: truck._id },
-                                {
-                                    $set: {
-                                        [targetMedia]: mediaReal, [targetRatio]: 1,
-                                        [targetFuel]: newFuel
-                                    },
-                                }, (err, res) => {
-                                    if (err) { def.reject({ error: 400 }); return; }
-                                    def.resolve({ error: diff.toFixed(2) + " l." });
-                                });
-                    });
+        let theftRoute = res.Truck.fuel.find(e => {
+            truck.date = new Date(truck.date).getTime();
+            return new Date(e.dtStop).getTime() >= truck.date;
         });
+
+        let mediaReal = theftRoute.mediaRoute,
+            diff = theftRoute.fuel - (theftRoute.totalRoute * theftRoute.mediaRoute / 100),
+            newFuel = theftRoute.fuel - diff,
+            routeId = theftRoute._id - 1,
+            targetMedia = `Truck.fuel.${routeId}.mediaReal`,
+            targetRatio = `Truck.fuel.${routeId}.ratio`,
+            targetFuel = `Truck.fuel.${routeId}.fuel`,
+            targetFuelD = `Driver.routes.${routeId}.fuel`,
+            targetRatioD = `Driver.routes.${routeId}.ratio`,
+            targetMediaD = `Driver.routes.${routeId}.mediaReal`;
+
+        dbConnection.getDb().collection(truck.collectionName)
+            .findOneAndUpdate({ _id: theftRoute.driver },
+                {
+                    $set: {
+                        [targetMediaD]: mediaReal, [targetRatioD]: 1,
+                        [targetFuelD]: newFuel
+                    },
+                }, (err, res) => {
+
+                    if (err) { def.reject(400); return; }
+
+                    dbConnection.getDb().collection(truck.collectionName)
+                    .findOneAndUpdate({ _id: truck._id },
+                        {
+                            $set: {
+                                [targetMedia]: mediaReal, [targetRatio]: 1,
+                                [targetFuel]: newFuel
+                            },
+                        }, (err, res) => {
+                            if (err) { def.reject(400); return; }
+                            def.resolve(diff.toFixed(2) + " l.");
+                        }
+                    );
+                }
+            );
+        }
+    );
     return def.promise;
 };
 

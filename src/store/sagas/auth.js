@@ -19,7 +19,7 @@ export function* authProcessSaga(action) {
        
     }
     catch (error) {
-        yield put(actions.authFail(error.response.data.error || error.message));
+        yield put(actions.authFail(error.response.data || error.message));
     };
 };
 
@@ -35,7 +35,7 @@ export function* newPassProcessSaga(action) {
         yield put(actions.newPassSuccess(response.data));
     }
     catch (error) {
-        yield put(actions.newPassFail(error.response.data.error || error.message));
+        yield put(actions.newPassFail(error.response.data || error.message));
     };
 };
 

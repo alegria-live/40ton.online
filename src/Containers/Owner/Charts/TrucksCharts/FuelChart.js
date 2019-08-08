@@ -99,6 +99,10 @@ const FuelChart = props => {
             setLoading(false);
             setNoData(false);
         })
+        .catch(() => {
+            setLoading(false)
+            setNoData(true)
+        })
     }
     return (
         loading ? <Spin tip="Loading..."></Spin> :

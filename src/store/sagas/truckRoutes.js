@@ -10,6 +10,6 @@ export function* getTruckRoutesSaga(action) {
         yield put(actions.truckRoutesSuccess(response.data));
     }
     catch (error) {
-        yield put(actions.truckRoutesFail(error.response.data.error || error.message));
+        yield put(actions.truckRoutesFail(error.response.data || error.message));
     };
 };

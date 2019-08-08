@@ -10,8 +10,8 @@ const addRoute = (id, route) => {
     dbConnection.getDb().collection(id).findOneAndUpdate({ _id: route.truckId },
         { $push: { "Truck.routes": { $each: [], $slice: route._id } } }, (err, res) => {
 
-            if (err) { def.reject({ msg: 400 }); return; }
-            if (!res) { def.reject({ msg: 400 }); return; }
+            if (err) { def.reject(400); return; }
+            if (!res) { def.reject(400); return; }
 
             else {
                 let routesLength = (res.value.Truck.routes).length,
@@ -67,7 +67,7 @@ const addRouteTruck = (id, truckId, route) => {
         .findOneAndUpdate({ _id: truckId },
             { $push: { "Truck.routes": route } },
             { upsert: true, returnOriginal: false }, (err, res) => {
-                if (err) { def.reject({ msg: 400 }); return; }
+                if (err) { def.reject(400); return; }
 
                 def.resolve(res);
 
@@ -88,12 +88,12 @@ const correctFuel = (id, truckId, route) => {
     dbConnection.getDb().collection(id)
     .findOneAndUpdate({ _id: truckId },
         { $pull: { "Truck.fuel": { fuel_Id: ObjectId(route.fuel_Id) } } }, (err, res) => {
-            if (err) { return err; }
+            if (err) { return Promise.reject(err); }
 
             dbConnection.getDb().collection(id)
             .findOneAndUpdate({ _id: route.driverId },
                 { $pull: { "Driver.routes": { fuel_Id: ObjectId(route.fuel_Id) } } }, (err, res) => {
-                    if (err) { return err; }
+                    if (err) { return Promise.reject(err); }
 
                     if (route.type === 3 && route.full === 1 && route._id !== 0) {
                         calcRoute(id, truckId, route);
@@ -108,8 +108,8 @@ const calcRoute = (id, truckId, route) => {
 
     dbConnection.getDb().collection(id)
     .findOne({ _id: truckId }, (err, res) => {
-        if (err) { return err; }
-        if (!res) { return err; }
+        if (err) { return Promise.reject(err); }
+        if (!res) { return Promise.reject(400); }
         addFuel(id, truckId, calcFuelDetails(truckId, route, res));
     });
 };

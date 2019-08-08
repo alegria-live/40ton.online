@@ -35,7 +35,7 @@ const driversFuelEfficiency = ({ collectionName, from, end, param }) => {
 			{ $sort: { 'realAvg': 1 } }
 		]).toArray()
 		.then(res => def.resolve(res))
-		.catch(e => def.reject({ error: 503 }));
+		.catch(() => def.reject(503));
 	return def.promise;
 };
 
@@ -60,7 +60,7 @@ const oneDriverData = async ({ collectionName, driverId }) => {
 			]).next();
 		return res;
 	}
-	catch (e) {throw new Error(503);}
+	catch (e) {return Promise.reject(503);}
 };
 
 /* returns drivers who have at least one route
@@ -81,7 +81,7 @@ const activeDrivers = async ({ collectionName }) => {
 			]).toArray();
 		return res;
 	}
-	catch (e) {throw new Error(503);}
+	catch (e) {return Promise.reject(503);}
 };
 
 /* adds new driver to the company data base
@@ -102,8 +102,8 @@ const addDriver = async (driver) => {
 		};
 	}
 	catch (e) {
-		if(e.message.indexOf(duplError) !== -1 ) { throw new Error(468);} 
-		else throw new Error(503); 
+		if(e.message.indexOf(duplError) !== -1 ) { return Promise.reject(468);} 
+		else return Promise.reject(503); 
 	}
 };
 
@@ -124,7 +124,7 @@ const allDrivers = async (collectionName) => {
 			]).toArray();
 		return res;
 	}
-	catch (e) { throw new Error(503); }
+	catch (e) { return Promise.reject(503); }
 };
 
 /* returns one driver for edition
@@ -132,16 +132,16 @@ const allDrivers = async (collectionName) => {
 const find = async (collection, id) => {
 
 	if (typeof collection !== "string" && collection.length !== 24) {
-		throw new Error(400);
+		return Promise.reject(404);
 	}
 	try {
 		const res = await dbConnection.getDb()
 			.collection(collection)
 			.findOne({ _id: id });
-		if (res === null) { return { error: 404 }; }
+		if (res === null) { return Promise.reject(404); }
 		return res;
 	}
-	catch (e) { throw new Error(503); }
+	catch (e) { return Promise.reject(503); }
 };
 
 module.exports = {

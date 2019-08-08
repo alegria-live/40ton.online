@@ -1,23 +1,22 @@
 const nodemailer = require("nodemailer"),
-    eHost = process.env.eHost,
-    ePort = process.env.ePort,
-    eSecure = process.env.eSecure,
-    eUser = process.env.eUser,
-    ePasw = process.env.ePasw,
-    etarget = process.env.etarget,
+    eUser = process.env.eUser,    
+    etarget = process.env.etarget,   
+    transporData = {
+        host: process.env.eHost,
+        port: parseInt(process.env.ePort),
+        secure: process.env.eSecure,
+        auth: {
+            user: process.env.eUser,
+            pass: process.env.ePasw
+        }
+    },
     Q = require("q");
 
 function activation(clientEmail, id, name) {
 
     let def = Q.defer();
     var transporter = nodemailer.createTransport({
-        host: eHost,
-        port: parseInt(ePort),
-        secure: eSecure,
-        auth: {
-          user: eUser,
-          pass: ePasw
-        }
+        transporData
     });
     var mailOptions = {
         from: eUser,
@@ -45,7 +44,7 @@ function activation(clientEmail, id, name) {
         ${etarget}`
     };
     transporter.sendMail(mailOptions, function(error, info){
-        if (error) {def.reject({msg:400});}
+        if (error) {def.reject(400);}
         else {def.resolve(info.accepted[0]);}
     });
     return def.promise;
@@ -54,13 +53,7 @@ function activation(clientEmail, id, name) {
 function emailChPsw(clientEmail, psw, name) {
     let def = Q.defer();
     var transporter = nodemailer.createTransport({
-        host: eHost,
-        port: parseInt(ePort),
-        secure: eSecure,
-        auth: {
-          user: eUser,
-          pass: ePasw
-        }
+        transporData
     });
     var mailOptions = {
         from: eUser,
@@ -80,7 +73,7 @@ function emailChPsw(clientEmail, psw, name) {
         pod adresem: ${eUser}`
     };
     transporter.sendMail(mailOptions, function(error, info){
-        if (error) { def.reject({msg:400});}
+        if (error) { def.reject(400); }
         else {def.resolve(info.accepted[0]);}
     });
     return def.promise;
@@ -89,13 +82,7 @@ function emailChPsw(clientEmail, psw, name) {
 function sendOrder(clientEmail, orderId, name) {
     let def = Q.defer();
     var transporter = nodemailer.createTransport({
-        host: eHost,
-        port: parseInt(ePort),
-        secure: eSecure,
-        auth: {
-          user: eUser,
-          pass: ePasw
-        }
+        transporData
     });
 
     var mailOptions = {
@@ -124,7 +111,7 @@ function sendOrder(clientEmail, orderId, name) {
         ${etarget}`
     };
     transporter.sendMail(mailOptions, function(error, info){
-        if (error) { def.reject({msg:400});}
+        if (error) { def.reject(400); }
         else {def.resolve(info.accepted[0]);}
     });
     return def.promise;
@@ -133,13 +120,7 @@ function sendForm(data) {
 
     let def = Q.defer();
     var transporter = nodemailer.createTransport({
-        host: eHost,
-        port: parseInt(ePort),
-        secure: eSecure,
-        auth: {
-          user: eUser,
-          pass: ePasw
-        }
+        transporData
     });
     var mailOptions = {
         from: data.email,
@@ -150,8 +131,8 @@ function sendForm(data) {
         Treść: ${data.messg}`
     };
     transporter.sendMail(mailOptions, function(error, info){
-        if (error) {def.reject({msg: 400});}
-        else {def.resolve({msg:200});}
+        if (error) {def.reject(400);}
+        else {def.resolve(200);}
     });
     return def.promise;
 }

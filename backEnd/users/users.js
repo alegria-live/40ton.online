@@ -25,15 +25,19 @@ const addUser = user => {
 		.then(res => def.resolve({ name, email, _id } = res.ops[0]))
 		.catch(e => {
 			if (duplicateError.test(e.message)) {
-				def.reject({ error: 463 }); return;
+				def.reject(463);
+				return;
 			}
-			def.reject({ error: 503 });
+			def.reject(503);
 		});
 	return def.promise;
 };
 
 const activUser = user => {
-	if (!validation.isValidId(user.id)) { def.reject({ error: 465 }); return; }
+
+	if (!validation.isValidId(user.id)) { 
+		return Promise.reject(465);
+	}
 	let def = Q.defer();
 	const query = { _id: ObjectId(user.id) };
 	const updateData = { $set: { activ: 1 } };
@@ -43,15 +47,15 @@ const activUser = user => {
 		.collection(COLLECTION_NAME)
 		.findOne(query, projection)
 		.then(res => {
-			if (!res) { def.reject({ error: 465 }); return; }
-			if (res.activ === 1) { def.reject({ error: 466 }); return; }
+			if (!res) { def.reject(465); return; }
+			if (res.activ === 1) { def.reject(466); return; }
 			dbConnection.getDb()
 				.collection(COLLECTION_NAME)
 				.updateOne(query, updateData)
 				.then(res => def.resolve(setCollection(user.id)))
-				.catch(e => def.reject({ error: 503 }));
+				.catch(e => def.reject(503));
 		})
-		.catch(e => def.reject({ error: 503 }));
+		.catch(e => def.reject(503));
 	return def.promise;
 };
 
@@ -61,18 +65,17 @@ const setCollection = collName => {
 	dbConnection.getDb()
 		.createCollection(collName)
 		.then(res => def.resolve(200))
-		.catch(e => def.reject({ error: 503 }));
+		.catch(e => def.reject(503));
 	return def.promise;
 };
 
 //finds user for edition
 const findUser = id => {
-	let def = Q.defer();
 	
 	if (!validation.isValidId(id.id)) {
-		def.reject({ error: 465 });
-		return;
+		return Promise.reject(465);
 	}
+	let def = Q.defer();
 	const query = { _id: ObjectId(id.id) };
 	const project = { projection: { _id: 0, password: 0, workers: 0 }};
 
@@ -80,28 +83,27 @@ const findUser = id => {
 		.collection(COLLECTION_NAME)
 		.findOne(query, project)
 		.then(res => {
-			if (!res) { def.reject({ error: 465 }); return; }
+			if (!res) { def.reject(465); return; }
 			def.resolve(res);
 		})
-		.catch(e => def.reject({ error: 503 }));
+		.catch(e => def.reject(503));
 	return def.promise;
 };
 
 //check whether the email exist in all database
 // if yes - error 467, if not call fn putEditUser
-const editUser = user => {	
-	let def = Q.defer();
+const editUser = user => {		
 	
 	if (!validation.isValidId(user._id)) {
-		def.reject({ error: 465 });
-		return;
+		return Promise.reject(465);
 	}
-
+	let def = Q.defer();
+	
 	dbConnection.getDb()
 		.collection(COLLECTION_NAME)
 		.findOne( { _id: ObjectId(user._id) })
 		.then(res => {
-			if (!res) { def.reject({ error: 465 }); return; }
+			if (!res) { def.reject(465); return; }
 			if (res.email !== user.dataSet.email) {
 				dbConnection.getDb()
 				.collection(COLLECTION_NAME)
@@ -111,28 +113,28 @@ const editUser = user => {
 						{ "workers.email": user.dataSet.email }
 					]})
 					.then(res => {
-						if (res) { def.reject({ error: 467 }); return; }
+						if (res) { def.reject(467); return; }
 						def.resolve(putEditUser(user));
 					})
-					.catch(e => def.reject({ error: 503 }));
+					.catch(e => def.reject(503));
 			}
 			else {
 				def.resolve(putEditUser(user));
 			}
 		})
-		.catch(e => def.reject({error: 503}));
+		.catch(e => def.reject(503));
 	return def.promise;
 };
 
 // put new user's data
 const putEditUser = user => {
-	let def = Q.defer();
-	user.dataSet.password = bcrypt.hashSync(user.dataSet.password, bcrypt.genSaltSync(8));
 	
 	if (!validation.isValidId(user._id)) {
-		def.reject({ error: 465 });
-		return;
+		return Promise.reject(465);
 	}
+	user.dataSet.password = bcrypt.hashSync(user.dataSet.password, bcrypt.genSaltSync(8));
+	let def = Q.defer();
+
 	dbConnection.getDb()
 		.collection(COLLECTION_NAME)
 		.findOneAndUpdate(
@@ -141,7 +143,7 @@ const putEditUser = user => {
 			{ returnOriginal: false }
 		)
 		.then(res => def.resolve(200))
-		.catch(e => def.reject({ error: 503 }));			
+		.catch(e => def.reject(503));			
 	return def.promise;
 };
 
@@ -169,14 +171,14 @@ const checkUser = (email, password) => {
 					.catch(err => def.reject(err));
 				return;
 			}
-			if (!res.activ) { def.reject({ error: 464 }); return; }
+			if (!res.activ) { def.reject(464); return; }
 			if (!bcrypt.compareSync(password, res.password)) {
-				def.reject({ error: 461 });
+				def.reject(461);
 				return;
 			}
 			def.resolve({ _id: res._id, company: res.company, permission: 1 });
 		})
-		.catch(err => def.reject({ error: 503 }));
+		.catch(err => def.reject(503));
 	return def.promise;
 };
 
@@ -189,26 +191,25 @@ const checkUserInWorkers = (email, password) => {
 		.collection(COLLECTION_NAME)
 		.findOne(query, projection)
 		.then(res => {
-			if (!res) { def.reject({ error: 461 }); return; }
+			if (!res) { def.reject(461); return; }
 			if (!bcrypt.compareSync(password, res.workers[0].password)) {
-				def.reject({ error: 461 });
+				def.reject(461);
 				return;
 			}
 			def.resolve({ _id: res._id, company: res.company, permission: 0 });
 		})
-		.catch(err => { def.reject({ error: 503 }); });
+		.catch(err => { def.reject(503); });
 	return def.promise;
 };
 
 // delete main user
 const delUser = user => {
+	
+	if (!validation.isValidId(user._id)) {		
+		return Promise.reject(465);		
+	}	
 	let def = Q.defer();
-	
-	if (!validation.isValidId(user._id)) {
-		def.reject({ error: 400 });
-		return;
-	}
-	
+
 	dbConnection.getDb().collection(user._id).drop();
 	
 	dbConnection.getDb()
@@ -218,7 +219,7 @@ const delUser = user => {
 			{ justOne: true }
 		)
 		.then(res => def.resolve(200))
-		.catch(e => def.reject({ error: 503 }));		
+		.catch(e => def.reject(503));		
 	return def.promise;
 };
 
@@ -234,27 +235,26 @@ const chPsw = data => {
 			{ email: data.email },
 			{ $set: { password: newPswBc } })
 		.then(res => {
-			if (res.value === null) { def.reject({ error: 462 }); return; }
+			if (res.value === null) { def.reject(462); return; }
 			def.resolve({
 				email: res.value.email,
 				password: newPsw,
 				name: res.value.name
 			});
 		})
-		.catch(e => def.reject({ error: 503 }));
+		.catch(e => def.reject(503));
 	return def.promise;
 };
 
 // add new company's worker, checking if the email exist in all database
 const addWorker = (worker) => {
 
+	if (!validation.isValidId(worker.mainUserId)) {
+		return Promise.reject(465);	
+	}
 	let def = Q.defer();
 	worker.dataSet.password = bcrypt
-		.hashSync(worker.dataSet.password, bcrypt.genSaltSync(8));
-
-	if (!validation.isValidId(worker.mainUserId)) {
-		def.reject({ error: 465 }); return;
-	}
+		.hashSync(worker.dataSet.password, bcrypt.genSaltSync(8));	
 
 	dbConnection.getDb()
 		.collection(COLLECTION_NAME)
@@ -266,7 +266,7 @@ const addWorker = (worker) => {
 		})
 		.then(res => {
 
-			if (res) { def.reject({ error: 467 }); return; }
+			if (res) { def.reject(467); return; }
 
 			dbConnection.getDb()
 				.collection(COLLECTION_NAME)
@@ -280,15 +280,18 @@ const addWorker = (worker) => {
 					const lastName = res.value.workers[res.value.workers.length - 1].lastName;
 					def.resolve(name + ' ' + lastName);
 				})
-				.catch(e => def.reject({ error: 503 }));
+				.catch(e => def.reject(503));
 		})
-		.catch(e => def.reject({ error: 503 }));
+		.catch(e => def.reject(503));
 	return def.promise;
 };
 
 //returns workers array with name, email, lastName
 const getWorkers = async data => {
-		
+	
+	if (!validation.isValidId(data.collectionName)) {
+		return Promise.reject(465);
+	}
 	const query = {
 		"_id": ObjectId(data.collectionName),
 		"workers.0": { $exists: true }
@@ -296,10 +299,6 @@ const getWorkers = async data => {
 	const projetc = {
 		projection: { 'workers': 1, _id: 0 }
 	};
-
-	if (!validation.isValidId(data.collectionName)) {
-		def.reject({ error: 465 }); return;
-	}
 	
 	try {
 		const res = await dbConnection.getDb()
@@ -311,17 +310,17 @@ const getWorkers = async data => {
 			return elem;
 		});
 	}
-	catch (e) { throw new Error(503); }	
+	catch (e) { return Promise.reject(503); }
 };
 
-const editWorker = async worker => {	
+const editWorker = async worker => {
+
+	if (!validation.isValidId(worker.collectionName+1)) {
+		return Promise.reject(465);
+	}
 	worker.newData.password = bcrypt
 		.hashSync(worker.newData.password, bcrypt.genSaltSync(8));
 	
-	if (!validation.isValidId(worker.collectionName)) {
-		def.reject({ error: 465 });
-		return;
-	}
 	try {
 			const res = await dbConnection.getDb()
 			.collection(COLLECTION_NAME)
@@ -330,13 +329,13 @@ const editWorker = async worker => {
 				{ "workers.email": worker.newData.email }
 			]});
 			if(res && worker.id !== worker.newData.email) {
-				throw new Error(467);
+				return Promise.reject(467);
 			}
 			else {
 				return await putEditWorker(worker);
 			}
 		}
-		catch (e) { throw new Error(e.message || 503); }
+		catch (e) { return Promise.reject(503); }
 	};
 
 	const putEditWorker = async worker => {
@@ -351,14 +350,13 @@ const editWorker = async worker => {
 				const Worker = res.value.workers.find(elem => elem.email === worker.newData.email);
 				return(Worker.name + ' ' + Worker.lastName);
 		}
-		catch (e) { throw new Error(503); }
+		catch (e) { return Promise.reject(503); }
 	};
 	
 const delWorker = async worker => {
 	
 	if (!validation.isValidId(worker.collectionName)) {
-		def.reject({ error: 465 });
-		return;
+		return Promise.reject(465);
 	}
 	try {
 		const res = await dbConnection.getDb()
@@ -370,7 +368,7 @@ const delWorker = async worker => {
 			});
 			return res.ok;
 	}
-	catch (e) { throw new Error(503); }
+	catch (e) {return Promise.reject(503); }
 };
 
 module.exports = {

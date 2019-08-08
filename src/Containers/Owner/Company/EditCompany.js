@@ -217,7 +217,7 @@ const EditCompany = props => {
         setIsLoading(true);
         Axios.get('/api/users/findUser')
             .then(res => { setWorker(res.data); setIsLoading(false) })
-            .catch(e => { setIsLoading(false); setErrorMsg(e.response.data.error) })
+            .catch(e => { setIsLoading(false); setErrorMsg(e.response.data) })
     };
     useEffect(() => {
         if(showEditCompany) getCompany();
@@ -294,7 +294,7 @@ const EditCompany = props => {
             }
         })
         .catch(e => {
-            setErrorMsg(e.response.data.error);
+            setErrorMsg(e.response.data.toString());
             setIsLoading(false);
         })
     };
@@ -314,7 +314,7 @@ const EditCompany = props => {
                     }
                 })
                 .catch(e => {
-                    setErrorMsg(e.response.data.error);
+                    setErrorMsg(e.response.data.toString());
                     setIsLoading(false);
                 })
             },

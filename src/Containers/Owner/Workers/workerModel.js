@@ -11,7 +11,7 @@ export class Worker {
         isLoading(true);
         axios.post('api/workers/addWorker', this.workerData)
             .then(res => { success(res.data); isLoading(false); })
-            .catch(e => { error(e.response.data.error.toString()); isLoading(false) });
+            .catch(e => { error(e.response.data.toString()); isLoading(false) });
     };
     updateWorker(success, error, isLoading, getWorkers) {
         isLoading(true);
@@ -23,6 +23,6 @@ export class Worker {
         isLoading(true);
         axios.delete('/api/workers/delWorker', {data: this.workerData} )
             .then(res => { success(res.data); isLoading(false); getWorkers() })
-            .catch(e => { error(e.message); isLoading(false) });
+            .catch(e => { error(e.response.data.toString()); isLoading(false) });
     };
 }; 

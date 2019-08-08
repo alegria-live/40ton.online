@@ -61,7 +61,7 @@ const Payments = props => {
         setIsLoading(true);
         Axios.get('/system/allTrucks')
             .then(res => { setAllTrucks(res.data); setIsLoading(false) })
-            .catch(e => { console.log(e); setIsLoading(false); setErrorMsg(e.response.data.error) })
+            .catch(e => {setIsLoading(false); setErrorMsg(e.response.data.toString()) })
     };
 
     useEffect(() => {
@@ -148,8 +148,15 @@ const Payments = props => {
             style={{ textAlign: 'center' }}
             onClose={cancelHandler}
         > {
-            errorMsg ? errorMsg :
             isLoading ? <Spinner /> :
+            errorMsg ?
+                    <div style={{margin: '1.5rem'}}>
+                            <h6 style={{color: 'red'}}>{
+                                props.errorText[errorMsg] ? 
+                                props.errorText[errorMsg] : 
+                                props.cText.addWorkerError
+                            }</h6>
+                    </div> :                     
 
             <div style={{width: '90%', margin: '1rem auto'}}>
                 <h4 style={{color: 'rgba(43, 144, 143, 0.85)', margin: 20}} >
@@ -188,6 +195,7 @@ const Payments = props => {
             <button
                 onClick={payHandler}
                 disabled
+                hidden={errorMsg}
                 style={{marginRight: 30}}
                 className='btn btn-primary btn-sm'>
                 {props.payText ? props.payText.payButton : ''}

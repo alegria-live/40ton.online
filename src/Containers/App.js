@@ -12,7 +12,7 @@ const Activation = React.lazy(() => import('../Components/Activation/Activation'
 const HomeLayout = React.lazy(() => import('../hoc/HomeLayout/HomeLayout'));
 
 export const App = ({autoInitLang, ...props}) => {
-	console.log(props)
+	
 	useEffect(() => { autoInitLang() }, [autoInitLang]);
 
 	const [showLogIn, changeShowLogin] = useState(false);

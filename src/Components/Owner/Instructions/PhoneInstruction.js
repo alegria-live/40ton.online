@@ -9,8 +9,7 @@ const PhoneInstruction = props => {
 
     const [_gcn] = useState(Cookies.get('_gcn'))
     const {showPhoneInstruction, setShowPhoneInstruction } = useContext(MenuContext);
-    let url = 'https://40ton.online/driver/';
-    if (props.lang === 'es') url = "https://es.40ton.online/driver/";
+    let url = `https://driver.${window.location.host}/driver/`;
     
     return (
         <Modal
@@ -25,7 +24,7 @@ const PhoneInstruction = props => {
         ]}
     >
         <p>{props.instrText.p1}</p>
-        <p>{props.instrText.p2 +  url + _gcn}</p>
+        <p>{props.instrText.p2 +  url + _gcn + '/' + props.lang}</p>
         <p>{props.instrText.p3}</p>
         <p>{props.instrText.p4}</p>
         <p>{props.instrText.p5}</p>

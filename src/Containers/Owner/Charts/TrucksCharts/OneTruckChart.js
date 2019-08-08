@@ -89,6 +89,10 @@ const OneTruckChart = props => {
 				setLoading(false);
 				setNoData(false);
 			})
+			.catch(() => {
+				setLoading(false);
+				setNoData(true);
+			})
 	};
 
 	useEffect(() => {
