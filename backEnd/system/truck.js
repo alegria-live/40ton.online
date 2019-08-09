@@ -92,7 +92,7 @@ const truckRoutes = async ({ collectionName, truckId, from, end }) => {
                         }
                     }
                 }
-            ]).next();           
+            ]).next();            
         return res;
     }
     catch (e) { return Promise.reject(503); }
@@ -143,19 +143,19 @@ const allTrucks = async (truck) => {
  * @param {*} truck 
  */
 const theft = truck => {
-
+   
     let def = Q.defer();
     dbConnection.getDb().collection(truck.collectionName)
-    .findOne({ _id: truck._id }, (err, res) => {
+    .findOne({ _id: truck.id }, (err, res) => {
 
-        if (err) { def.reject(400); return; }
-
-        if (!res) { def.reject(400); return; }
-
+        if (err) { def.reject(465); return; }
+        if (!res) { def.reject(465); return; }
+        
         let theftRoute = res.Truck.fuel.find(e => {
-            truck.date = new Date(truck.date).getTime();
-            return new Date(e.dtStop).getTime() >= truck.date;
+            return e.dtStop >= truck.date;
         });
+        
+        if(!theftRoute) {def.reject(470); return;}
 
         let mediaReal = theftRoute.mediaRoute,
             diff = theftRoute.fuel - (theftRoute.totalRoute * theftRoute.mediaRoute / 100),
@@ -166,7 +166,7 @@ const theft = truck => {
             targetFuel = `Truck.fuel.${routeId}.fuel`,
             targetFuelD = `Driver.routes.${routeId}.fuel`,
             targetRatioD = `Driver.routes.${routeId}.ratio`,
-            targetMediaD = `Driver.routes.${routeId}.mediaReal`;
+            targetMediaD = `Driver.routes.${routeId}.mediaReal`;           
 
         dbConnection.getDb().collection(truck.collectionName)
             .findOneAndUpdate({ _id: theftRoute.driver },
@@ -177,17 +177,17 @@ const theft = truck => {
                     },
                 }, (err, res) => {
 
-                    if (err) { def.reject(400); return; }
+                    if (err) { def.reject(465); return; }
 
                     dbConnection.getDb().collection(truck.collectionName)
-                    .findOneAndUpdate({ _id: truck._id },
+                    .findOneAndUpdate({ _id: truck.id },
                         {
                             $set: {
                                 [targetMedia]: mediaReal, [targetRatio]: 1,
                                 [targetFuel]: newFuel
                             },
                         }, (err, res) => {
-                            if (err) { def.reject(400); return; }
+                            if (err) { def.reject(465); return; }
                             def.resolve(diff.toFixed(2) + " l.");
                         }
                     );

@@ -71,6 +71,7 @@
         "467": "Dirección de correo electrónico no válida.",
         "468": "Este permiso ya está registrado",
         "469": "Esta matricula ya está registrada",
+        "470": "La fecha indicada no es válida.",
         "500": "Internal Server Error",
         "503": "DataBase connection error"
     },

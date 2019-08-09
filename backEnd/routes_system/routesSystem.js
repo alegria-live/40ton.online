@@ -145,6 +145,7 @@ router.delete("/owner/delRoute", (req, res) => {
 });
 
 router.put("/theft", (req, res) => {
+	req.body.collectionName = req.cookies._gcn;
 	truck.theft(req.body)
 		.then(data => { res.status(200).json(data); })
 		.catch(data => { res.status(500).json(data); });

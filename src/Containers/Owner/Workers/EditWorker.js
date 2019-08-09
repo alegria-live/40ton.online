@@ -104,10 +104,6 @@ const EditWorker = props => {
     }, [showEditWorker]);
 
     useEffect(() => {
-        getWorkers();
-    }, []);
-
-    useEffect(() => {
         validFormHandler(controls, setFormIsValid);
     }, [controls]);
 
@@ -129,8 +125,7 @@ const EditWorker = props => {
         setControls(copyControls);
     };
 
-    const submitHandler = event => {
-        event.preventDefault();
+    const submitHandler = () => {       
         if (props.demo) { props.demoModal(true); return; }
         const worker = new Worker(
             {
@@ -145,8 +140,7 @@ const EditWorker = props => {
         );
         worker.updateWorker(setSuccesMsg, setErrorMsg, setIsLoading, getWorkers);
     };
-    const deleteHandler = event => {
-        if (event) event.preventDefault();
+    const deleteHandler = () => {        
         if (props.demo) { props.demoModal(true); return; }
         const worker = new Worker({
             id: controls.email.value.trim()
@@ -160,8 +154,7 @@ const EditWorker = props => {
             onCancel() { return }
         });        
     };
-    const cancelHandler = (event) => {
-        if (event) event.preventDefault();
+    const cancelHandler = () => {        
         cancelForm(controls, formElementsKeyArray, setControls);
         setShowEditWorker(false);
         setSuccesMsg(null);
@@ -208,7 +201,7 @@ const EditWorker = props => {
                 defaultValue={props.textMenu.workers}>
                 {options}
             </Select>
-            <form onSubmit={submitHandler} style={{ display: "inline", textAlign: 'center' }}>
+            <form  style={{ display: "inline", textAlign: 'center' }}>
                 {form}       
                 <Button
                     onClick={submitHandler}

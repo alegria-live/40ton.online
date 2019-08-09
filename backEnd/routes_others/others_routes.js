@@ -12,12 +12,13 @@ module.exports = function (app) {
     //set app language depending on the client choice
     app.get("/:lang", csrfProtection, (req, res) => {
         app.set('language', req.params.lang);
+        global.language = req.params.lang;
         let env = app.get("env");
         if (env === "production") { env = null; }
         res.json({
             _csrf: req.csrfToken(),
             env
-        });
+        });        
     });
 
     // user activation

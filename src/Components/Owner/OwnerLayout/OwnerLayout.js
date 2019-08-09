@@ -8,6 +8,7 @@ import Inside from '../Inside/Inside';
 import AddDriver from '../../../Containers/Owner/Drivers/AddDriver';
 import AddTruck from '../../../Containers/Owner/Trucks/AddTruck';
 import EditTruck from '../../../Containers/Owner/Trucks/EditTruck';
+import Theft from '../../../Containers/Owner/Trucks/Theft';
 import AddWorker from '../../../Containers/Owner/Workers/AddWorker';
 import EditWorker from '../../../Containers/Owner/Workers/EditWorker';
 import EditCompany from '../../../Containers/Owner/Company/EditCompany';
@@ -37,8 +38,10 @@ const OwnerLayout = props => {
 
     const [showAddTruck, setShowAddTruck] = useState(false);
     const [showEditTruck, setShowEditTruck] = useState(false);
+    const [showTheft, setShowTheft] = useState(false);
     const setAddTruck = val => setShowAddTruck(val);
     const setEditTruck = val => setShowEditTruck(val);
+    const setTheft = val => setShowTheft(val);
 
     const [showAddWorker, setShowAddWorker] = useState(false);
     const [showEditWorker, setShowEditWorker] = useState(false);
@@ -54,8 +57,6 @@ const OwnerLayout = props => {
     const [showPhoneInstruction, setShowPhoneInstruction] = useState(false);
     const setPhoneInstruction = val => setShowPhoneInstruction(val);
 
-    
-
     const [showDemoModal, setShowDemoModal] = useState(false);
 
     return (
@@ -68,6 +69,8 @@ const OwnerLayout = props => {
             setShowAddTruck: setAddTruck,
             showEditTruck,
             setShowEditTruck: setEditTruck,
+            showTheft,
+            setShowTheft: setTheft,
             showAddWorker,
             setShowAddWorker:setAddWorker,
             showEditWorker,
@@ -99,6 +102,7 @@ const OwnerLayout = props => {
             <EditDriver demoModal={setShowDemoModal} />
             <AddTruck demoModal={setShowDemoModal} />
             <EditTruck demoModal={setShowDemoModal} />
+            <Theft demoModal={setShowDemoModal} />
             <AddWorker demoModal={setShowDemoModal} />
             <EditWorker demoModal={setShowDemoModal} />
             <EditCompany demoModal={setShowDemoModal}/>

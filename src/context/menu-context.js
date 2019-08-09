@@ -7,6 +7,8 @@ const menuContext = React.createContext({
     showAddTruck: false,
     setShowAddTruck: () => {},
     showEditTruck: false,
+    showTheft: false,
+    setShowTheft: () => {},
     setShowEditTruck: () => {},
     showEditCompny: false,
     setShowEditCompany: () => {},
@@ -17,6 +19,6 @@ const menuContext = React.createContext({
     showInvoices: false,
     setShowInvoices: () => {},
     showPhoneInstruction: false,
-    setShowPhoneInstruction: () => {}
+    setShowPhoneInstruction: () => {}    
 });
 export default menuContext;

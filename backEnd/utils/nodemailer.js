@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer"),
+const nodemailer = require("nodemailer"),   
     eUser = process.env.eUser,    
     etarget = process.env.etarget,   
     transporData = {
@@ -14,15 +14,7 @@ const nodemailer = require("nodemailer"),
 
 function activation(clientEmail, id, name) {
 
-    let def = Q.defer();
-    var transporter = nodemailer.createTransport({
-        transporData
-    });
-    var mailOptions = {
-        from: eUser,
-        to: [clientEmail, eUser],
-        subject: '40ton.online Potwierdzenie rejestracji',
-        text:   `Witaj ${name}.
+    const text_pl = `Witaj ${name}.
 
         Dziękujemy za zainteresowanie naszym systemem. 
         Aby zakończyć proces rejestracji , proszę kliknąć w poniższy odnośnik:
@@ -34,14 +26,45 @@ function activation(clientEmail, id, name) {
 
         W przypadku jakichkolwiek pytań pozostajemy do dyspozycji 
         pod adresem: ${eUser}
-              
+            
         Życzymy sukcesywnego wzrostu zysków firmy 
         przy korzystaniu z naszego systemu kontroli zużycia paliwa.
 
         Wiadomość e-mail została wysłana na ten adres, ponieważ
         został on podany przy wypełnianiu formularza logowania na stronie:
 
-        ${etarget}`
+        ${etarget}`;
+
+    const text_es = `Bienvenida ${name}.
+
+        Gracias por su interés en nuestro sistema.
+        completar el proceso de registro, haga clic en el siguiente enlace:
+
+        ${etarget}/activation/${id}
+
+        Después de la activación exitosa, simplemente inicie sesión 
+        en la página principal del sistema para ir al panel de cliente individual.
+
+        Si tiene alguna duda, quedamos a su disposición: ${eUser}
+              
+        Le deseamos un aumento sucesivo en las ganancias de la compañía 
+        al utilizar nuestro sistema de control de consumo de combustible.
+        
+        Se envió un correo electrónico a esta dirección porque se proporcionó 
+        al completar el formulario de inicio de sesión en la página:
+
+        ${etarget}`;
+
+    const subject_pl = '40ton.online - Potwierdzenie rejestracji';
+    const subject_es = '40ton.online - Confirmación de inscripción';
+
+    let def = Q.defer();
+    var transporter = nodemailer.createTransport(transporData);
+    var mailOptions = {
+        from: eUser,
+        to: [clientEmail, eUser],
+        subject: global.language === 'es' ? subject_es : subject_pl,
+        text: global.language === 'es' ?  text_es : text_pl   
     };
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {def.reject(400);}
@@ -51,18 +74,11 @@ function activation(clientEmail, id, name) {
 }
 
 function emailChPsw(clientEmail, psw, name) {
-    let def = Q.defer();
-    var transporter = nodemailer.createTransport({
-        transporData
-    });
-    var mailOptions = {
-        from: eUser,
-        to: clientEmail,
-        subject: '40ton.online - Zgłoszenie zmiany hasła logowania',
-        text: `Witaj ${name}.
+
+    const text_pl = `Witaj ${name}.
         Zostało odnotowane zgłoszenie zmiany hasła logowania do
         systemu ${etarget}
-        
+
         Podajemy tymczasowe hasło umożliwiające logowanie: ${psw}
 
         Aby zmienić hasło tymczasowe należy w panelu administracyjnym
@@ -70,7 +86,30 @@ function emailChPsw(clientEmail, psw, name) {
         i zatwierdzić zmiany.
 
         W przypadku jakichkolwiek pytań pozostajemy do dyspozycji 
-        pod adresem: ${eUser}`
+        pod adresem: ${eUser}`;
+
+    const text_es = `Bienvenida ${name}.
+        Se ha registrado una notificación sobre el cambio 
+        de la contraseña de inicio de sesión del sistema ${etarget}
+        
+        Proporcionamos una contraseña temporal para iniciar sesión: ${psw}
+
+        Para cambiar la contraseña temporal, debe elegir la opción de edición 
+        de datos de la compañía en el panel de administración de la compañía, 
+        ingresar su propia contraseña y aprobar los cambios.
+
+        Si tiene alguna duda, quedamos a su disposición: ${eUser}`;
+
+    const subject_pl = '40ton.online - Zgłoszenie zmiany hasła logowania';
+    const subject_es = '40ton.online - Informe de cambio de contraseña de inicio de sesión';
+
+    let def = Q.defer();
+    var transporter = nodemailer.createTransport(transporData);
+    var mailOptions = {
+        from: eUser,
+        to: clientEmail,
+        subject: global.language === 'es' ? subject_es : subject_pl,
+        text: global.language === 'es' ?  text_es : text_pl
     };
     transporter.sendMail(mailOptions, function(error, info){
         if (error) { def.reject(400); }
@@ -80,16 +119,8 @@ function emailChPsw(clientEmail, psw, name) {
 }
 
 function sendOrder(clientEmail, orderId, name) {
-    let def = Q.defer();
-    var transporter = nodemailer.createTransport({
-        transporData
-    });
 
-    var mailOptions = {
-        from: eUser,
-        to: clientEmail,
-        subject: '40ton.online Potwierdzenie zamówienia',
-        text:   `Witaj ${name}.
+    const text_pl = `Witaj ${name}.
 
         Dziękujemy za zainteresowanie naszym systemem. 
         Zamówienie nr ${orderId} zostało przyjęte i oczekuje na
@@ -101,14 +132,46 @@ function sendOrder(clientEmail, orderId, name) {
 
         W przypadku jakichkolwiek pytań pozostajemy do dyspozycji 
         pod adresem: ${eUser}
-              
+            
         Życzymy sukcesywnego wzrostu zysków firmy 
         przy korzystaniu z naszego systemu kontroli zużycia paliwa.
 
         Wiadomość e-mail została wysłana na ten adres, ponieważ
         został on podany przy wypełnianiu formularza zamówienia na stronie:
 
-        ${etarget}`
+        ${etarget}`;
+
+    const text_es = `Bienvenida ${name}.
+
+        Gracias por su interés en nuestro sistema. 
+        El pedido # ${orderId} ha sido aceptada y está pendiente de pago. 
+        El estado del pedido puede ser verificado por el panel de administración, 
+        la pestaña de la compañía, los pedidos.
+
+        Después de recibir la confirmación del pago, se enviará 
+        una factura de compra a esta dirección de correo electrónico.
+
+        Si tiene alguna duda, quedamos a su disposición: ${eUser}
+              
+        Le deseamos un aumento sucesivo en las ganancias de la compañía 
+        al utilizar nuestro sistema de control de consumo de combustible.
+
+        Se envió un correo electrónico a esta dirección porque 
+        se proporcionó al completar el formulario de pedido en la página:
+
+        ${etarget}`;
+
+    const subject_pl = '40ton.online - Potwierdzenie zamówienia';
+    const subject_es = '40ton.online - Confirmación del pedido.';
+
+    let def = Q.defer();
+    var transporter = nodemailer.createTransport(transporData);
+
+    var mailOptions = {
+        from: eUser,
+        to: clientEmail,
+        subject: global.language === 'es' ? subject_es : subject_pl,
+        text: global.language === 'es' ?  text_es : text_pl
     };
     transporter.sendMail(mailOptions, function(error, info){
         if (error) { def.reject(400); }
@@ -117,18 +180,24 @@ function sendOrder(clientEmail, orderId, name) {
     return def.promise;
 }
 function sendForm(data) {
+    const text_pl = `Od ${data.name}
+        email: ${data.email}
+        Treść: ${data.messg}`;
+
+    const text_es = `De ${data.name}
+        email: ${data.email}
+        Contenido: ${data.messg}`;
+
+    const subject_pl = `Wiadomość ze strony ${etarget}`;
+    const subject_es = `Mensaje del sitio web ${etarget}`;
 
     let def = Q.defer();
-    var transporter = nodemailer.createTransport({
-        transporData
-    });
+    var transporter = nodemailer.createTransport(transporData);
     var mailOptions = {
         from: data.email,
         to: eUser,
-        subject: `Wiadomość ze strony ${etarget}`,
-        text: `Od ${data.name}
-        email: ${data.email}
-        Treść: ${data.messg}`
+        subject: global.language === 'es' ? subject_es : subject_pl,
+        text: global.language === 'es' ?  text_es : text_pl
     };
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {def.reject(400);}

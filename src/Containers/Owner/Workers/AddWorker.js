@@ -127,8 +127,7 @@ const AddWorker = props => {
         // eslint-disable-next-line
     }, [props.workerText]);
 
-    const checkIdentityHandler = (event) => {
-        event.preventDefault();
+    const checkIdentityHandler = () => {        
         if(!checkIdentity(controls.email.value, controls.email2.value)) {
             setFormIsValid(false);
             setNotIdentity('email');
@@ -158,8 +157,7 @@ const AddWorker = props => {
         );
         worker.addWorker(setSuccesMsg, setErrorMsg, setIsLoading);
     };
-    const cancelHandler = (event) => {
-        if (event) event.preventDefault();
+    const cancelHandler = () => {        
         cancelForm(controls, formElementsKeyArray, setControls);
         setShowAddWorker(false);
         setSuccesMsg(null);
@@ -185,7 +183,7 @@ const AddWorker = props => {
             <h6 style={{marginBottom: '2rem'}}>{props.workerText.addPanelName}</h6>
             <p>{props.workerText.restrictionText}</p>
             <p>{props.workerText.addPanelDescripton}</p>
-            <form onSubmit={checkIdentityHandler} style={{ display: "inline", textAlign: 'center' }}>
+            <form  style={{ display: "inline", textAlign: 'center' }}>
                 {form}
                 <p style={{color: 'red'}}>{
                     notIdentity === 'email' ?
@@ -197,6 +195,7 @@ const AddWorker = props => {
                 <button
                     className='btn btn-primary btn-sm'
                     disabled={!formIsValid || isLoading || !props.perm}
+                    onClick={checkIdentityHandler}
                     style={{ marginRight: '1rem' }}>
                     {props.workerText ? props.workerText.submit : ''}
                 </button>

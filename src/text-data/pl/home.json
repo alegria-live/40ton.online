@@ -71,6 +71,7 @@
         "467": "Nieprawidłowy adres email.",
         "468": "Ten numer prawa jazdy jest już zarejestrowany",
         "469": "Ta rejestracja jest już zapisana w bazie",
+        "470": "Podana data zdarzenie nie jest prawidłowa",
         "500": "Błąd połączenia z serwerem.",
         "503": "Błąd połączenia z bazą danych."
     },

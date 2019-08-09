@@ -67,8 +67,7 @@ const LogIn = props => {
     // eslint-disable-next-line
     },[props.token])
 
-    const submitHandler = ( event ) => {
-        event.preventDefault();
+    const submitHandler = () => {       
         const data = {
             email: controls.email.value,
             password: controls.password.value,
@@ -77,8 +76,7 @@ const LogIn = props => {
         props.onSubmitHandler(data);
     };
 
-    const cancelHandler = (event) => {
-        if(event) event.preventDefault();
+    const cancelHandler = () => {       
         cancelForm(controls, formElementsKeyArray, setControls);
         props.clearError();
         setShowLogIn();
@@ -105,18 +103,26 @@ const LogIn = props => {
     return (        
         <>           
             {props.loading ? <Spinner /> : null}
-            <form onSubmit={submitHandler}>
+            <form >
                 {props.error ? <p>{props.errorText[props.error.toString()] || props.error}</p>: null}                
                 {form}
                 <button 
-                className='btn btn-primary btn-sm' 
-                disabled={!formIsValid || props.loading}
-                style={{marginRight: '1rem'}}>{props.loginText.submit}</button>
-                <button onClick={cancelHandler} className='btn btn-secondary btn-sm'>{props.loginText.cancel}</button>
+                    className='btn btn-primary btn-sm' 
+                    disabled={!formIsValid || props.loading}
+                    onClick={submitHandler}
+                    style={{marginRight: '1rem'}}>
+                    {props.loginText.submit}
+                </button>
+                <button
+                    onClick={cancelHandler}
+                    className='btn btn-secondary btn-sm'>
+                    {props.loginText.cancel}
+                </button>
             </form>
             <p 
-            style={{marginTop: '2rem', cursor: 'pointer'}}
-            onClick={forgotPswHandler}>{props.loginText.forgotPsw}</p>
+                style={{marginTop: '2rem', cursor: 'pointer'}}
+                onClick={forgotPswHandler}>{props.loginText.forgotPsw}
+            </p>
         </>
     );
 };

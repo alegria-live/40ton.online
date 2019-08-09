@@ -103,11 +103,7 @@ const EditTruck = props => {
     };
     useEffect(() => {
         if(showEditTruck) getTrucks();
-    }, [showEditTruck]);
-
-    useEffect(() => {
-        getTrucks();
-    }, []);
+    }, [showEditTruck]);    
 
     useEffect(() => {
         validFormHandler(controls, setFormIsValid);
@@ -129,8 +125,7 @@ const EditTruck = props => {
         setControls(copyControls);
     };
 
-    const submitHandler = event => {
-        event.preventDefault();
+    const submitHandler = () => {        
         if(props.demo) { props.demoModal(true); return; }
         const truck = new Truck(
             {
@@ -144,8 +139,7 @@ const EditTruck = props => {
         );
         truck.updateTruck(setSuccesMsg, setErrorMsg, setIsLoading, getTrucks);
     };
-    const deleteHandler = event => {
-        if(event) event.preventDefault();
+    const deleteHandler = () => {       
         if(props.demo) { props.demoModal(true); return; }
         const truck = new Truck({
             id: controls._id.value.toUpperCase().trim()
@@ -159,8 +153,7 @@ const EditTruck = props => {
             onCancel() { return }
         });
     };
-    const cancelHandler = (event) => {
-        if (event) event.preventDefault();
+    const cancelHandler = () => {        
         cancelForm(controls, formElementsKeyArray, setControls);
         setShowEditTruck(false);
         setSuccesMsg(null);
@@ -205,7 +198,7 @@ const EditTruck = props => {
                 defaultValue={props.textMenu.trucks}>
                 {options}
             </Select>
-            <form onSubmit={submitHandler} style={{ display: "inline", textAlign: 'center' }}>
+            <form style={{ display: "inline", textAlign: 'center' }}>
                 {form}
                 <Button
                     disabled={!formIsValid || isLoading}

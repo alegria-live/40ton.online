@@ -83,9 +83,6 @@ const EditDriver = props => {
             .then(res => { setAllDrivers(res.data); setIsLoading(false) })
             .catch(e => { setIsLoading(false); setErrorMsg(e) })
     };
-    useEffect(() => {
-        getDrivers();
-    }, []);
 
     useEffect(() => {
         if(showEditDriver) getDrivers();
@@ -111,8 +108,7 @@ const EditDriver = props => {
         setControls(copyControls);
     };
 
-    const submitHandler = event => {
-        if(event) event.preventDefault();
+    const submitHandler = () => {       
         if(props.demo) { props.demoModal(true); return; }
         const driver = new Driver(
             {
@@ -125,8 +121,7 @@ const EditDriver = props => {
         );
         driver.updateDriver(setSuccesMsg, setErrorMsg, setIsLoading, getDrivers);
     };
-    const deleteHandler = event => {
-        if(event) event.preventDefault();
+    const deleteHandler = () => {        
         if(props.demo) { props.demoModal(true); return; }
         const driver = new Driver({
             id: controls._id.value.toLowerCase().trim()
@@ -141,8 +136,7 @@ const EditDriver = props => {
         });
     };
 
-    const cancelHandler = (event) => {
-        if (event) event.preventDefault();
+    const cancelHandler = () => {
         cancelForm(controls, formElementsKeyArray, setControls);
         setShowEditDriver(false);
         setSuccesMsg(null);
@@ -188,7 +182,7 @@ const EditDriver = props => {
                 defaultValue={props.textMenu.drivers}>
                 {options}
             </Select>
-            <form onSubmit={submitHandler} style={{ display: 'inline', textAlign: 'center' }}>
+            <form  style={{ display: 'inline', textAlign: 'center' }}>
                 {form}
                 <Button
                     disabled={!formIsValid || isLoading}

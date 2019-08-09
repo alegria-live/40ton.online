@@ -83,8 +83,7 @@ const AddDriver = props => {
         // eslint-disable-next-line
     }, [props.driversText]);
     
-    const submitHandler = event => {
-        event.preventDefault();
+    const submitHandler = () => {        
         if(props.demo) { props.demoModal(true); return; }
         const driver = new Driver(
             {
@@ -99,8 +98,7 @@ const AddDriver = props => {
         );        
         driver.addDriver(setSuccesMsg, setShowInstruction, setErrorMsg, setIsLoading);
     };
-    const cancelHandler = (event) => {
-        if (event) event.preventDefault();
+    const cancelHandler = () => {        
         cancelForm(controls, formElementsKeyArray, setControls);        
         setShowAddDriver(false);
         setSuccesMsg(null);
@@ -125,11 +123,12 @@ const AddDriver = props => {
     const formElement = (
         <>
             <h6>{props.driversText.addPanelName}</h6>
-            <form onSubmit={submitHandler} style={{ display: "inline", textAlign: 'center' }}>
+            <form  style={{ display: "inline", textAlign: 'center' }}>
                 {form}
                 <button
                     className='btn btn-primary btn-sm'
                     disabled={!formIsValid || isLoading}
+                    onClick={submitHandler}
                     style={{ margin: '1rem' }}>
                     {props.driversText ? props.driversText.submit : null}
                 </button>

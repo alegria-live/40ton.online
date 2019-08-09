@@ -47,8 +47,7 @@ const NewPass = props => {
     }, [props.loginText]);
 
 
-    const submitHandler = ( event ) => {
-        event.preventDefault();
+    const submitHandler = () => {
         const data = {
             email: controls.email.value,           
             _csrf: props._csrf
@@ -56,8 +55,7 @@ const NewPass = props => {
         props.onSubmitHandler(data);        
     };
 
-    const cancelHandler = (event) => {
-        if(event) event.preventDefault();
+    const cancelHandler = () => {        
         cancelForm(controls, formElementsKeyArray, setControls);
         props.clearError();
         setShowNewPass(false);
@@ -79,16 +77,17 @@ const NewPass = props => {
     const sendButton = (
         <button 
             className='btn btn-primary btn-sm' 
+            onClick={submitHandler}
             disabled={!formIsValid || props.loading || props.newPassEmail}
             style={{marginRight: '1rem'}}>{props.loginText.newPassSubmit}
         </button>
     );
 
-    const submitButton = (
+    const cancelButton = (
         <button
-        onClick={cancelHandler}
-        className='btn btn-secondary btn-sm'>
-        {props.loginText.cancel}
+            onClick={cancelHandler}
+            className='btn btn-secondary btn-sm'>
+            {props.loginText.cancel}
         </button>
     );
 
@@ -101,7 +100,7 @@ const NewPass = props => {
     return (        
         <>           
             {props.loading ? <Spinner /> : null}
-            <form onSubmit={submitHandler}>
+            <form>
                 {props.error ? <p>{props.errorText[props.error.toString()] || props.error}</p>: null}
                 {props.newPassError ? <p>{props.errorText[props.newPassError.toString()] || props.error}</p>: null}
                 {props.newPassEmail ? successInfo : 
@@ -111,7 +110,7 @@ const NewPass = props => {
                     </>
                     }
                 {!props.newPassEmail ? sendButton: null}
-                {submitButton}
+                {cancelButton}
             </form>
         </>
     );

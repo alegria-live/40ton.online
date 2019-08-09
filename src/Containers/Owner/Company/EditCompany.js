@@ -225,11 +225,6 @@ const EditCompany = props => {
     }, [showEditCompany]);
 
     useEffect(() => {
-        getCompany();
-        // eslint-disable-next-line
-    }, []);
-
-    useEffect(() => {
         validFormHandler(controls, setFormIsValid);
         if(notIdentity) setNotIdentity(null)
         // eslint-disable-next-line
@@ -252,8 +247,7 @@ const EditCompany = props => {
         setControls(copyControls);
     };
 
-    const checkIdentityHandler = (event) => {
-        event.preventDefault();
+    const checkIdentityHandler = () => {        
         if(!checkIdentity(controls.email.value, controls.email2.value)) {
             setFormIsValid(false);
             setNotIdentity('email');
@@ -298,8 +292,7 @@ const EditCompany = props => {
             setIsLoading(false);
         })
     };
-    const deleteHandler = event => {
-        event.preventDefault();
+    const deleteHandler = () => {        
         if(props.demo) { props.demoModal(true); return }
         confirm({
             title: controls.company.value,
@@ -321,8 +314,7 @@ const EditCompany = props => {
             onCancel() { return }
         });        
     };
-    const cancelHandler = (event) => {
-        if (event) event.preventDefault();
+    const cancelHandler = () => {        
         cancelForm(controls, formElementsKeyArray, setControls);
         setShowEditCompany(false);
         setSuccesMsg(null);
@@ -354,7 +346,7 @@ const EditCompany = props => {
         <>
             <h6>{props.cText.panelName}</h6>
             <p>{props.restrictionText}</p>
-            <form onSubmit={checkIdentityHandler} style={{ display: "inline", textAlign: 'center' }}>
+            <form  style={{ display: "inline", textAlign: 'center' }}>
                 {form}
                 <p style={{color: 'red'}}>{
                     notIdentity === 'email' ?

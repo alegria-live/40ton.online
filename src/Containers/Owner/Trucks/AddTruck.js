@@ -97,8 +97,7 @@ const AddTruck = props => {
         // eslint-disable-next-line
     }, [props.trucksText]);
     
-    const submitHandler = event => {
-        event.preventDefault();
+    const submitHandler = () => {        
         if(props.demo) { props.demoModal(true); return; }
         const truck = new Truck(
             {
@@ -116,8 +115,7 @@ const AddTruck = props => {
         );        
         truck.addTruck(setSuccesMsg, setErrorMsg, setIsLoading);
     };
-    const cancelHandler = event => {
-        if (event) event.preventDefault();       
+    const cancelHandler = () => {       
         cancelForm(controls, formElementsKeyArray, setControls);       
         setShowAddTruck(false);
         setSuccesMsg(null);
@@ -141,11 +139,12 @@ const AddTruck = props => {
     const formElement = (
         <>
             <h6>{props.trucksText.addPanelName}</h6>
-            <form onSubmit={submitHandler} style={{display: "inline", textAlign: 'center' }}>
+            <form  style={{display: "inline", textAlign: 'center' }}>
                 {form}
                 <button
                     className='btn btn-primary btn-sm'
                     disabled={!formIsValid || isLoading}
+                    onClick={submitHandler}
                     style={{ margin: '1rem' }}>
                     {props.trucksText ? props.trucksText.submit : null}
                 </button>

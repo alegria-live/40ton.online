@@ -235,8 +235,8 @@ const LogIn = props => {
     // eslint-disable-next-line
     },[props.registerEmail]);
 
-    const checkIdentityHandler = (event) => {
-        event.preventDefault();
+    const checkIdentityHandler = () => {
+
         if(!checkIdentity(controls.email.value, controls.email2.value)) {
             return setShowModal({show:true, message: props.registerText.emailNotIdentity})
         }
@@ -248,7 +248,7 @@ const LogIn = props => {
         submitHandler()
     };
     
-    const submitHandler = ( event ) => {        
+    const submitHandler = () => {        
         const data = {
             dataSet : {
                 name: controls.name.value,
@@ -273,8 +273,7 @@ const LogIn = props => {
        props.onSubmitHandler(data);
     };
 
-    const cancelHandler = (event) => {
-        if(event) event.preventDefault();
+    const cancelHandler = () => {        
         cancelForm(controls, formElementsKeyArray, setControls);
         props.clearError();
         setShowRegister(false);
@@ -309,7 +308,7 @@ const LogIn = props => {
                     {props.registerText.cancel}
                 </button>              
             </Modal>
-            <form onSubmit={checkIdentityHandler}>                                
+            <form >                                
                 {form}
                 <div style={{margin: '1rem 0'}}>
                     <input 
@@ -319,10 +318,17 @@ const LogIn = props => {
                     <small style={{padding: '1.5rem'}}>{props.registerText.clause}</small>
                 </div>                
                 <button 
-                className='btn btn-primary btn-sm' 
-                disabled={!formIsValid || props.loading} 
-                style={{marginRight: '1rem'}}>{props.registerText.submit}</button>
-                <button onClick={cancelHandler} className='btn btn-secondary btn-sm'>{props.registerText.cancel}</button>
+                    className='btn btn-primary btn-sm' 
+                    disabled={!formIsValid || props.loading}
+                    onClick={checkIdentityHandler}
+                    style={{marginRight: '1rem'}}>
+                    {props.registerText.submit}
+                </button>
+                <button 
+                    onClick={cancelHandler}
+                    className='btn btn-secondary btn-sm'>
+                    {props.registerText.cancel}
+                </button>
             </form>            
         </>
     );

@@ -12,6 +12,7 @@ const MenuContent = props => {
 		setShowEditDriver,		
 		setShowAddTruck,
 		setShowEditTruck,
+		setShowTheft,
 		setShowAddWorker,
 		setShowEditWorker,
 		setShowEditCompany,
@@ -58,7 +59,7 @@ const MenuContent = props => {
 				>
 					<Menu.Item onClick={() => setShowAddTruck(true)} key="4">{props.textMenu.addTruck}</Menu.Item>
 					<Menu.Item onClick={() => setShowEditTruck(true)} key="5">{props.textMenu.editTruck}</Menu.Item>
-					<Menu.Item onClick={() => {}} key="6">{props.textMenu.theft}</Menu.Item>
+					<Menu.Item onClick={() => setShowTheft(true)} key="6">{props.textMenu.theft}</Menu.Item>
 				</SubMenu>
 				<SubMenu
 					key="workers"

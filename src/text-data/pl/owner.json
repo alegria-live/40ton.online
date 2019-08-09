@@ -124,7 +124,13 @@
         "cancel": "Powrót",
         "addTruckSuccess": "Do bazy danych dodano pojazd",
         "addTruckError": "Wystąpił błąd. Proszę zalogować się od nowa i ponowić operację",
-        "editTruckSuccess": "Zmiany zapisane dla pojazdu"
+        "editTruckSuccess": "Zmiany zapisane dla pojazdu",
+        "theftPanelName": "Robo de gasoil",
+        "theftPanelDescription": "Opcja pozwalająca na dokonanie korekty obliczeń trasy, podczas której dokonano kradzieży paliwa.",
+        "choiceTheftData": "Proszę wybrać numer pojazdu i datę kradzieży",
+        "theftSubmit": "Korekta",
+        "theftSuccess": "Trasa została skorygowana. Wyliczona utrata paliwa to: ",
+        "theftError": "Wystąpił błąd. Proszę zalogować się od nowa i ponowić operację"
     },
     "workerForm" : {
         "addPanelName": "Panel dodawania użytkowników",
