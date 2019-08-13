@@ -110,6 +110,14 @@
         "registerSuccess2": " Aby zakończyć proces rejestracji proszę sprawdzić pocztę przychodzącą. W przypadku braku informacji proszę sprawdzić folder SPAM.",
         "activateSuccess": "Aktywacja przebiegła pomyślnie. Możesz zalogować się do swojego systemu."
     },
+    "contactForm" : {
+        "email": "Adres email",
+        "name": "Imię",
+        "content": "Wiadomość",
+        "success": "Wiadomość została wysłana poprawnie.",
+        "submit": "Wyślij",
+        "cancel": "Powrót"
+    },
     "demoData": {
         "email": "fuel.control.demo@alegria.live",
         "pass": "giX0sf-nHUe5Hw8GXQ9N3gtjHMg"

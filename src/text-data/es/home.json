@@ -110,6 +110,14 @@
         "registerSuccess2": " Para completar el proceso de registro, revise su correo electrónico entrante. En ausencia de información, por favor revise la carpeta SPAM.",
         "activateSuccess": "La activación salió bien. Ya puedes iniciar sesión en el sistema."
     },
+    "contactForm" : {
+        "email": "Dirección de email",
+        "name": "Nombre",
+        "content": "Mensaje",
+        "success": "El mensaje ha sido enviado correctamente.",
+        "submit": "Enviar",
+        "cancel": "Volver"
+    },
     "demoData": {
         "email": "fuel.control.demo@alegria.live",
         "pass": "giX0sf-nHUe5Hw8GXQ9N3gtjHMg"

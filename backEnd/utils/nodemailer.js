@@ -179,14 +179,14 @@ function sendOrder(clientEmail, orderId, name) {
     });
     return def.promise;
 }
-function sendForm(data) {
+function sendForm(data) {   
     const text_pl = `Od ${data.name}
         email: ${data.email}
-        Treść: ${data.messg}`;
+        Treść: ${data.content}`;
 
     const text_es = `De ${data.name}
         email: ${data.email}
-        Contenido: ${data.messg}`;
+        Contenido: ${data.content}`;
 
     const subject_pl = `Wiadomość ze strony ${etarget}`;
     const subject_es = `Mensaje del sitio web ${etarget}`;
@@ -200,7 +200,7 @@ function sendForm(data) {
         text: global.language === 'es' ?  text_es : text_pl
     };
     transporter.sendMail(mailOptions, function(error, info){
-        if (error) {def.reject(400);}
+        if (error) {def.reject(465); return;}
         else {def.resolve(200);}
     });
     return def.promise;

@@ -9,7 +9,8 @@ const initialState = {
         headerSlogan: '',
         navHeader: []
     },
-    textOwner: {}
+    textOwner: {},
+    textHomeInside: {}
 };
 
 const resetLanguage = (state, action) => {

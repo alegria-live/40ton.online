@@ -28,8 +28,7 @@ const NavHeader = props => {
         if(showRegister || showOwner ) return
         setShowLogIn(val)
     };
-    const onSignInHandler = val => {
-        // if(showRegister) return        
+    const onSignInHandler = val => {         
         setShowRegister(!showRegister);
     };
     const toSytemPage = () => {

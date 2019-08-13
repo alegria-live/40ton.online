@@ -8,6 +8,8 @@ const appContext = React.createContext({
     setShowNewPass: () => {},
     showRegister: false,
     setShowRegister: () => {},
+    showContactForm: false,
+    setShowContactForm: () => {},
     showOwner: false,
     setShowOwner: () => {}
 });

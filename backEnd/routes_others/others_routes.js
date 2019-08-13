@@ -11,14 +11,13 @@ module.exports = function (app) {
 
     //set app language depending on the client choice
     app.get("/:lang", csrfProtection, (req, res) => {
-        app.set('language', req.params.lang);
         global.language = req.params.lang;
         let env = app.get("env");
         if (env === "production") { env = null; }
         res.json({
             _csrf: req.csrfToken(),
             env
-        });        
+        });
     });
 
     // user activation
@@ -45,7 +44,7 @@ module.exports = function (app) {
             res.status(503).json(503); return;
         }
 
-        if (!req.body.name || !req.body.email || !req.body.messg) {
+        if (!req.body.name || !req.body.email || !req.body.content) {
             res.status(500).json(465);
             return;
         }

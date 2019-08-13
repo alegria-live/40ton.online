@@ -9,6 +9,7 @@ import Header from '../../Components/Home/Header/Header';
 import Main from '../../Components/Home/Main/Main';
 import LogIn from '../../Containers/LogIn/LogIn';
 import NewPass from '../../Containers/LogIn/NewPass';
+import ContactForm from '../../Containers/ContactForm/ContactForm';
 import AppContext from '../../context/app-context';
 import ChartsContext from '../../context/charts-context';
 import Modal from '../../Components/UI/Modal/Modal';
@@ -19,7 +20,13 @@ const Owner = React.lazy(() => import('../../Components/Owner/OwnerLayout/OwnerL
 
 
 export const HomeLayout = (props) => {
-	const { showLogIn, showNewPass, showRegister, showOwner } = useContext(AppContext);
+	const {
+		showLogIn,
+		showNewPass,
+		showRegister,
+		showOwner,
+		showContactForm
+	} = useContext(AppContext);
 	const [allActiveDrivers, setAllActiveDrivers] = useState({});
 	const [allActiveTrucks, setAllActiveTrucks] = useState({});
 	const [driversLoaded, setDriversLoaded] = useState(false);
@@ -47,6 +54,7 @@ export const HomeLayout = (props) => {
 		<>
 			<Modal show={showLogIn} ><LogIn /></Modal>
 			<Modal show={showNewPass} ><NewPass /></Modal>
+			<Modal show={showContactForm} ><ContactForm /></Modal>
 			<Header />			
 			<React.Suspense>
 				{showRegister ? <Register formName={props.registerText.formName} /> : <Main />}

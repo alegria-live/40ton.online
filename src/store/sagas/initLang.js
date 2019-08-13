@@ -12,6 +12,7 @@ export function* initLanguageSaga(action) {
 		yield localStorage.setItem("env", response.data.env);
 		response.data.textHome = yield require(`../../text-data/${action.language}/home.json`);
 		response.data.textOwner = yield require(`../../text-data/${action.language}/owner.json`);
+		response.data.textHomeInside = yield require(`../../text-data/${action.language}/homeInside.json`);
 		response.data.language = yield action.language;
 		yield put(actions.setLanguage(response.data));
 	}

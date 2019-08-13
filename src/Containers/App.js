@@ -18,12 +18,14 @@ export const App = ({autoInitLang, ...props}) => {
 	const [showLogIn, changeShowLogin] = useState(false);
 	const [showNewPass, changeShowNewPass] = useState(false);
 	const [showRegister, changeShowRegister] = useState(false);
+	const [showContactForm, changeShowContactForm] = useState(false);
 	const [showOwner, changeShowOwner] = useState(false);
 
 	const choiceLang = chosenLang => props.setLang(chosenLang);
 	const setShowLogIn = val => changeShowLogin(val);
 	const setShowRegister = val => changeShowRegister(val);
 	const setShowNewPass = () => changeShowNewPass(!showNewPass);
+	const setShowContactForm = val => changeShowContactForm(val);
 	const setShowOwner = val => changeShowOwner(val);
 
 	let routes = (
@@ -50,6 +52,8 @@ export const App = ({autoInitLang, ...props}) => {
 				setShowNewPass,
 				showRegister,
 				setShowRegister,
+				showContactForm,
+				setShowContactForm,
 				showOwner,
 				setShowOwner
 			}}>
