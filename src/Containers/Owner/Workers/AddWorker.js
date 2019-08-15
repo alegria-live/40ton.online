@@ -194,6 +194,7 @@ const AddWorker = props => {
                 }</p>
                 <button
                     className='btn btn-primary btn-sm'
+                    type="button"
                     disabled={!formIsValid || isLoading || !props.perm}
                     onClick={checkIdentityHandler}
                     style={{ marginRight: '1rem' }}>

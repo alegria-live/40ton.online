@@ -127,6 +127,7 @@ const AddDriver = props => {
                 {form}
                 <button
                     className='btn btn-primary btn-sm'
+                    type="button"
                     disabled={!formIsValid || isLoading}
                     onClick={submitHandler}
                     style={{ margin: '1rem' }}>
@@ -164,7 +165,6 @@ const AddDriver = props => {
                     isLoading ? <Spinner /> :
                         formElement
             }
-
             <button
                 onClick={cancelHandler}
                 className='btn btn-secondary btn-sm'>

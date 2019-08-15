@@ -143,6 +143,7 @@ const AddTruck = props => {
                 {form}
                 <button
                     className='btn btn-primary btn-sm'
+                    type="button"
                     disabled={!formIsValid || isLoading}
                     onClick={submitHandler}
                     style={{ margin: '1rem' }}>

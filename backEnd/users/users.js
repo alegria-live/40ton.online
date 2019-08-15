@@ -315,7 +315,7 @@ const getWorkers = async data => {
 
 const editWorker = async worker => {
 
-	if (!validation.isValidId(worker.collectionName+1)) {
+	if (!validation.isValidId(worker.collectionName)) {
 		return Promise.reject(465);
 	}
 	worker.newData.password = bcrypt

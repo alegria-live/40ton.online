@@ -1,4 +1,4 @@
-const emailer = require("../utils/nodemailer"),
+const emailer = require("../utils/nodemailer"),    
     users = require("../users"),
     euroxml = require("../utils/euro"),
     datesUpdate = require("../utils/datesUpdate"),
@@ -18,7 +18,7 @@ module.exports = function (app) {
             _csrf: req.csrfToken(),
             env
         });
-    });
+    });    
 
     // user activation
     app.put("/activation", (req, res) => {

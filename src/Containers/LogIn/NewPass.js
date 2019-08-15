@@ -76,7 +76,8 @@ const NewPass = props => {
 
     const sendButton = (
         <button 
-            className='btn btn-primary btn-sm' 
+            className='btn btn-primary btn-sm'
+            type="button"
             onClick={submitHandler}
             disabled={!formIsValid || props.loading || props.newPassEmail}
             style={{marginRight: '1rem'}}>{props.loginText.newPassSubmit}
@@ -85,6 +86,7 @@ const NewPass = props => {
 
     const cancelButton = (
         <button
+            type="button"
             onClick={cancelHandler}
             className='btn btn-secondary btn-sm'>
             {props.loginText.cancel}

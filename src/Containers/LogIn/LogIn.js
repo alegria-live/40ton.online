@@ -107,7 +107,8 @@ const LogIn = props => {
                 {props.error ? <p>{props.errorText[props.error.toString()] || props.error}</p>: null}                
                 {form}
                 <button 
-                    className='btn btn-primary btn-sm' 
+                    className='btn btn-primary btn-sm'
+                    type="button"
                     disabled={!formIsValid || props.loading}
                     onClick={submitHandler}
                     style={{marginRight: '1rem'}}>
@@ -115,6 +116,7 @@ const LogIn = props => {
                 </button>
                 <button
                     onClick={cancelHandler}
+                    type="button"
                     className='btn btn-secondary btn-sm'>
                     {props.loginText.cancel}
                 </button>

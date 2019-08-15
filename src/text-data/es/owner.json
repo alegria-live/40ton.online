@@ -87,7 +87,7 @@
         "invoices": "Facturas",
         "instructions": "Instrucciones",
         "systemInstruction": "Instrucción y descripción del sistema",
-        "systemInstructionLink": "https://react.40ton.online/pdf/instrucciones_sistema_control_consumo.pdf",
+        "systemInstructionLink": "https://40ton.online/pdf/instrucciones_sistema_control_consumo.pdf",
         "driverInstruction": "Configuración de teléfonos.",
         "demo": "Versión demo. Guardar información no está disponible."
     },

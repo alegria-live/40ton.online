@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import AppContext from '../../../context/app-context';
 import classes from './Main.css';
+import CookiesInfo from './CookiesInfo/CookiesInfo';
 import fuelEfficient_pl from '../../../assets/img/fuel_efficient_pl.jpg';
 import fuelEfficient_es from '../../../assets/img/fuel_efficient_es.jpg';
 import allRoutes_pl from '../../../assets/img/all_routes_pl.jpg';
@@ -17,7 +18,6 @@ import succsessBusines from '../../../assets/img/succsessBusines.jpg';
 import contactUs from '../../../assets/img/contact-us.jpg';
 import oneTruck_pl from '../../../assets/img/one_truck_pl.jpg';
 import oneTruck_es from '../../../assets/img/one_truck_es.jpg';
-
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
 
@@ -26,6 +26,7 @@ const Main = props => {
 	const { setShowContactForm, setShowRegister } = useContext(AppContext);
 	const [showRegulations, setShowRegulations] = useState(false);
 	const [showPolicy, setShowPolicy] = useState(false);
+	const [showCookie, setShowCookie] = useState(true);
 	const onDemoHandler = () => {
 		const data = {
 			email: props.demoData.email,
@@ -37,6 +38,13 @@ const Main = props => {
 
 	return (
 		<main className="container">
+			
+			{
+				!props.isToken && showCookie ? 
+					<aside className={classes.Cookies}>
+						<CookiesInfo setShowCookie={setShowCookie}/>
+					</aside> : null
+			}
 
 			<section id="section_1">
 				<div className="d-flex-row mt-5">
@@ -49,7 +57,11 @@ const Main = props => {
 			<section id="section_2">
 				<div className="d-flex mt-5 justify-content-center">
 					<div className="card" style={{ width: "35rem" }}>
-						<img className="card-img-top" src={effectiveDriveDark} alt="" />
+						<img
+							className="card-img-top"
+							src={effectiveDriveDark}
+							alt={props.text.section_1_h1}
+							title={props.text.section_1_h1} />
 						<div className="card-body">
 							<h5 className="card-title text-center">{props.text.section_2_h5}</h5>
 						</div>
@@ -77,7 +89,11 @@ const Main = props => {
 							<h6 className="p-2 text-center text-danger">{props.text.section_4_h6}</h6>
 						</div>
 						<div>
-							<img src={props.lang === 'pl' ? fuelEfficient_pl : fuelEfficient_es} className="img-fluid mx-auto d-block" alt="" />
+							<img
+								src={props.lang === 'pl' ? fuelEfficient_pl : fuelEfficient_es}
+								className="img-fluid mx-auto d-block"
+								alt={props.text.section_4_h6}
+							title={props.text.section_4_h6} />
 						</div>
 						<div className="mt-3">
 							<p className="p-2 text-justify text-secondary">{props.text.section_4_p1}</p>
@@ -98,7 +114,11 @@ const Main = props => {
 							<h6 className="p-2 text-center text-danger">{props.text.section_5_h6}</h6>
 						</div>
 						<div>
-							<img src={props.lang === 'pl' ? oneTruck_pl : oneTruck_es} className="img-fluid mx-auto" alt="" />
+							<img
+								src={props.lang === 'pl' ? oneTruck_pl : oneTruck_es}
+								className="img-fluid mx-auto"
+								alt={props.text.section_5_h6}
+								title={props.text.section_5_h6} />
 						</div>
 						<div className="mt-3">
 							<p className="p-2 text-justify text-secondary">{props.text.section_5_p}</p>
@@ -111,7 +131,7 @@ const Main = props => {
 
 			<section id="section_6">
 				<div className="d-flex-row mt-5 pl-3">
-				
+
 					<article>
 						<h2 className="text-danger">{props.text.section_6_h2}</h2>
 						<div className="">
@@ -120,12 +140,16 @@ const Main = props => {
 					</article>
 				</div>
 			</section>
-			
+
 			<section id="section_7">
 				<div className="row mt-5 justify-content-center">
-					
+
 					<div className="card p-3 m-3" style={{ width: "15.3rem", boxShadow: "0 1px 4px rgba(0, 0, 0, 0.2)" }}>
-						<img className="card-img-top" src={props.lang === 'pl' ? phonePanel1_pl : phonePanel1_es} alt="" />
+						<img
+							className="card-img-top"
+							src={props.lang === 'pl' ? phonePanel1_pl : phonePanel1_es}
+							alt={props.text.section_7_t1}
+							title={props.text.section_7_t1} />
 						<div className="card-body">
 							<h6 className="card-title">{props.text.section_7_t1}</h6>
 							<p className="card-text">{props.text.section_7_p1}</p>
@@ -133,7 +157,11 @@ const Main = props => {
 					</div>
 
 					<div className="card p-3 m-3" style={{ width: "15.3rem", boxShadow: "0 1px 4px rgba(0, 0, 0, 0.2)" }}>
-						<img className="card-img-top" src={props.lang === 'pl' ? phonePanel2_pl : phonePanel2_es} alt="" />
+						<img
+							className="card-img-top"
+							src={props.lang === 'pl' ? phonePanel2_pl : phonePanel2_es}
+							alt={props.text.section_7_t2}
+							title={props.text.section_7_t3} />
 						<div className="card-body">
 							<h6 className="card-title">{props.text.section_7_t2}</h6>
 							<p className="card-text">{props.text.section_7_p2}</p>
@@ -141,7 +169,11 @@ const Main = props => {
 					</div>
 
 					<div className="card p-3 m-3" style={{ width: "15.3rem", boxShadow: "0 1px 4px rgba(0, 0, 0, 0.2)" }}>
-						<img className="card-img-top" src={props.lang === 'pl' ? phonePanel3_pl : phonePanel3_es} alt="" />
+						<img
+							className="card-img-top"
+							src={props.lang === 'pl' ? phonePanel3_pl : phonePanel3_es}
+							alt={props.text.section_7_t3}
+							title={props.text.section_7_t3} />
 						<div className="card-body">
 							<h6 className="card-title">{props.text.section_7_t3}</h6>
 							<p className="card-text">{props.text.section_7_p3}</p>
@@ -168,7 +200,7 @@ const Main = props => {
 						</div>
 						<div className="card m-3 pl-5" style={{ width: "50%", border: "none" }}>
 							<div className="card-body" style={{ padding: 0 }}>
-								<div className={props.lang === 'pl' ?  classes.HandPhone_pl : classes.HandPhone_es}>
+								<div className={props.lang === 'pl' ? classes.HandPhone_pl : classes.HandPhone_es}>
 									<div className={classes.Hand}></div>
 									<div className={props.lang === 'pl' ? classes.Phone_pl : classes.Phone_es}></div>
 								</div>
@@ -176,11 +208,15 @@ const Main = props => {
 						</div>
 						<div>
 							<h3 className="text-danger mt-5">{props.text.section_9_h3}</h3>
-							<img src={props.lang === 'pl' ? allRoutes_pl : allRoutes_es} className="img-fluid mx-auto" alt="" />
+							<img
+								src={props.lang === 'pl' ? allRoutes_pl : allRoutes_es}
+								className="img-fluid mx-auto"
+								alt={props.text.section_9_h3}
+								title={props.text.section_7_h3} />
 						</div>
 					</div>
 				</article>
-			</section>			
+			</section>
 
 			<hr></hr>
 
@@ -191,7 +227,11 @@ const Main = props => {
 
 				<div className={["row justify-content-center"].join(' ')}>
 					<div className="card m-3" style={{ width: "20rem" }}>
-						<img className="card-img-top" src={successCharts} alt="" />
+						<img
+							className="card-img-top"
+							src={successCharts}
+							alt={props.text.footer_header +' - '+ props.text.section_10_card_1_h5}
+							title={props.text.footer_header +' - '+ props.text.section_10_card_1_h5} />
 						<div className="card-body">
 							<h5 className="card-title">{props.text.section_10_card_1_h5}</h5>
 							<p className="card-text">{props.text.section_10_card_1_p}</p>
@@ -204,7 +244,11 @@ const Main = props => {
 					</div>
 
 					<div className="card m-3" style={{ width: "20rem" }}>
-						<img className="card-img-top" src={succsessBusines} alt="" />
+						<img
+							className="card-img-top"
+							src={succsessBusines}
+							alt={props.text.footer_header +' - '+ props.text.section_10_card_2_h5}
+							title={props.text.footer_header +' - '+ props.text.section_10_card_2_h5} />
 						<div className="card-body">
 							<h5 className="card-title">{props.text.section_10_card_2_h5}</h5>
 							<p className="card-text">{props.text.section_10_card_2_p}</p>
@@ -217,7 +261,11 @@ const Main = props => {
 					</div>
 
 					<div className="card m-3" style={{ width: "20rem" }}>
-						<img className="card-img-top" src={contactUs} alt="" />
+						<img
+							className="card-img-top"
+							src={contactUs}
+							alt={props.text.footer_header +' - '+ props.text.section_10_card_3_h5}
+							title={props.text.footer_header +' - '+ props.text.section_10_card_3_h5} />
 						<div className="card-body">
 							<h5 className="card-title">{props.text.section_10_card_3_h5}</h5>
 							<p className="card-text">{props.text.section_10_card_3_p}</p>
@@ -230,7 +278,7 @@ const Main = props => {
 					</div>
 				</div>
 			</section>
-			
+
 			<hr></hr>
 
 			<footer>
@@ -278,7 +326,7 @@ const Main = props => {
 						</div>
 					</div>
 				</div>
-			</footer>			
+			</footer>
 		</main>
 	)
 };
@@ -287,7 +335,8 @@ const mapStateToProps = state => {
 		demoData: state.initLang.textHome.demoData,
 		_csrf: state.initLang._csrf,
 		lang: state.initLang.language,
-		text: state.initLang.textHomeInside
+		text: state.initLang.textHomeInside,
+		isToken: state.authReducer.token
 	}
 };
 const mapDispatchToProps = dispatch => {
@@ -295,5 +344,4 @@ const mapDispatchToProps = dispatch => {
 		onDemo: (data) => dispatch(actions.authProcess(data))
 	}
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

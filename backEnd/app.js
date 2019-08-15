@@ -1,4 +1,5 @@
 const cluster = require("cluster");
+const path = require('path');
 require('dotenv').load();
 
 if(cluster.isMaster && process.env.NODE_ENV === 'production') {
@@ -22,6 +23,10 @@ else {
 	require("./middlewares/middlewares.js")(app);
 	app.set("env", process.env.NODE_ENV);
 	app.use(express.static("build"));
+
+	app.get("/activation/:id", (req, res) => {
+        res.sendFile(path.join(__dirname+'/build/index.html'));
+    });
 
 	db.initDb((err, db) => {
 		if (err) {			

@@ -119,7 +119,7 @@ const incrTrucks = (collection_id, trucks) => {
 
 const getOrders = user => {
 
-    if (!validation.isValidId("user._id")) {
+    if (!validation.isValidId(user._id)) {
         return Promise.reject(400);       
     }
     let def = Q.defer();

@@ -10,6 +10,21 @@
   padding-right: 1.5rem;
 }
 
+.Cookies {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 0 auto;
+  text-align: center;
+  height: 4rem;
+  padding: 1rem;
+  width: 100%;
+  background-color: #FFF;
+  -webkit-box-shadow: 1px 0 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 1px 0 3px rgba(0, 0, 0, 0.3);
+  z-index: 500;
+}
+
 .Hand {
   position: absolute;
   background: url("../../../assets/img/hand.png");

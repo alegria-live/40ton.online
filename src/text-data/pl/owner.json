@@ -87,7 +87,7 @@
         "invoices": "Faktury",
         "instructions": "Instruckcje",
         "systemInstruction": "Instrukcja systemu",
-        "systemInstructionLink": "https://react.40ton.online/pdf/instrukcja_systemu_kontroli_zuzycia_paliwa.pdf",
+        "systemInstructionLink": "https://40ton.online/pdf/instrukcja_systemu_kontroli_zuzycia_paliwa.pdf",
         "driverInstruction": "Instrukcja panelu kierowcy",
         "demo": "Wersja demonstracyjna. Zapisywanie informacji nie jest dostępne."
     },

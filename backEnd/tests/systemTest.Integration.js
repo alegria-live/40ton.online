@@ -50,14 +50,14 @@ describe('SERVER SIDE APLICATION MOCHA TESTS', () => {
 				})
 				.expect(200)
 				.end((err, res) => {
-					if (err) { return }
+					if (err) { return; }
 					hashedId = res.headers._gcn;
-					done()
+					done();
 				});
 		});
 	}).timeout(25000);
 
-	it('POST /user - add user with existing email & nip expect status 503 & res {msg:463}', (done) => {
+	it('POST /user - add user with existing email & nip expect status 503 & res 463', (done) => {
 		request(app)
 			.post('/api/user')
 			.set('Cookie', ext_cookie)
@@ -85,7 +85,7 @@ describe('SERVER SIDE APLICATION MOCHA TESTS', () => {
 			.expect(500)
 			.end((err, res) => {
 				if (err) { return console.log(err) }
-				expect(res.text).toBe("{\"error\":463}");
+				expect(res.text).toBe("463");
 				done();
 			});
 	});
@@ -226,7 +226,7 @@ describe('SERVER SIDE APLICATION MOCHA TESTS', () => {
 			});
 	});
 
-	it('POST /addWorker - with existing email- expect status 500 & res === 467', (done) => {
+	it('POST /addWorker - with existing email- expect status 500 & res 467', (done) => {
 		request(app)
 			.post('/api/workers/addWorker')
 			.set('Cookie', [`_gcn=${userId}`, `session=${session}`])
@@ -242,7 +242,7 @@ describe('SERVER SIDE APLICATION MOCHA TESTS', () => {
 			.expect(500).
 			end((err, res) => {
 				if (err) { return console.log(err); }
-				expect(res.body).toEqual({error:467});
+				expect(res.body).toEqual(467);
 				done();
 			});
 	});
@@ -590,180 +590,6 @@ describe('SERVER SIDE APLICATION MOCHA TESTS', () => {
 				done();
 			});
 	});
-
-	it('POST /driver/:id - driver - expect status 200 & res driverId = driverId', (done) => {
-		request(app)
-			.post(`/driver/${userId}`)
-			.set('Cookie', ext_cookie)
-			.send({
-				add: 0,
-				id: driverId,
-				_csrf: int_cookie
-			})
-			.expect(200)
-			.end((err, res) => {
-				if (err) { return console.log(err); }
-				expect(res.body.driverId).toBe(driverId);
-				done();
-			});
-	});
-
-	it('POST /driver/:id - truck - expect status 200 & res truckId = truckId', (done) => {
-		request(app)
-			.post(`/driver/${userId}`)
-			.set('Cookie', ext_cookie)
-			.send({
-				add: 0,
-				id: truckId,
-				_csrf: int_cookie
-			})
-			.expect(200)
-			.end((err, res) => {
-				if (err) { return console.log(err); }
-				expect(res.body.truckId).toBe(truckId);
-				done();
-			});
-	});
-
-	it('POST /driver/:id - unload - expect status 200 & res truckId = truckId', (done) => {
-		request(app)
-			.post(`/driver/${userId}`)
-			.set('Cookie', ext_cookie)
-			.send({
-				_id: 7,
-				driverId: driverId,
-				truckId: truckId,
-				type: 2,
-				litres: 0,
-				country: "PL",
-				postal: "95-500",
-				dtStop: "2019-02-01",
-				kmStop: 700,
-				tonOut: 0,
-				full: 0,
-				fuel_Id: 0,
-				add: 1,
-				_csrf: int_cookie
-			})
-			.expect(200)
-			.end((err, res) => {
-				if (err) { return console.log(err); }
-				expect(res.body.truckId).toBe(truckId);
-				done();
-			});
-	});
-
-	it('POST /driver/:id - load - expect status 200 & res truckId = truckId', (done) => {
-		request(app)
-			.post(`/driver/${userId}`)
-			.set('Cookie', ext_cookie)
-			.send({
-				_id: 8,
-				driverId: driverId,
-				truckId: truckId,
-				type: 1,
-				litres: 0,
-				country: "PL",
-				postal: "95-500",
-				dtStop: "2019-02-01",
-				kmStop: 800,
-				tonOut: 24,
-				full: 0,
-				fuel_Id: 0,
-				add: 1,
-				_csrf: int_cookie
-			})
-			.expect(200)
-			.end((err, res) => {
-				if (err) { return console.log(err); }
-				expect(res.body.truckId).toBe(truckId);
-				done();
-			});
-	});
-
-	it('POST /driver/:id - fuel full 0 - expect status 200 & res truckId = truckId', (done) => {
-		request(app)
-			.post(`/driver/${userId}`)
-			.set('Cookie', ext_cookie)
-			.send({
-				_id: 9,
-				driverId: driverId,
-				truckId: truckId,
-				type: 3,
-				litres: 20,
-				country: "PL",
-				postal: "95-500",
-				dtStop: "2019-02-01",
-				kmStop: 900,
-				tonOut: -1,
-				full: 0,
-				fuel_Id: 0,
-				add: 1,
-				_csrf: int_cookie
-			})
-			.expect(200)
-			.end((err, res) => {
-				if (err) { return console.log(err); }
-				expect(res.body.truckId).toBe(truckId);
-				done();
-			});
-	});
-
-	it('POST /driver/:id - fuel - expect status 200 & res lastRoute litres = 20', (done) => {
-		request(app)
-			.post(`/driver/${userId}`)
-			.set('Cookie', ext_cookie)
-			.send({
-				_id: 10,
-				driverId: driverId,
-				truckId: truckId,
-				type: 3,
-				litres: 130,
-				country: "PL",
-				postal: "95-500",
-				dtStop: "2019-02-01",
-				kmStop: 1000,
-				tonOut: -1,
-				full: 1,
-				fuel_Id: 0,
-				add: 1,
-				_csrf: int_cookie
-			})
-			.expect(200)
-			.end((err, res) => {
-				if (err) { return console.log(err); }
-				expect(res.body.lastRoute.litres).toBe(130);
-				done();
-			});
-	});
-
-	it('POST /driver/:id - unload - expect status 200 & res truckId = truckId', (done) => {
-		request(app)
-			.post(`/driver/${userId}`)
-			.set('Cookie', ext_cookie)
-			.send({
-				_id: 11,
-				driverId: driverId,
-				truckId: truckId,
-				type: 2,
-				litres: 0,
-				country: "PL",
-				postal: "95-500",
-				dtStop: "2019-02-01",
-				kmStop: 1100,
-				tonOut: 0,
-				full: 0,
-				fuel_Id: 0,
-				add: 1,
-				_csrf: int_cookie
-			})
-			.expect(200)
-			.end((err, res) => {
-				if (err) { return console.log(err); }
-				expect(res.body.truckId).toBe(truckId);
-				done();
-			});
-	});	
 
 	it('PUT /api/user/psw - change password - expect status 200', (done) => {
 		request(app)

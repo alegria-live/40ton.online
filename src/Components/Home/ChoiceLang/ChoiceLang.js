@@ -3,7 +3,8 @@ import classes from './ChoiceLang.css';
 import AppContext from '../../../context/app-context';
 import flag_pl from '../../../assets/img/flag_pl.png';
 import flag_es from '../../../assets/img/flag_es.png';
-const ChoiceLang = props => {
+
+const ChoiceLang = () => {
     const { choiceLang } = useContext(AppContext);
     return (
         <main>
