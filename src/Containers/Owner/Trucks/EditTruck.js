@@ -157,6 +157,7 @@ const EditTruck = props => {
         cancelForm(controls, formElementsKeyArray, setControls);
         setShowEditTruck(false);
         setSuccesMsg(null);
+        setErrorMsg(null);
         setIsLoading(true);
         clearSelect()
     };
@@ -193,7 +194,7 @@ const EditTruck = props => {
             <h6>{props.trucksText.editPanelName}</h6>
             <p>{props.trucksText.choiceTruck}</p>
             <Select
-                style={{ width: 280 }}
+                style={{ width: "100%" }}
                 onChange={(value) => setTruck(value)}
                 defaultValue={props.textMenu.trucks}>
                 {options}

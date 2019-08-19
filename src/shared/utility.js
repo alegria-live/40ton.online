@@ -9,7 +9,7 @@ export function preloadImage(url) {
     });
 };
 
-export const checkValidity = (value, rules) => {
+export const checkValidity = (value, rules) => {   
     let isValid = true;
     if (rules.required) {
         isValid = value.trim() !== '' && isValid;
@@ -28,6 +28,9 @@ export const checkValidity = (value, rules) => {
         const pattern = /^\d+$/;
         isValid = pattern.test(value) && isValid
     }
+    if (rules.notNull) {
+        isValid = value !== null
+    }
     return isValid
 };
 
@@ -36,7 +39,7 @@ export const checkIdentity = (...fields) => {
     return fields.every((el) => el === firstElement);
 }
 
-export const inputChangedHandler = (event, payload, controlName, cb) => {
+export const inputChangedHandler = (event, payload, controlName, cb, hidden) => {    
     const updatedControls = updateObject(payload, {
         [controlName]: updateObject(payload[controlName], {
             value: event.target.value,
@@ -47,7 +50,7 @@ export const inputChangedHandler = (event, payload, controlName, cb) => {
     cb(updatedControls);
 };
 
-export const validFormHandler = (payload, cb) => {
+export const validFormHandler = (payload, cb) => {   
     let x = true;
     for (let mainKey in payload) {
         for (let key in payload[mainKey]) {
@@ -57,7 +60,7 @@ export const validFormHandler = (payload, cb) => {
         };
     };
     x ? cb(true) : cb(false);
-}
+};
 
 export const changeInputsFormText = (payload, formElementsKeyArray, textData, cb) => {
     const updatedControls = _.cloneDeep(payload);
@@ -65,7 +68,7 @@ export const changeInputsFormText = (payload, formElementsKeyArray, textData, cb
         updatedControls[elem].elementConfig.placeholder = textData[elem]
     });
     cb(updatedControls);
-}
+};
 
 export const changeInputsLabelText = (payload, formElementsKeyArray, textData, cb) => {
     const updatedControls = _.cloneDeep(payload);
@@ -73,7 +76,7 @@ export const changeInputsLabelText = (payload, formElementsKeyArray, textData, c
         updatedControls[elem].label = textData[elem]
     });
     cb(updatedControls);
-}
+};
 
 export const cancelForm = (payload, formElementsKeyArray, cb) => {
     const updatedControls = _.cloneDeep(payload);

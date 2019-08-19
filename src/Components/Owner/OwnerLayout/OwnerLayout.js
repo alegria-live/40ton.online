@@ -14,11 +14,12 @@ import EditWorker from '../../../Containers/Owner/Workers/EditWorker';
 import EditCompany from '../../../Containers/Owner/Company/EditCompany';
 import Payments from '../../../Containers/Owner/Company/Payments';
 import PhoneInstruction from '../../../Components/Owner/Instructions/PhoneInstruction';
+import ManualRoutes from '../../../Containers/Owner/ManualRoutes/ManualRoutes';
 import AppContext from '../../../context/app-context';
 import {Modal} from 'antd';
 import classes from './OwnerLayout.css';
-const EditDriver = React.lazy(() => import('../../../Containers/Owner/Drivers/EditDriver'));
 
+const EditDriver = React.lazy(() => import('../../../Containers/Owner/Drivers/EditDriver'));
 
 const OwnerLayout = props => {
     
@@ -57,6 +58,9 @@ const OwnerLayout = props => {
     const [showPhoneInstruction, setShowPhoneInstruction] = useState(false);
     const setPhoneInstruction = val => setShowPhoneInstruction(val);
 
+    const [showManualRoutes, setShowManualRoutes] = useState(false);
+    const setManualRoutes = val => setShowManualRoutes(val);
+
     const [showDemoModal, setShowDemoModal] = useState(false);
 
     return (
@@ -80,7 +84,9 @@ const OwnerLayout = props => {
             showPayments,
             setShowPayments:setPayments,
             showPhoneInstruction,
-            setShowPhoneInstruction: setPhoneInstruction
+            setShowPhoneInstruction: setPhoneInstruction,
+            showManualRoutes,
+            setShowManualRoutes: setManualRoutes
             }}>
             <div>
                 <NavForBigDevices />
@@ -105,9 +111,10 @@ const OwnerLayout = props => {
             <Theft demoModal={setShowDemoModal} />
             <AddWorker demoModal={setShowDemoModal} />
             <EditWorker demoModal={setShowDemoModal} />
-            <EditCompany demoModal={setShowDemoModal}/>
+            <EditCompany demoModal={setShowDemoModal} />
             <Payments />
-            <PhoneInstruction />           
+            <PhoneInstruction />
+            <ManualRoutes demoModal={setShowDemoModal} />
         </MenuContext.Provider>
     );
 };
@@ -121,5 +128,5 @@ const mapDispatchToProps = dispatch => {
     return {
         onLogout: () => dispatch(actions.logoutUser())
     }
-}
+};
 export default connect(mapStateToProps, mapDispatchToProps)(OwnerLayout);

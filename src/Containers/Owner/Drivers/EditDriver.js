@@ -177,7 +177,7 @@ const EditDriver = props => {
             <h6>{props.driversText.editPanelName}</h6>
             <p>{props.driversText.choiceDriver}</p>
             <Select
-                style={{ width: 280 }}
+                style={{ width: "100%" }}
                 onChange={(value) => setDriver(value)}
                 defaultValue={props.textMenu.drivers}>
                 {options}

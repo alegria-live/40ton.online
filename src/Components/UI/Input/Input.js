@@ -32,6 +32,7 @@ const input = ( props ) => {
             inputElement = (
                 <select
                     className={inputClasses.join(' ')}
+                    hidden = {props.elementConfig.hidden}
                     value={props.value}
                     onChange={props.changed}>
                     {props.elementConfig.options.map(option => (

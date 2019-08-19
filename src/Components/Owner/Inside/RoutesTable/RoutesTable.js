@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
+import ChartsContext from '../../../../context/charts-context';
 import RoutesTableData from '../../../../Containers/Owner/RoutesTableData/RoutesTableData';
 import { Table, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
@@ -7,7 +8,8 @@ import ReactToPrint from 'react-to-print';
 const RouteTable = props => {
 	const [data, setData] = useState([]);
 	const componentRef = useRef();
-
+	const { allActiveDrivers } = useContext(ChartsContext);
+	
 	useEffect(() => {
 		if (props.routes !== undefined && props.routes.length) {
 			const routesSorted = props.routes.sort((prev, next) => {
@@ -15,8 +17,14 @@ const RouteTable = props => {
 			});			
 			setData(
 				routesSorted.map(route => {
+					const driver = allActiveDrivers.find(driver => {
+						return driver._id === route.driverId
+					});
+					let driverId = ''
+					if(driver) driverId = driver.driverName
 					return {
 						...route,
+						driverId ,
 						dtStop: (new Date(route.dtStop)).toLocaleDateString(),
 						type: checkAction(route.type),
 						full: route.full ? props.text.yes : route.type === 3 ? props.text.no : '-',

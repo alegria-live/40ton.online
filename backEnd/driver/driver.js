@@ -120,7 +120,8 @@ const allDrivers = async (collectionName) => {
 						name: '$Driver.name',
 						lastName: '$Driver.lastName'
 					}
-				}
+				},
+                { $sort: { 'lastName': 1 } }
 			]).toArray();
 		return res;
 	}

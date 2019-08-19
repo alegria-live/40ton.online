@@ -120,8 +120,6 @@ router.get("/allTrucks", (req, res) => {
 		.catch(e => { res.status(500); res.json(e); });
 });
 
-
-
 router.post("/owner/:id", (req, res) => {
 	addRoutes.addRoute(req.params.id, req.body)
 		.then(data => {
@@ -136,6 +134,7 @@ router.post("/owner/:id", (req, res) => {
 });
 
 router.delete("/owner/delRoute", (req, res) => {
+	req.body.collectionName = req.cookies._gcn;
 	delRoutes.delRoute(req.body)
 		.then(data => {
 			data = { truckId: data._id };

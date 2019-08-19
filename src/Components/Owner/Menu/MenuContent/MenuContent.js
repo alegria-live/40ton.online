@@ -17,7 +17,8 @@ const MenuContent = props => {
 		setShowEditWorker,
 		setShowEditCompany,
 		setShowPayments,
-		setShowPhoneInstruction
+		setShowPhoneInstruction,
+		setShowManualRoutes
 	} = useContext(MenuContext);
 	
 	return (
@@ -26,8 +27,7 @@ const MenuContent = props => {
 				<Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
 			</Button>
 			<Menu
-				defaultSelectedKeys={['1']}
-				// defaultOpenKeys={['sub1']}
+				defaultSelectedKeys={['1']}				
 				mode="vertical"
 				theme="dark"
 				inlineCollapsed={collapsed}
@@ -103,6 +103,17 @@ const MenuContent = props => {
 						</a>
 					</Menu.Item>
 					<Menu.Item onClick={() => setShowPhoneInstruction(true)} key="14">{props.textMenu.driverInstruction}</Menu.Item>
+				</SubMenu>
+				<SubMenu
+					key="routes"
+					title={
+						<span>
+							<Icon type="car" />
+							<span>{props.textMenu.routes}</span>
+						</span>
+					}
+				>
+					<Menu.Item onClick={() => setShowManualRoutes(true)} key="15">{props.textMenu.manualRoutes}</Menu.Item>
 				</SubMenu>
 			</Menu>
 		</div>

@@ -123,15 +123,19 @@ const addTruck = async (truck) => {
 const allTrucks = async (truck) => {
     try {
         const res = await dbConnection.getDb().collection(truck.collectionName)
-            .aggregate([{ $match: { "Truck": { $exists: true } } },
-            {
-                $project: {
-                    name: "$Truck.name",
-                    norm: "$Truck.norm",
-                    consum: "$Truck.consum",
-                    paid: "$Truck.paid"
-                }
-            }])
+            .aggregate([
+                { $match: { "Truck": { $exists: true } } },
+                {
+                    $project: {
+                        name: "$Truck.name",
+                        norm: "$Truck.norm",
+                        consum: "$Truck.consum",
+                        paid: "$Truck.paid",
+                        routesLength: {$size: "$Truck.routes"}
+                    }
+                },
+                { $sort: { '_id': 1 } }
+            ])
             .toArray();
         return res;
     }

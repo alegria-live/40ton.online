@@ -19,6 +19,8 @@ const menuContext = React.createContext({
     showInvoices: false,
     setShowInvoices: () => {},
     showPhoneInstruction: false,
-    setShowPhoneInstruction: () => {}    
+    setShowPhoneInstruction: () => {},
+    showManualRoutes: false,
+    setShowManualRoutes: () => {} 
 });
 export default menuContext;

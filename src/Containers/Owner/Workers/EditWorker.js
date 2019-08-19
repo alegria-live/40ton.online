@@ -196,7 +196,7 @@ const EditWorker = props => {
             <p>{props.workerText.restrictionText}</p>
             <p>{props.workerText.choiceWorker}</p>
             <Select
-                style={{ width: 280 }}
+                style={{ width: "100%" }}
                 onChange={(value) => setWorker(value)}
                 defaultValue={props.textMenu.workers}>
                 {options}

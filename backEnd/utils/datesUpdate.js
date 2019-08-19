@@ -72,14 +72,14 @@ function changeDates(collName) {
 			getFuelDates(item)
 			.then(data => {
 				if(data === "truck") {
-					truckRoutesArr.forEach((elem, i) => {
-							//elem._id = i;
-						elem.dtStart = elem.dtStart + 86400000 * 7;
-						elem.dtStop = elem.dtStop + 86400000 * 7;
+					truckRoutesArr.forEach((elem, i) => {						 
+						//elem._id = i;
+						//elem.dtStart = elem.dtStart + 86400000 * 7;
+						//elem.dtStop = elem.dtStop + 86400000 * 7;
 					// elem.dtStart = new Date(Number(new Date(elem.dtStart))).getTime();
 					// elem.dtStop = new Date(Number(new Date(elem.dtStop))).getTime();
 					});
-					updateTruckRoutesDates(item, truckRoutesArr);
+					//updateTruckRoutesDates(item, truckRoutesArr);
 					
 
 					truckFuelArr.forEach((elem, i) => {
@@ -90,7 +90,7 @@ function changeDates(collName) {
 					// elem.dtStop = new Date(Number(new Date(elem.dtStop))).getTime();		
 					
 					});
-					updateTruckFuelDates(item, truckFuelArr);
+					//updateTruckFuelDates(item, truckFuelArr);
 										
 				}
 				if(data === "driver") {
@@ -101,7 +101,7 @@ function changeDates(collName) {
 					// elem.dtStart = new Date(Number(new Date(elem.dtStart))).getTime();
 					// elem.dtStop = new Date(Number(new Date(elem.dtStop))).getTime();		
 					});
-					updateDriverRoutesDates(item, driverRoutesArr);					
+					//updateDriverRoutesDates(item, driverRoutesArr);					
 				}			
 			}).catch( err => console.log(err))
 

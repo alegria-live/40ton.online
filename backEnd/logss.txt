@@ -214,3 +214,12 @@ Wed Aug 14 2019 21:00:40 GMT+0200 (GMT+02:00) Error [ERR_STREAM_WRITE_AFTER_END]
     at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1394:5
     at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1247:23
     at process._tickCallback (internal/process/next_tick.js:61:11)
+Fri Aug 16 2019 08:35:55 GMT+0200 (GMT+02:00) Error [ERR_STREAM_WRITE_AFTER_END]: write after end
+    at writeAfterEnd (_stream_writable.js:243:12)
+    at Socket.Writable.write (_stream_writable.js:291:5)
+    at Connection.write (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\connection.js:733:57)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1532:44
+    at waitForAuth (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1386:40)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1394:5
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1247:23
+    at process._tickCallback (internal/process/next_tick.js:61:11)
