@@ -1,8 +1,11 @@
 {
-  "name": "40",
-  "version": "0.1.0",
+  "name": "40ton.online",
+  "version": "0.2.0",
   "private": true,
-  "homepage": "https://react.40ton.online/",
+  "homepage": "https://40ton.online/",
+  "description": "Fuel consumption control system for transport companies.",
+  "author": "Tomasz Cybulski",
+  "license": "ISC",
   "dependencies": {
     "@babel/core": "7.4.3",
     "@svgr/webpack": "4.1.0",

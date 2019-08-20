@@ -4,4 +4,3 @@ reports/
 .env
 babel.config.js
 .eslintrc.json
-public_dev/
