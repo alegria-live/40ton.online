@@ -13,7 +13,7 @@ router.post("/user", async (req, res) => {
     if (req.app.get("dbError")) { 
         return res.status(503).json(503);
     }
-    if (!reqDataCheck(req.body.dataSet)) {
+    if (!reqDataCheck(req.body.dataSet)) {        
         return res.status(404).json(465);
     }
     try {

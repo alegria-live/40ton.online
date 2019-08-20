@@ -223,3 +223,94 @@ Fri Aug 16 2019 08:35:55 GMT+0200 (GMT+02:00) Error [ERR_STREAM_WRITE_AFTER_END]
     at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1394:5
     at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1247:23
     at process._tickCallback (internal/process/next_tick.js:61:11)
+Tue Aug 20 2019 09:07:06 GMT+0200 (GMT+02:00) TypeError: Cannot read property 'slice' of undefined
+    at Test.request.post.set.send.expect.end (D:\Project_Tir\40_react\40\backEnd\tests\systemTest.Integration.js:108:44)
+    at Test.assert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:181:6)
+    at Server.localAssert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:131:12)
+    at Object.onceWrapper (events.js:273:13)
+    at Server.emit (events.js:182:13)
+    at emitCloseNT (net.js:1629:8)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+Tue Aug 20 2019 09:37:49 GMT+0200 (GMT+02:00) Error: [2mexpect([22m[31mreceived[39m[2m).toBe([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+Expected: [32m"465"[39m
+Received: [31m"463"[39m
+    at Test.request.post.set.send.expect.end (D:\Project_Tir\40_react\40\backEnd\tests\systemTest.Integration.js:121:22)
+    at Test.assert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:181:6)
+    at Server.localAssert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:131:12)
+    at Object.onceWrapper (events.js:273:13)
+    at Server.emit (events.js:182:13)
+    at emitCloseNT (net.js:1629:8)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+Tue Aug 20 2019 09:38:43 GMT+0200 (GMT+02:00) Error: [2mexpect([22m[31mreceived[39m[2m).toBe([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+Expected: [32m"465"[39m
+Received: [31m"463"[39m
+    at Test.request.post.set.send.expect.end (D:\Project_Tir\40_react\40\backEnd\tests\systemTest.Integration.js:121:22)
+    at Test.assert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:181:6)
+    at Server.localAssert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:131:12)
+    at Object.onceWrapper (events.js:273:13)
+    at Server.emit (events.js:182:13)
+    at emitCloseNT (net.js:1629:8)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+Tue Aug 20 2019 09:39:49 GMT+0200 (GMT+02:00) Error: [2mexpect([22m[31mreceived[39m[2m).toBe([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+Expected: [32m"465"[39m
+Received: [31m"463"[39m
+    at Test.request.post.set.send.expect.end (D:\Project_Tir\40_react\40\backEnd\tests\systemTest.Integration.js:121:22)
+    at Test.assert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:181:6)
+    at Server.localAssert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:131:12)
+    at Object.onceWrapper (events.js:273:13)
+    at Server.emit (events.js:182:13)
+    at emitCloseNT (net.js:1629:8)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+Tue Aug 20 2019 09:41:34 GMT+0200 (GMT+02:00) Error: [2mexpect([22m[31mreceived[39m[2m).toBe([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+Expected: [32m"465"[39m
+Received: [31m"463"[39m
+    at Test.request.post.set.send.expect.end (D:\Project_Tir\40_react\40\backEnd\tests\systemTest.Integration.js:121:22)
+    at Test.assert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:181:6)
+    at Server.localAssert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:131:12)
+    at Object.onceWrapper (events.js:273:13)
+    at Server.emit (events.js:182:13)
+    at emitCloseNT (net.js:1629:8)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+Tue Aug 20 2019 09:41:39 GMT+0200 (GMT+02:00) TypeError: Cannot read property '_id' of undefined
+    at Test.request.get.set.expect.end (D:\Project_Tir\40_react\40\backEnd\tests\systemTest.Integration.js:616:24)
+    at Test.assert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:181:6)
+    at Server.localAssert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:131:12)
+    at Object.onceWrapper (events.js:273:13)
+    at Server.emit (events.js:182:13)
+    at emitCloseNT (net.js:1629:8)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+Tue Aug 20 2019 09:50:36 GMT+0200 (GMT+02:00) Error: [2mexpect([22m[31mreceived[39m[2m).toBe([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+Expected: [32m"465"[39m
+Received: [31m"463"[39m
+    at Test.request.post.set.send.expect.end (D:\Project_Tir\40_react\40\backEnd\tests\systemTest.Integration.js:121:22)
+    at Test.assert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:181:6)
+    at Server.localAssert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:131:12)
+    at Object.onceWrapper (events.js:273:13)
+    at Server.emit (events.js:182:13)
+    at emitCloseNT (net.js:1629:8)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+Tue Aug 20 2019 09:51:21 GMT+0200 (GMT+02:00) Error: [2mexpect([22m[31mreceived[39m[2m).toBe([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+Expected: [32m"465"[39m
+Received: [31m"463"[39m
+    at Test.request.post.set.send.expect.end (D:\Project_Tir\40_react\40\backEnd\tests\systemTest.Integration.js:121:22)
+    at Test.assert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:181:6)
+    at Server.localAssert (D:\Project_Tir\40_react\40\backEnd\node_modules\supertest\lib\test.js:131:12)
+    at Object.onceWrapper (events.js:273:13)
+    at Server.emit (events.js:182:13)
+    at emitCloseNT (net.js:1629:8)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+Tue Aug 20 2019 13:22:16 GMT+0200 (GMT+02:00) Error [ERR_STREAM_WRITE_AFTER_END]: write after end
+    at writeAfterEnd (_stream_writable.js:243:12)
+    at Socket.Writable.write (_stream_writable.js:291:5)
+    at Connection.write (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\connection.js:733:57)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1532:44
+    at waitForAuth (D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1386:40)
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1394:5
+    at D:\Project_Tir\40_react\40\backEnd\node_modules\mongodb-core\lib\connection\pool.js:1247:23
+    at process._tickCallback (internal/process/next_tick.js:61:11)

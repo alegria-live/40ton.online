@@ -15,11 +15,11 @@ let hashedId,
 describe('SERVER SIDE APLICATION MOCHA TESTS', () => {
 	ext_cookie = process.env.EXT_COOKIE;
 	int_cookie = process.env.INT_COOKIE;
-	testEmail = process.env.eUser;
+	testEmail = process.env.INTEGRATION_TEST_EMAIL;
 	it('GET / - expect status 200', (done) => {
 		request(app)
 			.get('/es')
-			.expect(200, done)
+			.expect(200, done);
 	});
 
 	it('POST /user - add new user - expect status 200', (done) => {
@@ -57,7 +57,7 @@ describe('SERVER SIDE APLICATION MOCHA TESTS', () => {
 		});
 	}).timeout(25000);
 
-	it('POST /user - add user with existing email & nip expect status 503 & res 463', (done) => {
+	it('POST /user - add user with existing email & nip expect status 500 & res 463', (done) => {
 		request(app)
 			.post('/api/user')
 			.set('Cookie', ext_cookie)
@@ -90,11 +90,84 @@ describe('SERVER SIDE APLICATION MOCHA TESTS', () => {
 			});
 	});
 
+	it('POST /user - add user with undefined field value expect status 404 & res 465', (done) => {
+		request(app)
+			.post('/api/user')
+			.set('Cookie', ext_cookie)
+			.send({
+				dataSet: {
+					name: "undefined",
+					lastName: "testLastName",
+					company: "testCompany",
+					nip: "9999999999",
+					street: "testStreet",
+					city: "testCity",
+					post: "666",
+					country: "testCountry",
+					email: testEmail,
+					password: "secretpass",
+					date: new Date().getTime(),
+					workers: [],
+					orders: [],
+					invoices: [],
+					activ: 0,
+					permission: 1
+				},
+				_csrf: int_cookie
+			})
+			.expect(404)
+			.end((err, res) => {
+				if (err) { return console.log(err) }
+				expect(res.text).toBe("465");
+				done();
+			});
+	});
+
+	it('POST /user - add user with more then 50 field length expect status 404 & res 465', (done) => {
+		request(app)
+			.post('/api/user')
+			.set('Cookie', ext_cookie)
+			.send({
+				dataSet: {
+					name: "012345678901234567890123456789012345678901234567891",
+					lastName: "testLastName",
+					company: "testCompany",
+					nip: "9999999999",
+					street: "testStreet",
+					city: "testCity",
+					post: "666",
+					country: "testCountry",
+					email: testEmail,
+					password: "secretpass",
+					date: new Date().getTime(),
+					workers: [],
+					orders: [],
+					invoices: [],
+					activ: 0,
+					permission: 1
+				},
+				_csrf: int_cookie
+			})
+			.expect(404)
+			.end((err, res) => {
+				if (err) { return console.log(err) }
+				expect(res.text).toBe("465");
+				done();
+			});
+	});
+
 	it('POST /activation - expect status 200', (done) => {
 		request(app)
 			.put('/activation')
 			.send({ id: hashedId })
 			.expect(200, done);
+	}).timeout(25000);
+
+	it('POST /activation with incorect hashedId expect status 500', (done) => {
+		request(app)
+			.put('/activation')
+			.send({ id: 'hashedId' })
+			.expect(500, done);
 	}).timeout(25000);
 
 	it('POST /login - expect status 202', (done) => {
@@ -484,13 +557,7 @@ describe('SERVER SIDE APLICATION MOCHA TESTS', () => {
 		request(app)
 			.delete('/system/owner/delRoute')
 			.set('Cookie', [`_gcn=${userId}`, `session=${session}`])
-			.send({
-				collectionName: hashedId,
-				truckId: truckId,
-				id: 4,
-				fuel_Id: 0,
-				driverId: driverId
-			})
+			.send({ _id: truckId })
 			.expect(200).
 			end((err, res) => {
 				if (err) { return console.log(err); }

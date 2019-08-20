@@ -1,3 +1,3 @@
-# https://react.40ton.online
+# https://40ton.online
 
 development version

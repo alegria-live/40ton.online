@@ -4,6 +4,8 @@ import MenuContext from '../../../context/menu-context';
 import ChartsContext from '../../../context/charts-context';
 import { Truck } from './truckModel';
 import { Drawer, Select, Button, DatePicker  } from 'antd';
+import locale_es from 'antd/lib/date-picker/locale/es_ES';
+import locale_pl from 'antd/lib/date-picker/locale/pl_PL';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 const { Option } = Select;
 
@@ -16,8 +18,7 @@ const EditTruck = props => {
     const [theftDate, setTheftDate] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [successMsg, setSuccesMsg] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);   
-    
+    const [errorMsg, setErrorMsg] = useState(null);       
 
     useEffect(() => {
 		if (allActiveTrucks.length) {
@@ -31,8 +32,7 @@ const EditTruck = props => {
 			
 		}		
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);	
-    
+	}, []);    
 
     const submitHandler = event => {
         event.preventDefault();
@@ -45,7 +45,7 @@ const EditTruck = props => {
         );
         truck.theft(setSuccesMsg, setErrorMsg, setIsLoading);
     };
-    
+
     const cancelHandler = () => {
         if(successMsg) {getActiveTrucks()}  
         setShowTheft(false);
@@ -54,6 +54,7 @@ const EditTruck = props => {
         setIsLoading(true);
         clearSelect()
     };
+    
     const clearSelect = () => {
         setTimeout(() => {
             setIsLoading(false)
@@ -75,8 +76,9 @@ const EditTruck = props => {
                 </Select>
                 <br></br>         
                 <DatePicker
-                style={{ width: 240, marginBottom: 35}}
-                onChange={date => setTheftDate((date._d).getTime())} />
+                    locale={props.language === 'es' ? locale_es : locale_pl}
+                    style={{ width: 240, marginBottom: 35}}
+                    onChange={date => setTheftDate((date._d).getTime())} />
                 <br></br>
                 <Button
                     style={{marginRight: 20}}
@@ -130,6 +132,7 @@ const mapStateToProps = state => {
     return {
         errorText: state.initLang.textHome.serverResErrors,
         trucksText: state.initLang.textOwner.trucksForm,
+        language: state.initLang.language,
         demo: state.authReducer.demo
     };
 };

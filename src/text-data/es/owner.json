@@ -129,7 +129,7 @@
         "editTruckSuccess": "Los cambios se han guardado para el camión",
         "theftPanelName": "Robo de gasoil",
         "theftPanelDescription": "Esta opción le permite hacer correcciones a los cálculos de ruta durante los cuales se robó el gasoil.",
-        "choiceTheftData": "Introce el número de vehículo y la fecha del robo",
+        "choiceTheftData": "Introduce el número de vehículo y la fecha del robo",
         "theftSubmit": "Corrección",
         "theftSuccess": "La ruta ha sido ajustada. La pérdida de combustible calculada es: ",
         "theftError": "Ha ocurrido un error. Por favor inicie la sesión de nuevo."

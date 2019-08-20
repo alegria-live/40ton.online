@@ -15,10 +15,13 @@ const dbConnection = require('../utils/dbConnection'),
  * for nodemailer and response
  */
 const addUser = user => {
+
 	let def = Q.defer();
 	const duplicateError = /E11000 duplicate key error collection/;
+	
 	user.dataSet.password = bcrypt.hashSync(user.dataSet.password, bcrypt.genSaltSync(9));
 	user.dataSet.date = Long.fromString(user.dataSet.date.toString());
+	
 	dbConnection.getDb()
 		.collection(COLLECTION_NAME)
 		.insertOne(user.dataSet, { w: "majority", wtimeout: 2500, j: true })
@@ -35,7 +38,7 @@ const addUser = user => {
 
 const activUser = user => {
 
-	if (!validation.isValidId(user.id)) { 
+	if (!validation.isValidId(user.id)) {
 		return Promise.reject(465);
 	}
 	let def = Q.defer();
@@ -71,13 +74,13 @@ const setCollection = collName => {
 
 //finds user for edition
 const findUser = id => {
-	
+
 	if (!validation.isValidId(id.id)) {
 		return Promise.reject(465);
 	}
 	let def = Q.defer();
 	const query = { _id: ObjectId(id.id) };
-	const project = { projection: { _id: 0, password: 0, workers: 0 }};
+	const project = { projection: { _id: 0, password: 0, workers: 0 } };
 
 	dbConnection.getDb()
 		.collection(COLLECTION_NAME)
@@ -92,26 +95,28 @@ const findUser = id => {
 
 //check whether the email exist in all database
 // if yes - error 467, if not call fn putEditUser
-const editUser = user => {		
-	
+const editUser = user => {
+
 	if (!validation.isValidId(user._id)) {
 		return Promise.reject(465);
 	}
 	let def = Q.defer();
-	
+
 	dbConnection.getDb()
 		.collection(COLLECTION_NAME)
-		.findOne( { _id: ObjectId(user._id) })
+		.findOne({ _id: ObjectId(user._id) })
 		.then(res => {
 			if (!res) { def.reject(465); return; }
 			if (res.email !== user.dataSet.email) {
 				dbConnection.getDb()
-				.collection(COLLECTION_NAME)
-				.findOne(
-					{$or: [
-						{ email: user.dataSet.email },
-						{ "workers.email": user.dataSet.email }
-					]})
+					.collection(COLLECTION_NAME)
+					.findOne(
+						{
+							$or: [
+								{ email: user.dataSet.email },
+								{ "workers.email": user.dataSet.email }
+							]
+						})
 					.then(res => {
 						if (res) { def.reject(467); return; }
 						def.resolve(putEditUser(user));
@@ -128,7 +133,7 @@ const editUser = user => {
 
 // put new user's data
 const putEditUser = user => {
-	
+
 	if (!validation.isValidId(user._id)) {
 		return Promise.reject(465);
 	}
@@ -143,7 +148,7 @@ const putEditUser = user => {
 			{ returnOriginal: false }
 		)
 		.then(res => def.resolve(200))
-		.catch(e => def.reject(503));			
+		.catch(e => def.reject(503));
 	return def.promise;
 };
 
@@ -204,14 +209,14 @@ const checkUserInWorkers = (email, password) => {
 
 // delete main user
 const delUser = user => {
-	
-	if (!validation.isValidId(user._id)) {		
-		return Promise.reject(465);		
-	}	
+
+	if (!validation.isValidId(user._id)) {
+		return Promise.reject(465);
+	}
 	let def = Q.defer();
 
 	dbConnection.getDb().collection(user._id).drop();
-	
+
 	dbConnection.getDb()
 		.collection(COLLECTION_NAME)
 		.remove(
@@ -219,7 +224,7 @@ const delUser = user => {
 			{ justOne: true }
 		)
 		.then(res => def.resolve(200))
-		.catch(e => def.reject(503));		
+		.catch(e => def.reject(503));
 	return def.promise;
 };
 
@@ -250,11 +255,11 @@ const chPsw = data => {
 const addWorker = (worker) => {
 
 	if (!validation.isValidId(worker.mainUserId)) {
-		return Promise.reject(465);	
+		return Promise.reject(465);
 	}
 	let def = Q.defer();
 	worker.dataSet.password = bcrypt
-		.hashSync(worker.dataSet.password, bcrypt.genSaltSync(8));	
+		.hashSync(worker.dataSet.password, bcrypt.genSaltSync(8));
 
 	dbConnection.getDb()
 		.collection(COLLECTION_NAME)
@@ -288,7 +293,7 @@ const addWorker = (worker) => {
 
 //returns workers array with name, email, lastName
 const getWorkers = async data => {
-	
+
 	if (!validation.isValidId(data.collectionName)) {
 		return Promise.reject(465);
 	}
@@ -299,12 +304,12 @@ const getWorkers = async data => {
 	const projetc = {
 		projection: { 'workers': 1, _id: 0 }
 	};
-	
+
 	try {
 		const res = await dbConnection.getDb()
-		.collection(COLLECTION_NAME)
-		.findOne(query, projetc);
-		if(!res) return [];
+			.collection(COLLECTION_NAME)
+			.findOne(query, projetc);
+		if (!res) return [];
 		return res.workers.map(elem => {
 			delete elem['password'];
 			return elem;
@@ -320,41 +325,43 @@ const editWorker = async worker => {
 	}
 	worker.newData.password = bcrypt
 		.hashSync(worker.newData.password, bcrypt.genSaltSync(8));
-	
-	try {
-			const res = await dbConnection.getDb()
-			.collection(COLLECTION_NAME)
-			.findOne({ $or: [
-				{ email: worker.newData.email },
-				{ "workers.email": worker.newData.email }
-			]});
-			if(res && worker.id !== worker.newData.email) {
-				return Promise.reject(467);
-			}
-			else {
-				return await putEditWorker(worker);
-			}
-		}
-		catch (e) { return Promise.reject(503); }
-	};
 
-	const putEditWorker = async worker => {
-		try {
-			const res = await dbConnection.getDb()
-				.collection(COLLECTION_NAME)
-				.findOneAndUpdate(
-					{'workers.email': worker.id},
-					{$set: {'workers.$': worker.newData}},
-					{ upsert: true, returnOriginal: false }
-					);
-				const Worker = res.value.workers.find(elem => elem.email === worker.newData.email);
-				return(Worker.name + ' ' + Worker.lastName);
+	try {
+		const res = await dbConnection.getDb()
+			.collection(COLLECTION_NAME)
+			.findOne({
+				$or: [
+					{ email: worker.newData.email },
+					{ "workers.email": worker.newData.email }
+				]
+			});
+		if (res && worker.id !== worker.newData.email) {
+			return Promise.reject(467);
 		}
-		catch (e) { return Promise.reject(503); }
-	};
-	
+		else {
+			return await putEditWorker(worker);
+		}
+	}
+	catch (e) { return Promise.reject(503); }
+};
+
+const putEditWorker = async worker => {
+	try {
+		const res = await dbConnection.getDb()
+			.collection(COLLECTION_NAME)
+			.findOneAndUpdate(
+				{ 'workers.email': worker.id },
+				{ $set: { 'workers.$': worker.newData } },
+				{ upsert: true, returnOriginal: false }
+			);
+		const Worker = res.value.workers.find(elem => elem.email === worker.newData.email);
+		return (Worker.name + ' ' + Worker.lastName);
+	}
+	catch (e) { return Promise.reject(503); }
+};
+
 const delWorker = async worker => {
-	
+
 	if (!validation.isValidId(worker.collectionName)) {
 		return Promise.reject(465);
 	}
@@ -362,13 +369,14 @@ const delWorker = async worker => {
 		const res = await dbConnection.getDb()
 			.collection(COLLECTION_NAME)
 			.findOneAndUpdate(
-			{ _id: ObjectId( worker.collectionName ) },
-			{ $pull: 
-				{ workers: { email: worker.id } }
-			});
-			return res.ok;
+				{ _id: ObjectId(worker.collectionName) },
+				{
+					$pull:
+						{ workers: { email: worker.id } }
+				});
+		return res.ok;
 	}
-	catch (e) {return Promise.reject(503); }
+	catch (e) { return Promise.reject(503); }
 };
 
 module.exports = {

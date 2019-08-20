@@ -5,20 +5,15 @@ import { Collapse, Icon, DatePicker } from 'antd';
 import locale_es from 'antd/lib/date-picker/locale/es_ES';
 import locale_pl from 'antd/lib/date-picker/locale/pl_PL';
 import moment from 'moment';
-// import  'moment/locale/es';
 import FuelChart from '../../../../Containers/Owner/Charts/DriversCharts/FuelChart';
 
 const { RangePicker } = DatePicker;
 const { Panel } = Collapse;
 
-// const callback = (key) => {
-//   console.log(key);
-// }
 const genExtra = () => (
 	<Icon
 		type="setting"
 		onClick={event => {
-			// If you don't want click extra trigger collapse, you can prevent this:
 			event.stopPropagation();
 			console.log('extra')
 		}}
@@ -31,7 +26,7 @@ class DriversFuel extends React.Component {
 		dateFrom: moment().startOf('month').subtract(1, 'month'),
 		dateEnd: moment()
 	};
-	
+
 	onDateChange = (dates, dateStrings) => {
 		this.setState(prevState => {
 			return {
@@ -46,7 +41,6 @@ class DriversFuel extends React.Component {
 			<div className={classes.Fuel}>
 				<Collapse
 					defaultActiveKey={['1']}
-					// onChange={callback}
 					expandIconPosition="right"
 				>
 					<Panel header={this.props.chartText.titleFuel} key="1" extra={genExtra()}>

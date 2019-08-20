@@ -221,7 +221,7 @@ const Main = props => {
 			<hr></hr>
 
 			<section id="section_10">
-				<div className="row mt-2">
+				<div className="row mt-5">
 					<h3 className="text-danger m-3">{props.text.section_10_h3}</h3>
 				</div>
 

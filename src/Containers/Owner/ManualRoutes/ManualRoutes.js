@@ -6,6 +6,8 @@ import ChartsContext from '../../../context/charts-context';
 import { inputChangedHandler, validFormHandler, cancelForm, changeInputsLabelText } from '../../../shared/utility';
 import Input from '../../../Components/UI/Input/Input';
 import { Drawer, Select, Button, DatePicker } from 'antd';
+import locale_es from 'antd/lib/date-picker/locale/es_ES';
+import locale_pl from 'antd/lib/date-picker/locale/pl_PL';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 import Axios from 'axios';
 import Cookies from 'js-cookie';
@@ -354,6 +356,7 @@ const ManualRoutes = props => {
             </Select>
             <br></br>
             <DatePicker
+                locale={props.language === 'es' ? locale_es : locale_pl}
                 style={{ width: '100%', marginTop: 15 }}
                 allowClear={false}
                 onChange={date => setDate((date._d).getTime())} />
@@ -457,6 +460,7 @@ const mapStateToProps = state => {
         errorText: state.initLang.textHome.serverResErrors,
         manualText: state.initLang.textOwner.manualRoutes,
         _csrf: state.initLang._csrf,
+        language: state.initLang.language,
         demo: state.authReducer.demo
     };
 };
