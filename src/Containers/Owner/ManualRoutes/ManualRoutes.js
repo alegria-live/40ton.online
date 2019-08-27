@@ -14,9 +14,6 @@ import Cookies from 'js-cookie';
 const { Option } = Select;
 
 const ManualRoutes = props => {
-    const [action, setAction] = useState(0);
-
-    const {setShowOwner} = useContext(AppContext);
 
     const kmStop = {
         elementType: 'input',
@@ -160,10 +157,12 @@ const ManualRoutes = props => {
             minLength: 1
         }
     };
-
-    const [controls, setControls] = useState(null);
-    const { showManualRoutes, setShowManualRoutes } = useContext(MenuContext);
+    
+    const {setShowOwner} = useContext(AppContext);
+    const {showManualRoutes, setShowManualRoutes} = useContext(MenuContext);
     const {allActiveTrucks} = useContext(ChartsContext);
+    const [action, setAction] = useState(0);
+    const [controls, setControls] = useState(null);
     const [_gcn] = useState(Cookies.get('_gcn'));
     const [lastRouteLength, setLastRouteLength] = useState(0);
     const [allTrucks, setAllTrucks] = useState([]);
@@ -176,11 +175,12 @@ const ManualRoutes = props => {
     const [successMsg, setSuccesMsg] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [formIsValid, setFormIsValid] = useState(false);
+    const formElementsArray = [];
+    const formElementsKeyArray = [];
+
     let trucksOptions = <Option></Option>;
     let driversOptions = <Option></Option>;
     let trucksForRouteDelete = <Option></Option>;
-    const formElementsArray = [];
-    const formElementsKeyArray = [];
 
     if (controls) {
         for (let key in controls) {
@@ -217,6 +217,16 @@ const ManualRoutes = props => {
         // eslint-disable-next-line
     }, [props.manualText]);
 
+    useEffect(() => {
+        if (activeTruck && activeDriver && date) {
+            if (action === 1) setControls({ kmStop, tonOut, postal, country })
+            if (action === 2) setControls({ kmStop, tonIn, postal, country })
+            if (action === 3 && lastRouteLength) setControls({ kmStop, litres, full, postal, country })
+            if (action === 3 && !lastRouteLength) setControls({ kmStop, litres, fullFirst, weight, postal, country })
+        }
+        // eslint-disable-next-line
+    }, [action]);
+
     const submitHandler = () => {
         if (props.demo) { props.demoModal(true); return; }
         let weightToOut = -1;
@@ -245,14 +255,13 @@ const ManualRoutes = props => {
             _id: lastRouteLength
         };
         Axios.post('/system/owner/' + _gcn, dataSet)
-            .then(res => {
-                setIsLoading(false);
-                setSuccesMsg(props.manualText.addRouteSuccess);
-                setShowOwner(false);
-                setShowOwner(true);
-            })
-            .catch(e => { setIsLoading(false); setErrorMsg(e.response.data.toString()) })
-        console.log(dataSet)
+        .then(res => {
+            setIsLoading(false);
+            setSuccesMsg(props.manualText.addRouteSuccess);
+            setShowOwner(false);
+            setShowOwner(true);
+        })
+        .catch(e => { setIsLoading(false); setErrorMsg(e.response.data.toString()) });        
     };
 
     const deleteHandler = () => {
@@ -283,18 +292,7 @@ const ManualRoutes = props => {
             setIsLoading(false)
         }, 10)
     };
-
-    useEffect(() => {
-        if (activeTruck && activeDriver && date) {
-            if (action === 1) setControls({ kmStop, tonOut, postal, country })
-            if (action === 2) setControls({ kmStop, tonIn, postal, country })
-            if (action === 3 && lastRouteLength) setControls({ kmStop, litres, full, postal, country })
-            if (action === 3 && !lastRouteLength) setControls({ kmStop, litres, fullFirst, weight, postal, country })
-        }
-        // eslint-disable-next-line
-    }, [action]);
-
-
+        
     const setFormElements = () => {
         const input = formElementsArray.map(formElement => {
             return <Input
@@ -426,24 +424,28 @@ const ManualRoutes = props => {
         >
             {
                 !allTrucks.length ?
-                    <h6 style={{ margin: 20, color: 'rgba(43, 144, 143, 0.85)' }}>
-                        {props.manualText.noTrucks}
-                    </h6> :
-                    successMsg ?
-                        <div style={{ margin: 20, textAlign: 'center' }}>
-                            <h5 style={{ color: 'rgba(43, 144, 143, 0.85)' }}>
-                                {successMsg}</h5>                            
-                        </div> :
-                        errorMsg ?
-                            <div style={{ margin: '1.5rem' }}>
-                                <h6 style={{ color: 'red' }}>{
-                                    props.errorText[errorMsg] ?
-                                        props.errorText[errorMsg] :
-                                        props.manualText.addRouteError
-                                }</h6>
-                            </div> :
-                            isLoading ? <Spinner /> :
-                                formElement
+
+                <h6 style={{ margin: 20, color: 'rgba(43, 144, 143, 0.85)' }}>
+                    {props.manualText.noTrucks}
+                </h6> :
+                
+                successMsg ?
+                <div style={{ margin: 20, textAlign: 'center' }}>
+                    <h5 style={{ color: 'rgba(43, 144, 143, 0.85)' }}>
+                        {successMsg}</h5>                            
+                </div> :
+                
+                errorMsg ?
+                <div style={{ margin: '1.5rem' }}>
+                    <h6 style={{ color: 'red' }}>
+                        {
+                            props.errorText[errorMsg] ?
+                            props.errorText[errorMsg] :
+                            props.manualText.addRouteError
+                        }
+                    </h6>
+                </div> :
+                isLoading ? <Spinner /> : formElement
             }
             <Button onClick={cancelHandler} >
                 {props.manualText ? props.manualText.cancel : ''}
@@ -464,4 +466,4 @@ const mapStateToProps = state => {
         demo: state.authReducer.demo
     };
 };
-export default connect(mapStateToProps)(ManualRoutes)
+export default connect(mapStateToProps)(ManualRoutes);

@@ -24,7 +24,7 @@ const FuelChart = props => {
             },
             dataLabels: {
                 enabled: true,
-                offsetX: 300,
+                offsetX: 330,
                 style: {
                     fontSize: '12px',
                     colors: ['#fff']

@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     error: null,
     language: null,
+    showCookies: true,
     _csrf:'',
     env:'',
     textHome: {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux';
 
-const CookiesInfo = props => {
+export const CookiesInfo = props => {
 
     const [cookieText, setCookieText] = useState('');
     const [showButton, setShowButton] = useState(false);

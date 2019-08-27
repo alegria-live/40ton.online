@@ -21,12 +21,14 @@ import oneTruck_es from '../../../assets/img/one_truck_es.jpg';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
 
-const Main = props => {
+export const Main = props => {
 
+	const cookieAccepted = window.localStorage.getItem("cookieAccepted") !== null;
 	const { setShowContactForm, setShowRegister } = useContext(AppContext);
 	const [showRegulations, setShowRegulations] = useState(false);
 	const [showPolicy, setShowPolicy] = useState(false);
-	const [showCookie, setShowCookie] = useState(true);
+	const [showCookie, setShowCookie] = useState(!cookieAccepted);
+
 	const onDemoHandler = () => {
 		const data = {
 			email: props.demoData.email,
@@ -35,14 +37,18 @@ const Main = props => {
 		};
 		props.onDemo(data);
 	};
+	const cookieHandler = () => {
+		window.localStorage.setItem("cookieAccepted", true);
+		setShowCookie(false)
+	}
 
 	return (
 		<main className="container">
 			
 			{
-				!props.isToken && showCookie ? 
+				showCookie ? 
 					<aside className={classes.Cookies}>
-						<CookiesInfo setShowCookie={setShowCookie}/>
+						<CookiesInfo setShowCookie={cookieHandler}/>
 					</aside> : null
 			}
 
@@ -290,6 +296,7 @@ const Main = props => {
 						<p className="card-text">{props.text.footer_body_p2}</p>
 						<button
 							className="btn btn-outline-secondary btn-sm mr-3"
+							id='setShowRegulations'
 							onClick={() => {
 								if (showPolicy) setShowPolicy(false)
 								setShowRegulations(!showRegulations)
@@ -297,7 +304,7 @@ const Main = props => {
 							{props.text.regTitle}
 						</button>
 						<button
-							className="btn btn-outline-secondary btn-sm"
+							className="btn btn-outline-secondary btn-sm"							
 							onClick={() => {
 								if (showRegulations) setShowRegulations(false);
 								setShowPolicy(!showPolicy)
@@ -309,7 +316,7 @@ const Main = props => {
 							<h5 className="card-header">{props.text.regTitle}</h5>
 							<div className="card-body m-3" dangerouslySetInnerHTML={{ __html: props.text.regulations }}></div>
 							<button
-								className="btn btn-outline-secondary btn-sm"
+								className="btn btn-outline-secondary btn-sm"								
 								onClick={() => setShowRegulations(!showRegulations)}>
 								{props.text.back}
 							</button>

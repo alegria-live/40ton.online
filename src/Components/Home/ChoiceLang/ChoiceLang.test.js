@@ -13,7 +13,6 @@ describe('Components/Home <ChoiceLang />', () => {
     beforeEach(() => {
         wrapper = shallow(<ChoiceLang />, {context});
     });
-
     it('should contains alt with polish text', () => {
         expect(wrapper.find({alt:'System kontroli zużycia paliwa wersja polska'})).toHaveLength(1);
     });

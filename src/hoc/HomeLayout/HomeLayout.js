@@ -17,8 +17,6 @@ import Modal from '../../Components/UI/Modal/Modal';
 const Register = React.lazy(() => import('../../Components/Home/Register/Register'));
 const Owner = React.lazy(() => import('../../Components/Owner/OwnerLayout/OwnerLayout'));
 
-
-
 export const HomeLayout = (props) => {
 	const {
 		showLogIn,
@@ -62,8 +60,9 @@ export const HomeLayout = (props) => {
 		</>
 	);
 
-	if (showOwner && driversLoaded && trucksLoaded) {
+	if (showOwner) {
 		component = (
+			!driversLoaded || !trucksLoaded ? <Spinner /> :
 			<React.Suspense>
 				<ChartsContext.Provider value={{
 					getActiveDrivers,
@@ -71,7 +70,7 @@ export const HomeLayout = (props) => {
 					getActiveTrucks,
 					allActiveTrucks
 				}}>
-					<Owner />					
+					<Owner />	
 				</ChartsContext.Provider>
 			</React.Suspense>
 		);
@@ -92,7 +91,9 @@ export const HomeLayout = (props) => {
 
 	return (
 		<>
-			{!imgLoaded || (props._csrf.length !== 36 && props.textHome) || props.isLoading ? <Spinner /> : component}			
+			{!imgLoaded || 
+				(props._csrf.length !== 36 && props.textHome) || 
+				props.isLoading ? <Spinner /> : component}			
 		</>
 	);
 };
