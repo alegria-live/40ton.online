@@ -53,8 +53,8 @@ const RoutesTableData = props => {
         <>  
             <span>{ props.text.selectTruck }</span>
             <Select
-                defaultValue="--------------------------------------"
-                style={{ width: 280, margin: 15 }}
+                defaultValue="--------------"
+                style={{ width: 150, margin: 15 }}
                 onChange={(value) => changeTruckHandler(value)}>
                 {activeTrucksArr}
             </Select>

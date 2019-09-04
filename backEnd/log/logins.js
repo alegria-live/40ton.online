@@ -15,10 +15,10 @@ module.exports = function(app) {
 
     app.post("/login", async (req, res) => {
 
-        if(app.get("dbError")) {res.status(503).json({msg: 503}); return;}
+        if(app.get("dbError")) {res.status(503).json(503); return;}
         if(!req.body.email || !req.body.password){
-            res.status(404);
-            res.json({msg: 461});
+            res.status(401);
+            res.json(461);
             return;
         }
         try {

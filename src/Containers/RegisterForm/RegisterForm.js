@@ -277,7 +277,10 @@ const LogIn = props => {
     };
 
     const cancelHandler = event => {
-        if (event) event.preventDefault()        
+        if (event) {
+            event.stopPropagation()  
+            event.preventDefault()
+        } 
         cancelForm(controls, formElementsKeyArray, setControls);
         props.clearError();
         setShowRegister(false);

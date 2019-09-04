@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0;
+    opacity: 0.3;
     transition: 1s;
     
     img {
@@ -12,5 +12,11 @@
     }
 }
 .ChoiceLang:hover {
-    opacity: 0.9;
+    opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+    .ChoiceLang {
+        opacity: 0.9;
+    }
 }

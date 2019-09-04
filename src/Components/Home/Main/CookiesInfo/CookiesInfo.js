@@ -27,6 +27,7 @@ export const CookiesInfo = props => {
     return (
         <>
             <span style={{marginRight: 15}}>{cookieText}</span>
+            {document.documentElement.clientWidth < 1024 ? <hr></hr> : null}
             <button
                 className="btn btn-outline-info btn-sm"
                 hidden = {!showButton}

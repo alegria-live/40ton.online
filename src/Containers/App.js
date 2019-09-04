@@ -20,6 +20,7 @@ export const App = ({autoInitLang, ...props}) => {
 	const [showRegister, changeShowRegister] = useState(false);
 	const [showContactForm, changeShowContactForm] = useState(false);
 	const [showOwner, changeShowOwner] = useState(false);
+	const [smallResolutionDemoModal, changeSmallResolutionDemoModal] = useState(false);
 
 	const choiceLang = chosenLang => props.setLang(chosenLang);
 	const setShowLogIn = val => changeShowLogin(val);
@@ -27,11 +28,15 @@ export const App = ({autoInitLang, ...props}) => {
 	const setShowNewPass = () => changeShowNewPass(!showNewPass);
 	const setShowContactForm = val => changeShowContactForm(val);
 	const setShowOwner = val => changeShowOwner(val);
+	const setSmallResolutionDemoModal = val => changeSmallResolutionDemoModal(val);
 
 	let routes = (
 		<Switch>
 			<Route path="/activation" component={Activation} />
-			<Route path="/" render={() => (<div className="App"> {props.appLanguage === null ? <ChoiceLang /> : <HomeLayout />} </div>)} />
+			<Route path="/" render={() => 
+				(<div
+					className="App"> {!props.appLanguage ? <ChoiceLang /> : <HomeLayout />}
+				</div>)} />
 		</Switch>
 	);
 
@@ -55,7 +60,9 @@ export const App = ({autoInitLang, ...props}) => {
 				showContactForm,
 				setShowContactForm,
 				showOwner,
-				setShowOwner
+				setShowOwner,
+				smallResolutionDemoModal,
+				setSmallResolutionDemoModal
 			}}>
 				<Suspense fallback={<Spinner />}>{routes}</Suspense>
 			</AppContext.Provider>

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import AppContext from '../../../context/app-context';
+import {Modal} from 'antd';
 import classes from './Main.css';
 import CookiesInfo from './CookiesInfo/CookiesInfo';
 import fuelEfficient_pl from '../../../assets/img/fuel_efficient_pl.jpg';
@@ -24,10 +25,22 @@ import * as actions from '../../../store/actions';
 export const Main = props => {
 
 	const cookieAccepted = window.localStorage.getItem("cookieAccepted") !== null;
-	const { setShowContactForm, setShowRegister } = useContext(AppContext);
+	const {
+		smallResolutionDemoModal,
+		setSmallResolutionDemoModal,
+		setShowContactForm,
+		setShowRegister
+	} = useContext(AppContext);
 	const [showRegulations, setShowRegulations] = useState(false);
 	const [showPolicy, setShowPolicy] = useState(false);
 	const [showCookie, setShowCookie] = useState(!cookieAccepted);
+	const sreenWidth = document.documentElement.clientWidth;
+	let appDataTextWidth = '40%';
+	let appDataImageWidth = '50%';
+	if(sreenWidth <=768) {
+		appDataTextWidth = '100%';
+		appDataImageWidth = '0%';
+	}
 
 	const onDemoHandler = () => {
 		const data = {
@@ -35,7 +48,7 @@ export const Main = props => {
 			password: props.demoData.pass,
 			_csrf: props._csrf
 		};
-		props.onDemo(data);
+		sreenWidth < 1100 ? setSmallResolutionDemoModal(true) : props.onDemo(data);
 	};
 	const cookieHandler = () => {
 		window.localStorage.setItem("cookieAccepted", true);
@@ -51,6 +64,15 @@ export const Main = props => {
 						<CookiesInfo setShowCookie={cookieHandler}/>
 					</aside> : null
 			}
+
+			<Modal
+                visible={smallResolutionDemoModal}
+                closable={false}
+                zIndex={2000}
+                cancelButtonProps={{disabled: true}}
+                onOk={() => setSmallResolutionDemoModal(false)}
+                > {props.text.smallResolutionDemo}
+            </Modal>
 
 			<section id="section_1">
 				<div className="d-flex-row mt-5">
@@ -198,13 +220,13 @@ export const Main = props => {
 			<section id="section_9">
 				<article>
 					<div className="row m-0">
-						<div className="card pr-2 mr-3" style={{ width: "40%", border: "none" }}>
-							<div className="card-body pl-1">
+						<div className="card mr-3" style={{ width: appDataTextWidth, border: "none" }}>
+							<div className="card-body pl-1" style={sreenWidth <= 786 ? {padding: 0} : null}>
 								<p className="text-justify text-secondary">{props.text.section_9_p1}</p>
 								<p className="text-justify text-secondary">{props.text.section_9_p2}</p>
 							</div>
 						</div>
-						<div className="card m-3 pl-5" style={{ width: "50%", border: "none" }}>
+						<div className="card m-3 pl-5" style={{ width: appDataImageWidth, border: "none"}}>
 							<div className="card-body" style={{ padding: 0 }}>
 								<div className={props.lang === 'pl' ? classes.HandPhone_pl : classes.HandPhone_es}>
 									<div className={classes.Hand}></div>
@@ -213,7 +235,11 @@ export const Main = props => {
 							</div>
 						</div>
 						<div>
-							<h3 className="text-danger mt-5">{props.text.section_9_h3}</h3>
+							<h3
+								className="text-danger"
+								style={sreenWidth <= 786 ? {marginTop: 0} : {marginTop: "3rem"}}
+								>{props.text.section_9_h3}
+							</h3>
 							<img
 								src={props.lang === 'pl' ? allRoutes_pl : allRoutes_es}
 								className="img-fluid mx-auto"
@@ -288,15 +314,16 @@ export const Main = props => {
 			<hr></hr>
 
 			<footer>
-				<div className="card m-5">
+				<div>
 					<h5 className="card-header">{props.text.footer_header}</h5>
-					<div className="card-body m-3">
+					<div className="justify-content-center card-body m-3">
 						<h5 className="card-title">{props.text.footer_body_h5}</h5>
 						<p className="card-text">{props.text.footer_body_p1}</p>
 						<p className="card-text">{props.text.footer_body_p2}</p>
 						<button
-							className="btn btn-outline-secondary btn-sm mr-3"
+							className="btn btn-outline-secondary btn-sm mr-3 mt-3"
 							id='setShowRegulations'
+							// style={{marginBottom: 15}}
 							onClick={() => {
 								if (showPolicy) setShowPolicy(false)
 								setShowRegulations(!showRegulations)
@@ -304,7 +331,7 @@ export const Main = props => {
 							{props.text.regTitle}
 						</button>
 						<button
-							className="btn btn-outline-secondary btn-sm"							
+							className="btn btn-outline-secondary btn-sm mt-3"							
 							onClick={() => {
 								if (showRegulations) setShowRegulations(false);
 								setShowPolicy(!showPolicy)
@@ -312,7 +339,8 @@ export const Main = props => {
 							{props.text.policyTitle}
 						</button>
 
-						<div className="card m-5" hidden={!showRegulations} >
+						<div className="card" hidden={!showRegulations}
+							style={sreenWidth <= 768 ? {margin: '10px 0'} : {margin: '3rem'}}>
 							<h5 className="card-header">{props.text.regTitle}</h5>
 							<div className="card-body m-3" dangerouslySetInnerHTML={{ __html: props.text.regulations }}></div>
 							<button
@@ -322,7 +350,8 @@ export const Main = props => {
 							</button>
 						</div>
 
-						<div className="card m-5" hidden={!showPolicy} >
+						<div className="card" hidden={!showPolicy}
+						style={sreenWidth <= 768 ? {margin: '10px 0'} : {margin: '3rem'}} >
 							<h5 className="card-header">{props.text.policyTitle}</h5>
 							<div className="card-body m-3" dangerouslySetInnerHTML={{ __html: props.text.policy }}></div>
 							<button

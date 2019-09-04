@@ -13,7 +13,9 @@ const NavHeader = props => {
         setShowRegister,
         showRegister,
         setShowOwner,
-        showOwner } = useContext(AppContext);
+        showOwner,
+        setSmallResolutionDemoModal
+    } = useContext(AppContext);
 
     let navHeaderArr = props.navHeader;
     
@@ -32,7 +34,7 @@ const NavHeader = props => {
         setShowRegister(!showRegister);
     };
     const toSytemPage = () => {
-        setShowOwner(true);
+        getSreenWidth() < 1100 ? setSmallResolutionDemoModal(true) : setShowOwner(true);
     };
     const toHomePage = () => {
         setShowOwner(false);
@@ -42,13 +44,17 @@ const NavHeader = props => {
         props.onLogout();
     }
 
+    const getSreenWidth = () => {
+        return document.documentElement.clientWidth;
+    }
+
     const onDemoHandler = () => {
         const data = {
             email: props.demoData.email,
             password: props.demoData.pass,
             _csrf: props._csrf
         };
-        props.onDemo(data);
+        getSreenWidth() < 1100 ? setSmallResolutionDemoModal(true) : props.onDemo(data);
     }
     
     const onClickHandler = data => {
