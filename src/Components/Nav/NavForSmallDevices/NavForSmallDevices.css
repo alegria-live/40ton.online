@@ -1,4 +1,4 @@
-@media (min-width: 760px) {
+@media (min-width: 768px) {
   .NavForSmallDevices {
     display: none;
   }

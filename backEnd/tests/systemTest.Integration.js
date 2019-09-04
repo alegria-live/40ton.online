@@ -191,6 +191,14 @@ describe('SERVER SIDE APLICATION MOCHA TESTS', () => {
 			.expect(503, done);
 	}).timeout(25000);
 
+	it('POST /login - empty email value & incorrect password - expect status 401', (done) => {
+		request(app)
+			.post('/login')
+			.set('Cookie', ext_cookie)
+			.send({ password: "xxx", _csrf: int_cookie })
+			.expect(401, done);
+	}).timeout(25000);
+
 	it('POST /addTruck - expect status 200 & res === testId', (done) => {
 		request(app)
 			.post('/system/addTruck')
@@ -652,8 +660,10 @@ describe('SERVER SIDE APLICATION MOCHA TESTS', () => {
 			.set('Cookie', [`_gcn=${userId}`, `session=${session}`])			
 			.expect(200)
 			.end((err, res) => {
-				if (err) { return console.log(err); }
-				expect(res.body[0]._id).toBe(driverId);				
+				if (err) { return; }
+				// console.log(res.body[0]._id);
+				expect(res.body[0]._id).toBe(driverId);
+				
 				done();
 			});
 	});

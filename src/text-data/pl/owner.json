@@ -45,7 +45,7 @@
         "description" : "Wykres dla dowolnego pojazdu przedstawiający realną średnią spalania w stosunku do normy dla każdej trasy"
     },
     "routes" : {
-        "selectTruck": "Wybierz rejestrację pojazdu",
+        "selectTruck": "Pojazd",
         "dateChoice": "Zakres dat tabeli",
         "thisMonth": "Ten miesiąc",
         "lastMonth": "Poprzedni miesiąc",
@@ -127,7 +127,7 @@
         "addTruckSuccess": "Do bazy danych dodano pojazd",
         "addTruckError": "Wystąpił błąd. Proszę zalogować się od nowa i ponowić operację",
         "editTruckSuccess": "Zmiany zapisane dla pojazdu",
-        "theftPanelName": "Robo de gasoil",
+        "theftPanelName": "Kradzież paliwa",
         "theftPanelDescription": "Opcja pozwalająca na dokonanie korekty obliczeń trasy, podczas której dokonano kradzieży paliwa.",
         "choiceTheftData": "Proszę wybrać numer pojazdu i datę kradzieży",
         "theftSubmit": "Korekta",

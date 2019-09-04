@@ -11,6 +11,8 @@ const appContext = React.createContext({
     showContactForm: false,
     setShowContactForm: () => {},
     showOwner: false,
-    setShowOwner: () => {}
+    setShowOwner: () => {},
+    smallResolutionDemoModal: false,
+    setSmallResolutionDemoModal: () => {}
 });
 export default appContext;

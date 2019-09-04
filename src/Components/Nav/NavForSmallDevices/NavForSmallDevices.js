@@ -11,16 +11,25 @@ const NavForSmallDevices = () => {
     const showNavHandler = () => {
         setShowNav(!showNav);
     };
+    
+    console.log(showNav)
     useEffect(()=> {
         if(showRegister || showLogIn) {
-            showNavHandler();
+            // showNavHandler();
+            setShowNav(false)
         }
         // eslint-disable-next-line
     }, [showRegister, showLogIn])  
     return(
         <div className={classes.NavForSmallDevices}>
-            <DrowerToggle clicked={showNavHandler}/>
-            <Modal show={showNav && !showRegister && !showLogIn} modalClosed={showNavHandler}>
+            <DrowerToggle
+                clicked={showNavHandler}
+                disabled={showRegister}
+                />
+            <Modal
+                show={showNav && !showRegister && !showLogIn}
+                modalClosed={showNavHandler}
+                backgroundColor = 'rgba(255, 255, 255, 0.01);'>
                 <Nav />
             </Modal>
         </div> 

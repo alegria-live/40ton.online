@@ -21,27 +21,13 @@ const FuelChart = props => {
                 labels: {
                     maxWidth: 360
                 }
-            },
-            dataLabels: {
-                enabled: true,
-                offsetX: 330,
-                style: {
-                    fontSize: '12px',
-                    colors: ['#fff']
-                }
-            },
+            },           
             xaxis: {
-                min:20,
                 labels: {
-                    trim: false,
-                    axisTicks: {
-                        show: true,
-                        borderType: 'solid',
-                        color: '#78909C',
-                        height: 6,
-                        offsetX: 0,
-                        offsetY: 0
-                    }
+                    "formatter": function (val) {
+                        return val.toFixed(2)
+                    },
+                    trim: false                    
                 },
                 categories: []
             },

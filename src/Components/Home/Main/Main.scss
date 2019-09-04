@@ -60,3 +60,14 @@
 .HandPhone_es:hover .Phone_es {
 	opacity: 1;
 }
+
+@media screen and (max-width: 1023px) {
+    .Cookies {
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.95);;
+        height: 30vh;
+    }
+    .Hand, .Phone_pl, .Phone_es {
+        display: none;
+    }
+}

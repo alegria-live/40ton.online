@@ -45,7 +45,7 @@
         "description" : "Una gráfica para cualquier vehículo que muestre el promedio real de consumo en comparación con la norma para cada ruta."
     },
     "routes" : {
-        "selectTruck": "Elija un camion",
+        "selectTruck": "Camion",
         "dateChoice": "Rango de fechas",
         "thisMonth": "Este mes",
         "lastMonth": "El mes anterior",

@@ -80,30 +80,30 @@ function changeDates(collName) {
 					//elem.dtStart = new Date(Number(new Date(elem.dtStart))).getTime();
 					//elem.dtStop = new Date(Number(new Date(elem.dtStop))).getTime();
 					});
-					//updateTruckRoutesDates(item, truckRoutesArr);
+					// updateTruckRoutesDates(item, truckRoutesArr);
 					
 
 					truckFuelArr.forEach((elem, i) => {
 							//elem.driver = i+1;
-						elem.dtStart = elem.dtStart + 86400000 * 14;
-						elem.dtStop = elem.dtStop + 86400000 * 14;
+						elem.dtStart = elem.dtStart + 86400000 * 7;
+						elem.dtStop = elem.dtStop + 86400000 * 7;
 					//elem.dtStart = new Date(Number(new Date(elem.dtStart))).getTime();
 					//elem.dtStop = new Date(Number(new Date(elem.dtStop))).getTime();		
 					
 					});
-					updateTruckFuelDates(item, truckFuelArr);
+					// updateTruckFuelDates(item, truckFuelArr);
 										
 				}
 				if(data === "driver") {				
 					
 					driverRoutesArr.forEach((elem, i) => {
 							//elem._id = i+1;
-						elem.dtStart = elem.dtStart + 86400000 * 14;
-						elem.dtStop = elem.dtStop + 86400000 * 14;
+						elem.dtStart = elem.dtStart + 86400000 * 7;
+						elem.dtStop = elem.dtStop + 86400000 * 7;
 					// elem.dtStart = new Date(Number(new Date(elem.dtStart))).getTime();
 					// elem.dtStop = new Date(Number(new Date(elem.dtStop))).getTime();		
 					});
-					updateDriverRoutesDates(item, driverRoutesArr);
+					// updateDriverRoutesDates(item, driverRoutesArr);
 				}			
 			}).catch( err => console.log(err))
 
