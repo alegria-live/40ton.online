@@ -33,7 +33,7 @@
     "express-handlebars": "^3.0.0",
     "jsonwebtoken": "^8.4.0",
     "mongodb": "^3.0.4",
-    "nodemailer": "^4.6.3",
+    "nodemailer": "^6.4.16",
     "q": "^1.5.1",
     "request": "^2.87.0",
     "superagent": "^3.8.3"
